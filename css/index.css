@@ -1,0 +1,161 @@
+.logo {
+	height: 80px;
+	padding-top: 20px;
+	padding-left: 20px; 
+	display: inline-block;
+	text-align: -webkit-center;
+}
+img {
+		width: 30%;
+}
+
+#logo_title {
+	color: white;
+	font-size: 20px;
+	font-style: bold;
+	text-align: center;
+	display: inline-block;
+	padding-left: 50px;
+
+
+}
+
+body {
+	background: #f3f2f3;
+	color: #000000;
+	font-family: Verdana;
+	font-size: 14px;
+}
+
+#container {
+	background: #FFFFFF;
+	margin: 30px auto;
+	width: 900px;
+	height: 2000px;
+}
+
+#header {
+	background: #0089CF;
+	height: 100px;
+	width: 900px;
+	
+	color: yellow;
+}
+
+#navigation {
+	
+	background: white;
+	width: 900px;
+	height: 20px;
+	margin-top: 10px;
+}
+
+#sidebar {
+	background: #50B948;
+	width: 210px;
+	height: 600px;
+
+}
+#sidebar, #content {
+	display: inline-block;
+}
+#head-menu {
+	text-align: center;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px; 
+}
+
+#menu {
+	list-style: none;
+	width: 200px;
+	background: #50B948;
+	float: left;
+	padding-left: 5px;
+
+	color: white;
+	margin-top: 0px;
+}
+
+#menu a {
+
+	color: white;
+	text-decoration: none;
+}
+#menu li a {
+	display: block;
+	padding: 4px 15px;
+	
+	text-decoration: none;
+	position: relative;
+	list-style-type: none;
+}
+
+#menu li a:hover {
+	background: #0089CF;
+	color: white;
+}
+
+#content {
+	background: #d2d0d2;
+	float: right;
+	width: 600px;
+	height: 900px;
+	padding-left: 10px;
+}
+
+#clear {
+	clear:both;
+}
+
+#footer {
+	background: #0089CF;
+	height: 180px;
+	width: 900px;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid white;
+	width: 	550px;
+	border: 2px solid;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+th {
+	border: 1px solid;
+	text-align: center;
+	font-weight: normal;
+ 	color: #039;
+  	padding: 5px 8px;
+}
+td {
+	font-size: 10;
+	color: black;
+  	border-top: 1px solid #e8edff;
+  	padding: 5px 8px;
+}
+tr:nth-child(2n) {
+	background: #e8edff;
+}
+
+#col_1 {
+	text-align: left;
+}
+
+#td_green {
+	background: green;
+	color: white;
+}
+#td_yellow {
+	background: yellow;
+	color: blue;
+}
+
+#td_red {
+	background: red;
+	color: blue;
+}
