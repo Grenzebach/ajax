@@ -2,63 +2,66 @@
 	height: 80px;
 	padding-top: 20px;
 	padding-left: 20px; 
-	display: inline-block;
+	float: left;
 	text-align: -webkit-center;
+	background-size: cover;
 }
 img {
-		width: 30%;
+		width: 130%;
 }
 
 #logo_title {
 	color: white;
 	font-size: 20px;
-	font-style: bold;
-	text-align: center;
-	display: inline-block;
+	
+	
 	padding-left: 50px;
+}
 
-
+#title {
+	padding-top: 25px;
+	width: 100%;
+	color: yellow;
+	text-align: center;
 }
 
 body {
 	background: #f3f2f3;
 	color: #000000;
 	font-family: Verdana;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #container {
 	background: #FFFFFF;
 	margin: 30px auto;
-	width: 900px;
+	width: 100%;
 	height: 2000px;
 }
 
 #header {
-	background: #0089CF;
+	background: #163141;
 	height: 100px;
-	width: 900px;
+	width: 100%;
 	
 	color: yellow;
 }
 
 #navigation {
 	
-	background: white;
-	width: 900px;
+	background: #163141;
+	width: 100%;
 	height: 20px;
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #sidebar {
 	background: #50B948;
-	width: 210px;
+	width: 220px;
 	height: 600px;
 
 }
-#sidebar, #content {
-	display: inline-block;
-}
+
 #head-menu {
 	text-align: center;
 	color: white;
@@ -68,13 +71,12 @@ body {
 	padding-bottom: 10px; 
 }
 
-#menu {
+#sidebar, #menu {
 	list-style: none;
-	width: 200px;
-	background: #50B948;
+	width: 220px;
+	background: #163141;
 	float: left;
-	padding-left: 5px;
-
+	padding-left: 0px;
 	color: white;
 	margin-top: 0px;
 }
@@ -86,8 +88,7 @@ body {
 }
 #menu li a {
 	display: block;
-	padding: 4px 15px;
-	
+	padding: 4px 15px;	
 	text-decoration: none;
 	position: relative;
 	list-style-type: none;
@@ -99,11 +100,17 @@ body {
 }
 
 #content {
-	background: #d2d0d2;
-	float: right;
-	width: 600px;
-	height: 900px;
+	background: #d2d0d2;	
+	width: 100%;
+	height: 100%;
+	margin-left: 225px;
 	padding-left: 10px;
+	padding-top: 10px;
+}
+#content-header {
+	text-align: left;
+	padding-left: 100px;
+	font-size: 14;
 }
 
 #clear {
@@ -113,13 +120,12 @@ body {
 #footer {
 	background: #0089CF;
 	height: 180px;
-	width: 900px;
+	width: 100%;
 }
 
 table {
 	border-collapse: collapse;
-	border: 1px solid white;
-	width: 	550px;
+	width: 	100%px;
 	border: 2px solid;
 	margin-top: 20px;
 	margin-left: 20px;
@@ -129,13 +135,14 @@ th {
 	border: 1px solid;
 	text-align: center;
 	font-weight: normal;
- 	color: #039;
+ 	color: black;
   	padding: 5px 8px;
 }
 td {
 	font-size: 10;
 	color: black;
-  	border-top: 1px solid #e8edff;
+	text-align: center;
+  	border: 1px solid;
   	padding: 5px 8px;
 }
 tr:nth-child(2n) {
@@ -147,8 +154,8 @@ tr:nth-child(2n) {
 }
 
 #td_green {
-	background: green;
-	color: white;
+	background: #7CFC00;
+	color: black;
 }
 #td_yellow {
 	background: yellow;
@@ -157,5 +164,6 @@ tr:nth-child(2n) {
 
 #td_red {
 	background: red;
-	color: blue;
+	color: white;
+	border-color: black;
 }

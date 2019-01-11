@@ -1,0 +1,6 @@
+<?
+function testmsg()
+{
+    echo "test";
+}
+?>
