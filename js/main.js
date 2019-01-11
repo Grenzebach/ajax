@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-	console.log("message from main.js");
+	console.log("my message from main.js");
 
 
 	$("li").on("click", function () {
