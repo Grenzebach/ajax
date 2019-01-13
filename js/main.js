@@ -1,20 +1,48 @@
 $(document).ready(function () {
 
-	console.log("my message from main.js");
+    var id = 1;
+    if (window.location.hash != "") {
+        id = window.location.hash.split("=")[1];       
+        if (id == undefined) {
+            id = 1;
+        }
+    }
+	getContent(id);
 
 
 	$("li").on("click", function () {
-
-        var sel_id = $(this).attr("id");
-        $.ajax({
-            url: "php/getdata.php",
-            method: "POST",
-            data: {"type": "get_select", "id_machine": sel_id}
-        })
-            .done(function (data) {
-                $("#my-select").html(data);
-            });
-
-
+        var val = $(this).attr("value");
+        getContent(val);
     });
-})
+
+    $("#save-link").on("click", function() {
+        $.ajax({
+            url: "php/server.php",
+            method: "POST",
+            data: {"type": "save", "ids": getCheckedInputs()},
+            success: function(response) {
+                console.log(response);
+            } 
+        });        
+    })
+});
+
+function getContent(id) {
+    $.ajax({
+        url: "php/server.php?type=page&id=" + id,
+        method: "GET",
+        data: "",
+        success: function(response) {
+            $("#content-data").html(response)
+        } 
+    });
+}
+
+function getCheckedInputs() {
+    var ids = [];
+    $("input:checked").each(function() {
+        ids.push($(this).parent().closest("tr").attr("id"));
+    });
+    
+    return ids;
+}

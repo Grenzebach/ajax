@@ -1,9 +1,3 @@
-<?php
-include_once("php/getdata.php");
-//require_once("php/test.php");
-?>
-
-
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -15,7 +9,7 @@ include_once("php/getdata.php");
 <body>
 <div id="container">
     <div id="header">
-    	<div class="logo"><a href="/"><img src="img/logo.gif" alt=""></a>
+    	<div class="logo"><a href="/"><img src="img/logo.jpg" alt=""></a>
 			
     	</div>
 		<div id='title'><p id=logo_title>Система ТОиР ЗАО "Муром"</p>
@@ -42,43 +36,18 @@ include_once("php/getdata.php");
 		        //$i=0;
 		        while ($row = mysqli_fetch_array($result_menu)) {
 		            //$i++;
-		            echo '<li id=item_'.$row["id_machines"].'><a href="javascript: void(0);">' . $row["name_machines"] . '</a></li>';
+		            echo '<li value='.$row["id_machines"].'><a href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
 		        }
 		        echo "</ul>";
 		        mysqli_close($link);
     ?>
     
     </div>
+    <script type="text/javascript" src="js/main.js"></script>
     <div id="content">
-    	
-    	<script type="text/javascript" src="js/main.js"></script>
-
-
-    	<?php
-//-------------------------------------------
-
-//-----------------------------------------
-
-    	//testmsg();
-    	echo getContent(1); //Вызов для получения таблицы include_once
-    	?>  
-			<?
-				 # Если кнопка нажата
-    			if( isset( $_POST['Button_1'] ) )
-    				{
-       						 # Тут пишете код, который нужно выполнить.
-        					# Пример:
-        				echo 'Кнопка нажата!';
-    				}
-
-			?>
-
-
-			<form method="POST">
-    			<input type="submit" name="Button_1" value="Сделать отметки о проверке" />
-			</form>
-		
-		
+    	<div id="content-data">  
+    	</div>    	
+			<a id="save-link" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
 
     </div>
     <div id="clear"></div>

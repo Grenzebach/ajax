@@ -1,10 +1,5 @@
 <?php
 
-function mymsg()
-{
-    echo "fdfgfdgdfg";
-}
-
 function getContent($id = "")
 {
     $resultOut = "";
@@ -52,7 +47,7 @@ function getContent($id = "")
                    
                    
                    $date_control_rev = date("d-m-Y",strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
-                    $resultOut .=  "<tr><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td><td><input type='checkbox' name='a' value='10'></td></tr>";
+                    $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td><td><input type='checkbox' name='a' value='10'></td></tr>";
                 }
                     $resultOut .= "</table>";
                 mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
@@ -62,7 +57,7 @@ function getContent($id = "")
     return $resultOut;
 }
 
-
+//echo getContent($_POST['value']);
 
 
 ?>

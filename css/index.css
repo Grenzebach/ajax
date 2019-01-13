@@ -1,19 +1,49 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, nobr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 100;
+}
+.clear {
+    clear: both;
+}
+a img {
+    border: 0;
+}
+select:focus, input:focus, textarea:focus {
+    outline: 0;
+}
+html, body {
+    height: 100%;
+}
+
 .logo {
-	height: 80px;
+	height: 50px;
 	padding-top: 20px;
 	padding-left: 20px; 
 	float: left;
-	text-align: -webkit-center;
-	background-size: cover;
+	
+	
 }
 img {
-		width: 130%;
+		width: 50%;
 }
 
 #logo_title {
 	color: white;
 	font-size: 20px;
-	
 	
 	padding-left: 50px;
 }
@@ -22,7 +52,7 @@ img {
 	padding-top: 25px;
 	width: 100%;
 	color: yellow;
-	text-align: center;
+	
 }
 
 body {
@@ -40,7 +70,7 @@ body {
 }
 
 #header {
-	background: #163141;
+	background: #056292;
 	height: 100px;
 	width: 100%;
 	
@@ -49,14 +79,14 @@ body {
 
 #navigation {
 	
-	background: #163141;
+	background: #056292;
 	width: 100%;
 	height: 20px;
 	margin-bottom: 10px;
 }
 
 #sidebar {
-	background: #50B948;
+	
 	width: 220px;
 	height: 600px;
 
@@ -74,7 +104,7 @@ body {
 #sidebar, #menu {
 	list-style: none;
 	width: 220px;
-	background: #163141;
+	background: #004c73;
 	float: left;
 	padding-left: 0px;
 	color: white;
@@ -109,8 +139,11 @@ body {
 }
 #content-header {
 	text-align: left;
-	padding-left: 100px;
-	font-size: 14;
+	padding-left: 20px;
+	font-size: 12;
+}
+#content-data{
+	margin-bottom: 20px;
 }
 
 #clear {
@@ -139,14 +172,28 @@ th {
   	padding: 5px 8px;
 }
 td {
-	font-size: 10;
+	font-size: 12;
 	color: black;
 	text-align: center;
   	border: 1px solid;
   	padding: 5px 8px;
 }
 tr:nth-child(2n) {
-	background: #e8edff;
+	background: #bcbbbd;
+}
+
+#save-link {
+	background: #0089cf;
+	padding: 10px;
+	margin-top: 20px;
+	margin-left: 20px;
+	text-decoration: none;
+	color: white;
+}
+
+#save-link:hover {
+	background: #056292;
+	color: white;
 }
 
 #col_1 {
