@@ -82,7 +82,7 @@ body {
 	background: #056292;
 	width: 100%;
 	height: 20px;
-	margin-bottom: 10px;
+	
 }
 
 #sidebar {
@@ -133,7 +133,7 @@ body {
 	background: #d2d0d2;	
 	width: 100%;
 	height: 100%;
-	margin-left: 225px;
+	margin-left: 215px;
 	padding-left: 10px;
 	padding-top: 10px;
 }
@@ -171,6 +171,12 @@ th {
  	color: black;
   	padding: 5px 8px;
   	font-weight: bold;
+
+  	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); /* для webkit-браузеров */ 
+  	background: -moz-linear-gradient(top right, #b8b9b1, #fff); /* для firefox 3.6+ */ 
+  	background: -o-linear-gradient(top right, #b8b9b1, #fff); /* для Opera 11.10+ */ 
+  	background: -ms-linear-gradient(top right, #b8b9b1, #fff); /* для IE10+ */
+
 }
 td {
 	font-size: 12;
