@@ -16,7 +16,7 @@ function getContent($id = "")
 //-----------Заголовок таблицы---------------
         
 //-------------------------------------------
-        $resultOut = "<table><tr><th><img src='img/b_table_add.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
+        $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
         
         //echo date("d-m-Y");
         $current_day = date("d-m-Y");
