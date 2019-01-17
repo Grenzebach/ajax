@@ -11,6 +11,8 @@ function getContent($id = "")
 
             //разница в датах
         //$query_diff = "SELECT machines.name_machines, units.name_units, units.id_machines, control.date_control,control.id_units, categories.periodicy FROM control, categories, units, machines where control.id_units = units.id_units and categories.id_categories = units.id_categories and units.id_machines=machines.id_machines and units.id_machines=".$id;
+        
+        //SELECT units.name_units, units.info_units, units.pozname_units, units.id_categories FROM units
         $query_diff = "SELECT machines.name_machines, units.name_units, units.id_machines, control.date_control,control.id_units, categories.periodicy FROM control, categories, units, machines where control.id_units = units.id_units and categories.id_categories = units.id_categories and units.id_machines=machines.id_machines and units.id_machines=".$id;
         $result_diff = mysqli_query($link, $query_diff);
 
