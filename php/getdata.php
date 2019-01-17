@@ -10,14 +10,16 @@ function getContent($id = "")
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
             //разница в датах
+        //$query_diff = "SELECT machines.name_machines, units.name_units, units.id_machines, control.date_control,control.id_units, categories.periodicy FROM control, categories, units, machines where control.id_units = units.id_units and categories.id_categories = units.id_categories and units.id_machines=machines.id_machines and units.id_machines=".$id;
         $query_diff = "SELECT machines.name_machines, units.name_units, units.id_machines, control.date_control,control.id_units, categories.periodicy FROM control, categories, units, machines where control.id_units = units.id_units and categories.id_categories = units.id_categories and units.id_machines=machines.id_machines and units.id_machines=".$id;
         $result_diff = mysqli_query($link, $query_diff);
 
 //-----------Заголовок таблицы---------------
         
 //-------------------------------------------
+        //$resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
         $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
-        
+
         //echo date("d-m-Y");
         $current_day = date("d-m-Y");
 
@@ -47,6 +49,7 @@ function getContent($id = "")
                    
                    
                    $date_control_rev = date("d-m-Y",strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
+                    //$resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td></tr>";
                     $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td></tr>";
                 }
                     $resultOut .= "</table>";
