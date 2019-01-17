@@ -47,7 +47,7 @@
     <div id="content">
     	<div id="content-data">  
     	</div>    	
-			<a id="save-link" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
+			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
 
     </div>
     <div id="clear"></div>
