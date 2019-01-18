@@ -207,6 +207,10 @@ tr:nth-child(2n) {
 	text-align: left;
 }
 
+#col_notes {
+	text-align: left;
+}
+
 #td_green {
 	background: #7CFC00;
 	color: black;
