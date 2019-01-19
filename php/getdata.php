@@ -52,7 +52,7 @@ function getContent($id = "")
                    
                    $date_control_rev = date("d-m-Y",strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
                     //$resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td></tr>";
-                    $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td><td id=col_notes>".$row['notes_control']."</td></tr>";
+                    $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td class = 'days' id=".$id_color.">".$diff."</td><td id=col_notes>".$row['notes_control']."</td></tr>";
                 }
                     $resultOut .= "</table>";
                 mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ

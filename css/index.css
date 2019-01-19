@@ -211,6 +211,10 @@ tr:nth-child(2n) {
 	text-align: left;
 }
 
+.days {
+	padding: 5px,5px,5px,5px;
+}
+
 #td_green {
 	background: #7CFC00;
 	color: black;
