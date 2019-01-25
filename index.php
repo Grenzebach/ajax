@@ -48,7 +48,7 @@
     	<div id="content-data">  
     	</div>    	
 			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
-			<a id="add-link" title="Добавить запись о проверке" href="php/add_item.php">ДОБАВИТЬ ЗАПИСЬ</a>
+			<a id="add-link" title="Добавить запись о проверке" href="php/add_record.php">ДОБАВИТЬ ЗАПИСЬ</a>
     </div>
     <div id="clear"></div>
     <div id="footer"><a href="http://localhost/phpmyadmin/">phpmyadmin</a>
