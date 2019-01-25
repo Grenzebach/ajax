@@ -63,6 +63,6 @@ function getContent($id = "")
 }
 
 //echo getContent($_POST['value']);
-
+//https://dayte2.com/editable-table
 
 ?>
