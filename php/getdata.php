@@ -10,9 +10,7 @@ function getContent($id = "")
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
             //разница в датах
-        //$query_diff = "SELECT machines.name_machines, units.name_units, units.id_machines, control.date_control,control.id_units, categories.periodicy FROM control, categories, units, machines where control.id_units = units.id_units and categories.id_categories = units.id_categories and units.id_machines=machines.id_machines and units.id_machines=".$id;
         
-        //SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, control.id_units, control.date_control, control.notes_control, categories.id_categories, categories.periodicy FROM units, control, machines, categories where units.id_units=control.id_units and units.id_machines=machines.id_machines and units.id_categories=categories.id_categories and units.id_machines
         $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, control.id_units, control.date_control, control.notes_control, categories.id_categories, categories.periodicy FROM units, control, machines, categories where units.id_units=control.id_units and units.id_machines=machines.id_machines and units.id_categories=categories.id_categories and units.id_machines=".$id;
         $result_diff = mysqli_query($link, $query_diff);
 
@@ -61,7 +59,10 @@ function getContent($id = "")
     
     return $resultOut;
 }
+function add_record()
+{
 
+}
 //echo getContent($_POST['value']);
 //https://dayte2.com/editable-table
 
