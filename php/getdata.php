@@ -53,13 +53,13 @@ function getContent($id = "")
                     $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td class = 'days' id=".$id_color.">".$diff."</td><td id=col_notes>".$row['notes_control']."</td></tr>";
                 }
                     //$resultOut .= "</table>";
-                //mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
+                mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
         }
         
             //Формирование в последней строчке выпадающего списка узлов
         $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-        $query = "SELECT name_units FROM `units` WHERE id_machines = 1";
+        $query = "SELECT name_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
         $result = mysqli_query($link, $query); 
 
         $resultOut .="<tr><td></td><td>";
@@ -68,12 +68,30 @@ function getContent($id = "")
         while ($row = mysqli_fetch_array($result)) {
             $resultOut.="<option value='id_select_'".$i++.">".$row['name_units']."</option>";
     }
-        
+        mysqli_close($link);
+
         $resultOut .= "</select></td><td>";        
-        $resultOut .="<input type='text' id='input_info_units'>"; //Доп. информация по узлу
+        $resultOut .="<input type='text' id='input_info_units'>";                                   //Доп. информация по узлу
         $resultOut .="</td><td>";
-        $resultOut .="<input type='date' id='input_date_control_units'>";
-        $resultOut .= "</td><td></td><td></td><td></td></tr></table>";
+        $resultOut .="<input type='date' value=".date('Y-m-d')." id='input_date_control_units'>";   //Выбор даты
+        $resultOut .="</td><td>";
+        
+        //Список периодичности в селект
+        $link = mysqli_connect("localhost", "root", "", "desk");
+        mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+        $query = "SELECT periodicy FROM categories";
+        $result = mysqli_query($link, $query);
+        
+        $resultOut .="<select>";
+        while ($row = mysqli_fetch_array($result)) {
+            $resultOut .="<option>".$row['periodicy']."</option>";
+        }
+
+        mysqli_close($link);
+        $resultOut .="</select>";     //Периодичность проверки
+        $resultOut .="</td><td></td><td>";
+        $resultOut .='<textarea name="input_notes_table" id="input_notes" cols="30" rows="1"></textarea>';
+        $resultOut .="</td></tr></table>";
         $resultOut .= "";
     
     return $resultOut;
