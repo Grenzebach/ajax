@@ -106,7 +106,7 @@ function applyChanges()
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8    
     foreach ($_POST['ids'] as $value) {
-         $query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_control` = $value";
+         $query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_units` = $value";
          echo $query;
          mysqli_query($link, $query);
      }    
