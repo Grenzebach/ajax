@@ -111,6 +111,7 @@ function applyChanges()
          $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$value."', '".date('Y-m-d')."', '5', 'ok')";
          
          echo $query;
+         //echo $id;
          mysqli_query($link, $query);
      }    
 }
@@ -121,7 +122,7 @@ function addRecord()
 //query_col = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '"+ sel+"', '"+date_control+"', "+"'4'"+", '"+input_notes+"')";
         $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-        //$query = $_POST["query_col"];
+        
         $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$_POST['sel']."', '".$_POST['date_control']."', "."'4'".", '".$_POST['input_notes']."')";
         echo $query;
         

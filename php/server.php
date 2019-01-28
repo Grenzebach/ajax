@@ -13,7 +13,8 @@
 		else if (isset($_POST["type"]) && $_POST["type"] == "add"){
 
 			echo addRecord();
-
+			echo $id;
+			//echo getContent($id);
 			//echo "<p>gertrtert</p>";
 	}
 ?>

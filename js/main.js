@@ -8,7 +8,7 @@ $(document).ready(function () {
         }
     }
 	getContent(id);
-
+    
 
 	$("li").on("click", function () {
         var val = $(this).attr("value");
@@ -22,6 +22,7 @@ $(document).ready(function () {
             data: {"type": "save", "ids": getCheckedInputs()},
             success: function(response) {
                 console.log(response);
+                console.log("save");
             } 
         });        
     })
@@ -62,12 +63,3 @@ function getCheckedInputs() {
     return ids;
 }
 
-function addRecord() {
-    
-    var sel = $("#id_select option:selected").val();
-    var date_control = $("#input_date_control_units").val();
-    var input_notes = $("#input_notes").val();
-//INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '27', '2019-01-15', '4', 'ок')
-    
-    return sel,date_control,input_notes;
-}
