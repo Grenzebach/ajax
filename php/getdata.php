@@ -11,7 +11,7 @@ function getContent($id = "")
 
             //разница в датах
         
-        $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, control.id_units, control.date_control, control.notes_control, categories.id_categories, categories.periodicy FROM units, control, machines, categories where units.id_units=control.id_units and units.id_machines=machines.id_machines and units.id_categories=categories.id_categories and units.id_machines=".$id;
+        $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, control.id_units, control.date_control, control.notes_control, categories.id_categories, categories.periodicy FROM units, control, machines, categories WHERE units.id_units=control.id_units AND units.id_machines=machines.id_machines AND units.id_categories=categories.id_categories AND control.date_control=(SELECT MAX(control.date_control) FROM control) AND units.id_machines=".$id." GROUP BY units.name_units";
         $result_diff = mysqli_query($link, $query_diff);
 
 //-----------Заголовок таблицы---------------
@@ -103,10 +103,13 @@ function applyChanges()
     //данные из пост массива ids сохраняются в базу
     //обновление даты проверки
     //UPDATE `control` SET `date_control` = '2019-01-27' WHERE `control`.`id_control` = 9;
+    //INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '23', '2019-01-23', '5', 'ok');
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8    
     foreach ($_POST['ids'] as $value) {
-         $query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_units` = $value";
+         //$query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_units` = $value";
+         $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$value."', '".date('Y-m-d')."', '5', 'ok')";
+         
          echo $query;
          mysqli_query($link, $query);
      }    
