@@ -8,7 +8,7 @@ $(document).ready(function () {
         }
     }
 	getContent(id);
-    
+
 
 	$("li").on("click", function () {
         var val = $(this).attr("value");
