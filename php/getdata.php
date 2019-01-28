@@ -59,19 +59,19 @@ function getContent($id = "")
             //Формирование в последней строчке выпадающего списка узлов
         $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-        $query = "SELECT name_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
+        $query = "SELECT name_units,id_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
         $result = mysqli_query($link, $query); 
 
         $resultOut .="<tr><td></td><td>";
-        $resultOut .="<select>";
-        $i=0;
+        $resultOut .="<select id='id_select'>";
+        //$i=1;
         while ($row = mysqli_fetch_array($result)) {
-            $resultOut.="<option value='id_select_'".$i++.">".$row['name_units']."</option>";
+            $resultOut.="<option value=".$row['id_units'].">".$row['name_units']."</option>";
     }
         mysqli_close($link);
 
         $resultOut .= "</select></td><td>";        
-        $resultOut .="<input type='text' id='input_info_units'>";                                   //Доп. информация по узлу
+    // $resultOut .="<input type='text' id='input_info_units'>";                         //Доп. информация по узлу
         $resultOut .="</td><td>";
         $resultOut .="<input type='date' value=".date('Y-m-d')." id='input_date_control_units'>";   //Выбор даты
         $resultOut .="</td><td>";
@@ -94,10 +94,42 @@ function getContent($id = "")
         $resultOut .="</td></tr></table>";
         $resultOut .= "";
     
+        //$request = 
     return $resultOut;
 }
-function add_record()
+
+function applyChanges()
 {
+    //данные из пост массива ids сохраняются в базу
+    //обновление даты проверки
+    //UPDATE `control` SET `date_control` = '2019-01-27' WHERE `control`.`id_control` = 9;
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8    
+    foreach ($_POST['ids'] as $value) {
+         $query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_control` = $value";
+         echo $query;
+         mysqli_query($link, $query);
+     }    
+}
+
+function addRecord()
+{
+        
+//query_col = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '"+ sel+"', '"+date_control+"', "+"'4'"+", '"+input_notes+"')";
+        $link = mysqli_connect("localhost", "root", "", "desk");
+        mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+        //$query = $_POST["query_col"];
+        $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$_POST['sel']."', '".$_POST['date_control']."', "."'4'".", '".$_POST['input_notes']."')";
+        echo $query;
+        
+        //$result = mysqli_query($link, $query);
+
+        if (mysqli_query($link, $query)) 
+      echo "Запись добавлена";
+            else 
+      echo "Ошибка добавления" ;
+
+mysqli_close($link);
 
 }
 //echo getContent($_POST['value']);

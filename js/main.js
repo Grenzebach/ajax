@@ -25,7 +25,22 @@ $(document).ready(function () {
             } 
         });        
     })
+
+    $("#add-link").on("click", function() {
+       
+        var sel = $("#id_select option:selected").val();
+        var date_control = $("#input_date_control_units").val();
+        var input_notes = $("#input_notes").val();
+        $.ajax({
+            url: "php/server.php",
+            method: "POST",
+            data: {"type": "add", "sel": sel, "date_control": date_control, "input_notes": input_notes },
+            //success: getContent(1),
+             
+        });        
+    })
 });
+
 
 function getContent(id) {
     $.ajax({
@@ -45,4 +60,14 @@ function getCheckedInputs() {
     });
     
     return ids;
+}
+
+function addRecord() {
+    
+    var sel = $("#id_select option:selected").val();
+    var date_control = $("#input_date_control_units").val();
+    var input_notes = $("#input_notes").val();
+//INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '27', '2019-01-15', '4', 'ок')
+    
+    return sel,date_control,input_notes;
 }
