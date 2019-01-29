@@ -23,6 +23,9 @@ $(document).ready(function () {
             success: function(response) {
                 console.log(response);
                 console.log("save");
+                alert("qwert");
+                console.log();
+                getContent(id);
             } 
         });        
     })

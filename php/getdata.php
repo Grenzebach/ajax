@@ -109,7 +109,7 @@ function applyChanges()
     foreach ($_POST['ids'] as $value) {
          //$query = "UPDATE `control` SET `date_control` = '".date('Y-m-d')."' WHERE `control`.`id_units` = $value";
          $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$value."', '".date('Y-m-d')."', '5', 'ok')";
-         echo "<script>alert(\"Запись добавлена\");</script>" ;
+         echo "Запись добавлена" ;
          echo $query;
          //echo $id;
          mysqli_query($link, $query);
@@ -129,7 +129,7 @@ function addRecord()
         //$result = mysqli_query($link, $query);
 
         if (mysqli_query($link, $query)) 
-      echo "<script>alert(\"Запись добавлена\");</script>" ;
+      echo "11" ;
             else 
       echo "Ошибка добавления" ;
 
