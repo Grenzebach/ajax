@@ -13,6 +13,7 @@ $(document).ready(function () {
 	$("li").on("click", function () {
         var val = $(this).attr("value");
         getContent(val);
+
     });
 
     $("#save-link").on("click", function() {
