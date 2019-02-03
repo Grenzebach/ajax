@@ -221,7 +221,7 @@ tr:nth-child(2n) {
 .link a {
 	text-decoration: none;
 	color: #fff;
-	padding: 15px;
+	padding: 10px;
 	display: block;
 }
 
@@ -283,4 +283,5 @@ tr:nth-child(2n) {
 
 .warning-icon {
 	background-image: url("../img/icon-warning.png");
+	background-color: #f3cfd1;
 }

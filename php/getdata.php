@@ -26,7 +26,7 @@ function getContent($id = "")
         
 //-------------------------------------------
         //$resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
-        $resultOut = "<table><tr><th>Узел</th><th>Инфо</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Замечания</th></tr>";
+        $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Инфо</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th><th>Замечания</th></tr>";
 
         //echo date("d-m-Y");
         $current_day = date("d-m-Y");
@@ -45,19 +45,19 @@ function getContent($id = "")
 
             //$id_color = "td_green"; //Цвет ячейки по-умолчанию
             
-            $icon = "ok-icon";
+            $icon = "";
 
             $result = $date_deadline < $date_current;
             if ($result)
-                $icon = "warning-icon";                   //Маркировка просроченной даты
+                $icon = "class = 'days icon warning-icon' title='Просрочено!'";                   //Маркировка просроченной даты
 
-            if ($diff < 3)
-                $icon = "attention-icon";    //Осталось меньше трёх дней?
+            //if ($diff < 3)
+              //  $icon = "attention-icon";    //Осталось меньше трёх дней?
 
 
             $date_control_rev = date("d-m-Y", strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
             //$resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td></tr>";
-            $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td class = 'days icon $icon' >".$diff."</td><td><input type='checkbox' name='a' value='10'></td><td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";
+            $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td ".$icon.">".$diff."</td><td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";
             }
                     //$resultOut .= "</table>";
             mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
