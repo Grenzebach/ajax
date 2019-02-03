@@ -56,7 +56,6 @@ img {
 }
 
 body {
-	background: #f3f2f3;
 	color: #000000;
 	font-family: Verdana;
 	font-size: 12px;
@@ -64,9 +63,8 @@ body {
 
 #container {
 	background: #FFFFFF;
-	margin: 30px auto;
+	margin: 0 auto;
 	width: 100%;
-	height: 2000px;
 }
 
 #header {
@@ -88,7 +86,8 @@ body {
 #sidebar {
 	
 	width: 220px;
-	height: 600px;
+	height: 80%;
+	float: left;
 
 }
 
@@ -130,10 +129,8 @@ body {
 }
 
 #content {
-	background: #d2d0d2;	
-	width: 100%;
-	height: 100%;
-	margin-left: 215px;
+	float: left;
+	background: #fff;		
 	padding-left: 10px;
 	padding-top: 10px;
 }
@@ -152,8 +149,11 @@ body {
 
 #footer {
 	background: #0089CF;
-	height: 180px;
+	height: 80px;
 	width: 100%;
+    position: absolute;
+    top: 100%;
+    margin-top: -80px;	
 }
 
 table {
@@ -186,28 +186,46 @@ td {
   	padding: 5px 8px;
 }
 tr:nth-child(2n) {
-	background: #bcbbbd;
+	background: #eaeaea;
 }
 
 #save-link {
-	background: #0089cf;
+/*	background: #0089cf;
 	padding: 10px;
 	margin-top: 20px;
 	margin-left: 20px;
 	text-decoration: none;
-	color: white;
+	color: white;*/
 }
 
 #add-link {
-	background: #0089cf;
+/*	background: #0089cf;
 	padding: 10px;
 	margin-top: 20px;
 	margin-left: 20px;
 	text-decoration: none;
-	color: white;
+	color: white;*/
 }
 
-#save-link:hover {
+.links-container {
+	margin-top: 15px;
+}
+
+.link {
+	background: #0089cf;
+	float: left;
+	
+	margin-right: 15px;
+}
+
+.link a {
+	text-decoration: none;
+	color: #fff;
+	padding: 15px;
+	display: block;
+}
+
+.link:hover {
 	background: #056292;
 	color: white;
 }
@@ -230,16 +248,39 @@ tr:nth-child(2n) {
 }
 
 #td_green {
-	background: #7CFC00;
+	background-color: #7CFC00;
 	color: black;
 }
 #td_yellow {
-	background: yellow;
+	background-color: yellow;
 	color: blue;
 }
 
 #td_red {
-	background: red;
+	background-color: red;
 	color: white;
 	border-color: black;
+}
+
+.gif {
+	height: 35px;
+	width: 35px;
+	background: cyan;
+}
+
+.icon {
+	background-repeat: no-repeat;
+	background-position: center right;	
+}
+
+.ok-icon {	
+	background-image: url("../img/icon-ok.png");
+}
+
+.attention-icon {
+	background-image: url("../img/icon-attention.png");
+}
+
+.warning-icon {
+	background-image: url("../img/icon-warning.png");
 }

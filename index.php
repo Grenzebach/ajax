@@ -45,10 +45,25 @@
     </div>
     <script type="text/javascript" src="js/main.js"></script>
     <div id="content">
+    	
     	<div id="content-data">  
+    	</div>
+
+    	<div class="links-container">
+    		<div class="link">
+    			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
+    		</div>	
+			<div class="clear"></div>
+		</div>
+
+    	<div id="combos">
     	</div>    	
-			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
-			<a id="add-link" title="Добавить запись о проверке" href="javascript: void(0);">ДОБАВИТЬ ЗАПИСЬ</a>
+    	<div class="links-container">
+    		<div class="link">		
+				<a id="add-link" title="Добавить запись о проверке" href="javascript: void(0);">ДОБАВИТЬ ЗАПИСЬ</a>
+			</div>
+			<div class="clear"></div>
+		</div>
     </div>
     <div id="clear"></div>
     <div id="footer"><a href="http://localhost/phpmyadmin/">phpmyadmin</a>
