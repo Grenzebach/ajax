@@ -76,7 +76,7 @@ function getCombos($id) {
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "SELECT name_units,id_units,pozname_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
     $result = mysqli_query($link, $query);     
-    $resultOut ="<div><p>Добавление записи в таблицу</p>Узел: <select id='id_select'>";
+    $resultOut ="<div><p class = 'add-record'>Добавление записи в таблицу:</p>Узел: <select id='id_select'>";
     while ($row = mysqli_fetch_array($result)) {
         $resultOut.="<option value=".$row['id_units'].">".$row['name_units']." ".$row['pozname_units']."</option>";
     }
@@ -85,7 +85,7 @@ function getCombos($id) {
     $resultOut .= "</select>Дата: <input type='date' value=".date('Y-m-d')." id='input_date_control_units'></div>";//Выбор даты
                     
     $resultOut .="<div id='comment'><p>Комментарий:</p>";   
-    $resultOut .='<textarea name="input_notes_table" id="input_notes" cols="62" rows="1"></textarea></div>';    
+    $resultOut .='<textarea name="input_notes_table" id="input_notes" cols="71" rows="1"></textarea></div>';    
     return $resultOut;
 }
 //$_POST['ids']

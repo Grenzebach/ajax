@@ -14,7 +14,7 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-    font-weight: 100;
+    font-weight: 400;
 }
 
 
@@ -33,27 +33,26 @@ html, body {
 
 .logo {
 	height: 50px;
+	width: 300px;
 	padding-top: 20px;
 	padding-left: 20px; 
-	float: left;
-	
+	float: left;	
 	
 }
 img {
-		width: 50%;
-}
-
-#logo_title {
-	color: white;
-	font-size: 20px;
-	
-	padding-left: 50px;
+	width: 100%;
 }
 
 #title {
-	padding-top: 25px;
-	width: 100%;
-	color: yellow;
+	width: 800px;
+	height: 80px;
+
+	padding-top: 35px;
+	display: inline-block;
+	color: white;
+	font-size: 20px;	
+	padding-left: 100px;
+	
 	
 }
 
@@ -72,8 +71,7 @@ body {
 #header {
 	background: #056292;
 	height: 100px;
-	width: 100%;
-	
+	width: 100%;	
 	color: yellow;
 }
 
@@ -88,7 +86,7 @@ body {
 #sidebar {
 	
 	width: 220px;
-	height: 80%;
+	height: 100%;
 	float: left;
 
 }
@@ -141,6 +139,7 @@ body {
 	text-align: left;
 	padding-left: 20px;
 	font-size: 12;
+	font-weight: bold;
 }
 #content-data{
 	margin-bottom: 20px;
@@ -174,7 +173,7 @@ table {
 th {
 	border: 1px solid;
 	text-align: center;
-	font-weight: normal;
+	
  	color: black;
   	padding: 5px 8px;
   	font-weight: bold;
@@ -196,22 +195,10 @@ tr:nth-child(2n) {
 	background: #eaeaea;
 }
 
-#save-link {
-/*	background: #0089cf;
-	padding: 10px;
-	margin-top: 20px;
-	margin-left: 20px;
-	text-decoration: none;
-	color: white;*/
-}
-
-#add-link {
-/*	background: #0089cf;
-	padding: 10px;
-	margin-top: 20px;
-	margin-left: 20px;
-	text-decoration: none;
-	color: white;*/
+.add-record {
+	font-weight: bold;
+	padding-top: 10;
+	padding-bottom: 10;
 }
 
 .links-container {

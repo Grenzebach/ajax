@@ -12,7 +12,7 @@
     	<div class="logo"><a href="/"><img src="img/logo.jpg" alt=""></a>
 			
     	</div>
-		<div id='title'><p id=logo_title>Система ТОиР ЗАО "Муром"</p>
+		<div id='title'><p>Система ТОиР ЗАО "Муром"</p>
 		</div>
     </div>
     <div id="navigation"></div>

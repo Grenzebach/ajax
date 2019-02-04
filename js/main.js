@@ -68,6 +68,8 @@ $(document).ready(function () {
     $(document).on("change", "input[type='checkbox']", function(event) {
         if ($(this).prop("checked")) {
             $(this).parent().closest("tr").attr("checked", "true");
+            console.log("qwe");
+            
         } else {
             $(this).parent().closest("tr").removeAttr("checked");
         }
@@ -116,4 +118,6 @@ function getCurrentPageId() {
     }
     return id;
 }
+
+
 
