@@ -18,7 +18,8 @@ function getContent($id = "")
             AND units.id_categories=categories.id_categories 
             AND c1.date_control=(SELECT MAX(c2.date_control) FROM control c2 where c2.id_units = c1.id_units) 
             AND units.id_machines=$id 
-            GROUP BY units.name_units";
+            GROUP BY units.name_units
+            ORDER BY `units`.`id_units` ASC";
 
         $result_diff = mysqli_query($link, $query_diff);
 
@@ -75,17 +76,16 @@ function getCombos($id) {
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "SELECT name_units,id_units,pozname_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
     $result = mysqli_query($link, $query);     
-    $resultOut ="<div><select id='id_select'>";
+    $resultOut ="<div><p>Добавление записи в таблицу</p>Узел: <select id='id_select'>";
     while ($row = mysqli_fetch_array($result)) {
         $resultOut.="<option value=".$row['id_units'].">".$row['name_units']." ".$row['pozname_units']."</option>";
     }
     mysqli_close($link);
 
-    $resultOut .= "</select>";
-
-    $resultOut .="<input type='text' id='input_info_units'></div>";                         //Доп. информация по узлу
-    $resultOut .="<div><input type='date' value=".date('Y-m-d')." id='input_date_control_units'>";   //Выбор даты
-    $resultOut .='<textarea name="input_notes_table" id="input_notes" cols="30" rows="1"></textarea></div>';    
+    $resultOut .= "</select>Дата: <input type='date' value=".date('Y-m-d')." id='input_date_control_units'></div>";//Выбор даты
+                    
+    $resultOut .="<div id='comment'><p>Комментарий:</p>";   
+    $resultOut .='<textarea name="input_notes_table" id="input_notes" cols="62" rows="1"></textarea></div>';    
     return $resultOut;
 }
 //$_POST['ids']

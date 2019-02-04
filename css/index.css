@@ -16,6 +16,8 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     background: transparent;
     font-weight: 100;
 }
+
+
 .clear {
     clear: both;
 }
@@ -133,6 +135,7 @@ body {
 	background: #fff;		
 	padding-left: 10px;
 	padding-top: 10px;
+	
 }
 #content-header {
 	text-align: left;
@@ -141,6 +144,9 @@ body {
 }
 #content-data{
 	margin-bottom: 20px;
+	display: block;
+  	overflow-x: auto;
+  	max-width: 100%;
 }
 
 #clear {
@@ -151,17 +157,18 @@ body {
 	background: #0089CF;
 	height: 80px;
 	width: 100%;
-    position: absolute;
+   
     top: 100%;
-    margin-top: -80px;	
+    	
 }
 
 table {
 	border-collapse: collapse;
-	width: 	100%px;
+	
 	border: 2px solid;
 	margin-top: 20px;
 	margin-left: 20px;
+	
 }
 
 th {
@@ -209,6 +216,7 @@ tr:nth-child(2n) {
 
 .links-container {
 	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .link {
@@ -284,4 +292,19 @@ tr:nth-child(2n) {
 .warning-icon {
 	background-image: url("../img/icon-warning.png");
 	background-color: #f3cfd1;
+}
+
+#combos {
+	padding: 20px;
+}
+#combos textarea {
+	padding-top: 40px;
+}
+#combos select {
+	margin-right: 20px;
+	height: 24px;
+}
+p {
+	padding-top: 10px;
+	padding-bottom: 5px;
 }
