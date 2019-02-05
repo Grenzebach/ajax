@@ -127,15 +127,18 @@ function getPlan($id) {
     $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
-        $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, c1.id_units, c1.date_control, c1.notes_control, categories.id_categories, categories.periodicy 
+        $query_diff = " SELECT  CURDATE(), DATE_SUB(CURDATE(), INTERVAL 5 DAY),5-DAYOFWEEK(CURDATE()),DAYOFWEEK(CURDATE()) ,machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, c1.id_units, c1.date_control, c1.notes_control, categories.id_categories, categories.periodicy 
             FROM units, control c1, machines, categories 
             WHERE units.id_units=c1.id_units 
             AND units.id_machines=machines.id_machines 
             AND units.id_categories=categories.id_categories 
-            AND c1.date_control=(SELECT MAX(c2.date_control) FROM control c2 where c2.id_units = c1.id_units) 
-            AND units.id_machines=$id 
+            AND c1.date_control=(SELECT MAX(c2.date_control) 
+                                 FROM control c2 
+                                 where c2.id_units = c1.id_units)
+            AND c1.date_control < DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+            AND units.id_machines=1 
             GROUP BY units.name_units
-            ORDER BY `units`.`id_units` ASC";
+            ORDER BY `units`.`id_units` ASC" ;
 
         $result_diff = mysqli_query($link, $query_diff);
         echo "fsvsdfsdf";
