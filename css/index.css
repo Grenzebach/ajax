@@ -32,10 +32,9 @@ html, body {
 }
 
 .logo {
-	height: 50px;
+	height: 100px;
 	width: 300px;
-	padding-top: 20px;
-	padding-left: 20px; 
+	padding: 10px; 
 	float: left;	
 	
 }
@@ -45,7 +44,7 @@ img {
 
 #title {
 	width: 800px;
-	height: 80px;
+	height: 100px;
 
 	padding-top: 35px;
 	display: inline-block;
@@ -73,6 +72,7 @@ body {
 	height: 100px;
 	width: 100%;	
 	color: yellow;
+	white-space: nowrap;
 }
 
 #navigation {
@@ -128,12 +128,12 @@ body {
 	color: white;
 }
 
-#content {
-	float: left;
+#content {	
 	background: #fff;		
 	padding-left: 10px;
 	padding-top: 10px;
-	
+	white-space: nowrap;
+	overflow-x: auto;
 }
 #content-header {
 	text-align: left;
@@ -167,6 +167,7 @@ table {
 	border: 2px solid;
 	margin-top: 20px;
 	margin-left: 20px;
+	white-space: nowrap;
 	
 }
 

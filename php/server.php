@@ -16,5 +16,7 @@
 		//echo json_encode(Array("error" => "", "data" => getContent($_POST["page"])));	
 	} else if (isset($_GET["type"]) && $_GET["type"] == "combos") {
 		echo getCombos($_GET["id"]);
+	} else if (isset($_GET["type"]) && $_GET["type"] == "plan") {
+		echo getPlan($_GET["id"]);
 	}
 ?>

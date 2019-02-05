@@ -52,6 +52,9 @@
     	<div class="links-container">
     		<div class="link">
     			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
+    		</div>
+    		<div class="link">
+    			<a id="mkplan-link" title="Сформировать план" href="javascript: void(0);">СФОРМИРОВАТЬ ПЛАН</a>		
     		</div>	
 			<div class="clear"></div>
 		</div>

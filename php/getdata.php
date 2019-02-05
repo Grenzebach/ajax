@@ -31,7 +31,7 @@ function getContent($id = "")
 
         //echo date("d-m-Y");
         $current_day = date("d-m-Y");
-
+        $i=0;               //Счетчик итераций
         //echo dateDifference("2018-10-31","2018-12-25");
         $machineName = "";       
         while ($row = mysqli_fetch_array($result_diff)) {
@@ -47,13 +47,16 @@ function getContent($id = "")
             //$id_color = "td_green"; //Цвет ячейки по-умолчанию
             
             $icon = "";
-
+            $i++;
             $result = $date_deadline < $date_current;
             if ($result)
                 $icon = "class = 'days icon warning-icon' title='Просрочено!'";                   //Маркировка просроченной даты
 
-            //if ($diff < 3)
-              //  $icon = "attention-icon";    //Осталось меньше трёх дней?
+            if ($diff < 8)
+            {
+                //  $icon = "attention-icon";    //Осталось меньше трёх дней?
+                $plan[$i] = $row['name_units'];
+            }
 
 
             $date_control_rev = date("d-m-Y", strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
@@ -63,7 +66,7 @@ function getContent($id = "")
                     //$resultOut .= "</table>";
             mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
         }
-
+        print_r($plan);
     $resultOut .="</table>";
     $resultOut .= "";
         //$request = 
@@ -118,7 +121,24 @@ function addRecord($sel, $dateControl, $inputNotes) {
 
         mysqli_close($link);
 }
-//echo getContent($_POST['value']);
-//https://dayte2.com/editable-table
+
+function getPlan($id) {
+    $link = mysqli_connect("localhost", "root", "", "desk");
+        mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+
+        $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, c1.id_units, c1.date_control, c1.notes_control, categories.id_categories, categories.periodicy 
+            FROM units, control c1, machines, categories 
+            WHERE units.id_units=c1.id_units 
+            AND units.id_machines=machines.id_machines 
+            AND units.id_categories=categories.id_categories 
+            AND c1.date_control=(SELECT MAX(c2.date_control) FROM control c2 where c2.id_units = c1.id_units) 
+            AND units.id_machines=$id 
+            GROUP BY units.name_units
+            ORDER BY `units`.`id_units` ASC";
+
+        $result_diff = mysqli_query($link, $query_diff);
+        echo "fsvsdfsdf";
+        //print_r($plan);
+}
 
 ?>

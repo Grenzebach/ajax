@@ -35,6 +35,7 @@ $(document).ready(function () {
         var sel = $("#id_select option:selected").val();
         var date_control = $("#input_date_control_units").val();
         var input_notes = $("#input_notes").val();
+
         $.ajax({
             url: "php/server.php",
             method: "POST",
@@ -47,7 +48,28 @@ $(document).ready(function () {
             }
         });        
     });
+
+        $("#mkplan-link").on("click", function() {
+       
+        //var sel = $("#id_select option:selected").val();
+        //var date_control = $("#input_date_control_units").val();
+        //var input_notes = $("#input_notes").val();
+
+        $.ajax({
+            url: "php/server.php",
+            method: "POST",
+            data: {"type": "plan"},
+            success: function(response) {
+                $("#content-data").html(response);
+                setTimeout(function() {
+                    alert("План сформирован");
+                    console.log("plan is OK");
+                }, 100); 
+            }
+        });        
+    });
     
+
     $(document).on("dblclick", "tr[checked] .col-notes", function() {
         var element = $("td[oldValue]");
         element
