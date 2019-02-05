@@ -122,6 +122,7 @@ function addRecord($sel, $dateControl, $inputNotes) {
         mysqli_close($link);
 }
 
+//-----------------ФУНКЦИЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ УЗЛОВ НА ОБСЛУЖИВАНИЕ---------------------
 function getPlan($id) {
     $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -139,6 +140,21 @@ function getPlan($id) {
         $result_diff = mysqli_query($link, $query_diff);
         echo "fsvsdfsdf";
         //print_r($plan);
-}
+        $current_day = date("d-m-Y");
+          
+        while ($row = mysqli_fetch_array($result_diff)) {
+            $machineName = "<p id='content-header'>".$row['name_machines']."</p>";
+            $date_current = date_create($current_day);          //Теущая дата
+            $date_control = date_create($row['date_control']);  //Дата последней проверки
+            $date_deadline = date_add($date_control, date_interval_create_from_date_string($row['periodicy'] . "days")); // Окончания периода
+            $interval = date_diff($date_current, $date_deadline);   //Разница между датами
 
+            $diff = $interval -> format("%a");
+            if ($diff < 8)
+            {
+                //  $icon = "attention-icon";    //Осталось меньше трёх дней?
+                $plan[$i] = $row['name_units'];
+            }
+}
+}
 ?>
