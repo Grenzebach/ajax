@@ -4,6 +4,7 @@
 	<title>Система ТОиР ЗАО "Муром"</title>
 	<link rel="shortcut icon" href="img/icons8-maintenance-16.png" type="image/png">
 	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/print.css">
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -54,7 +55,10 @@
     			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
     		</div>
     		<div class="link">
-    			<a id="mkplan-link" title="Сформировать план" href="javascript: void(0);">СФОРМИРОВАТЬ ПЛАН</a>		
+    			<a id="mkplan-link" title="Сформировать план на предстоящий четверг" href="javascript: void(0);">СФОРМИРОВАТЬ ПЛАН</a>		
+    		</div>
+    		<div class="link">
+    			<a id="print-link" title="Таблица на печать" href="javascript: void(0);">ПЕЧАТЬ</a>		
     		</div>	
 			<div class="clear"></div>
 		</div>

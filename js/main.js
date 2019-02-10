@@ -41,6 +41,11 @@ $(document).ready(function () {
         getPlan(getCurrentPageId());        
     });
     
+    $("#print-link").on("click", function() {
+        window.print();                 //Печатать страницу
+        console.log("print");        
+    });
+
 
     $(document).on("dblclick", "tr[checked] .col-notes", function() {
         var element = $("td[oldValue]");
@@ -65,7 +70,7 @@ $(document).ready(function () {
     $(document).on("change", "input[type='checkbox']", function(event) {
         if ($(this).prop("checked")) {
             $(this).parent().closest("tr").attr("checked", "true");
-            console.log("qwe");
+            console.log("кря!");
             //$("#row5").hide();
             
         } else {
@@ -105,7 +110,7 @@ function getPlan(id) {
         success: function(response) {
             $("#content-data").html(response);
             setTimeout(function() {
-                window.location.hash = "#plan=1";                
+                window.location.hash = "#plan="+ id;                
                 console.log("plan is OK");
             }, 100); 
         }

@@ -27,7 +27,13 @@ function getContent($id = "")
         
 //-------------------------------------------
         //$resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Текущая дата</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th></tr>";
-        $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Инфо</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th><th>Замечания</th></tr>";
+        $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th>
+        <th>Узел</th>
+        <th>Инфо</th>
+        <th class='hide-col'>Предыдущая проверка</th>
+        <th class='hide-col'>Период-ть</th>
+        <th class='hide-col'>Дней осталось</th>
+        <th>Замечания</th></tr>";
 
         //echo date("d-m-Y");
         $current_day = date("d-m-Y");
@@ -45,15 +51,24 @@ function getContent($id = "")
             $diff = $interval -> format("%a"); //Количество дней в строку
 
                        
-            $icon = "";
+            $icon = "class = 'days-before'";
             
-            $result = $date_deadline < $date_current;
-            if ($result)
-                $icon = "class = 'days icon warning-icon' title='Просрочено!'";                   //Маркировка просроченной даты
+            $result_date = $date_deadline < $date_current;
+            if ($result_date){
+                $icon = "class = 'days icon warning-icon' title='Просрочено!'";
+                $diff = "-".$diff;                   //Маркировка просроченной даты
+            }
 
             $date_control_rev = date("d-m-Y", strtotime($row['date_control'])); // изменение формата даты из Y-m-d в d-m-Y
             //$resultOut .=  "<tr id=\"" . $row["id_units"] .  "\"><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']."</td><td>".$current_day."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td id=".$id_color.">".$diff."</td></tr>";
-            $resultOut .=  "<tr id = row". $row['id_units'] . " machine='" . $row["id_units"] . "'><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td><td>".$row['info_units']."</td><td>".$date_control_rev."</td><td>".$row['periodicy']."</td><td ".$icon.">".$diff."</td><td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";
+            $resultOut .=  "<tr id = row". $row['id_units'] . " machine='" . $row["id_units"] . "'>
+            <td><input type='checkbox' name='a' value='10'></td>
+            <td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td>
+            <td>".$row['info_units']."</td>
+            <td class='hide-col'>".$date_control_rev."</td>
+            <td class='hide-col'>".$row['periodicy']."</td>
+            <td ".$icon.">".$diff."</td>
+            <td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";
             }
                     //$resultOut .= "</table>";
             mysqli_close($link); //ЗАКРЫТИЕ СОЕДИНЕНИЯ
@@ -117,7 +132,13 @@ function addRecord($sel, $dateControl, $inputNotes) {
 //-----------------ФУНКЦИЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ УЗЛОВ НА ОБСЛУЖИВАНИЕ---------------------
 function getPlan($id) {
     //echo "12345";
-    $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Инфо</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th><th>Замечания</th></tr>";
+    $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th>
+    <th>Узел</th>
+    <th>Инфо</th>
+    <th class='hide-col'>Предыдущая проверка</th>
+    <th class='hide-col'>Период-ть</th>
+    <th class='hide-col'>Дней осталось</th>
+    <th>Замечания</th></tr>";
     
     $link = mysqli_connect("localhost", "root", "", "desk");
             mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -148,13 +169,19 @@ date_ADD(case
     $result = mysqli_query($link, $query);   
           
         while ($row = mysqli_fetch_array($result)) {
-            $icon = "";
-            
-            if ($row['diff'] < 0)
+            $icon = "class = 'days-before'";            
+            if ($row['diff'] < 0)                
                 $icon = "class = 'days icon warning-icon' title='Просрочено!'";
+            
 //<a href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a>
             $machineName = "<p id='content-header'><a class ='nav' value='". $row["id_machines"] ."' href='#machine=" . $row["id_machines"] . "'>" . $row["name_machines"] . "</a> -> План на обслуживание </p>";
-            $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\" machine='" . $row["id_units"] . "'><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td><td>".$row['info_units']."</td><td>".$row['date_control']."</td><td>".$row['periodicy']."</td><td ".$icon.">".$row['diff']."</td><td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";   
+            $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\" machine='" . $row["id_units"] . "'>
+            <td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td>
+            <td>".$row['info_units']."</td>
+            <td class='hide-col'>".$row['date_control']."</td>
+            <td class='hide-col'>".$row['periodicy']."</td>
+            <td ".$icon.">".$row['diff']."</td>
+            <td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";   
 }
 $resultOut .="</table>";
 $resultOut .= "";

@@ -304,3 +304,7 @@ p {
 tr[checked] {
 	background-color: #fff8b0;
 }
+
+.col-notes-edit{
+	padding: 5px;
+}
