@@ -116,7 +116,7 @@ function addRecord($sel, $dateControl, $inputNotes) {
 
 //-----------------ФУНКЦИЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ УЗЛОВ НА ОБСЛУЖИВАНИЕ---------------------
 function getPlan($id) {
-    echo "12345";
+    //echo "12345";
     $resultOut = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th><th>Узел</th><th>Инфо</th><th>Предыдущая проверка</th><th>Период-ть</th><th>Дней осталось</th><th>Замечания</th></tr>";
     
     $link = mysqli_connect("localhost", "root", "", "desk");
@@ -152,14 +152,14 @@ date_ADD(case
             
             if ($row['diff'] < 0)
                 $icon = "class = 'days icon warning-icon' title='Просрочено!'";
-
-            $machineName = "<p id='content-header'>".$row['name_machines']."</p>";
+//<a href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a>
+            $machineName = "<p id='content-header'><a class ='nav' value='". $row["id_machines"] ."' href='#machine=" . $row["id_machines"] . "'>" . $row["name_machines"] . "</a> -> План на обслуживание </p>";
             $resultOut .=  "<tr id=\"" . $row["id_units"] .  "\" machine='" . $row["id_units"] . "'><td><input type='checkbox' name='a' value='10'></td><td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td><td>".$row['info_units']."</td><td>".$row['date_control']."</td><td>".$row['periodicy']."</td><td ".$icon.">".$row['diff']."</td><td class='col-notes' id=col_notes>".$row['notes_control']."</td></tr>";   
 }
 $resultOut .="</table>";
-$resultOut .="";
+$resultOut .= "";
 mysqli_close($link);
-return $resultOut;
+return $machineName . $resultOut;
 }
 ?>
 

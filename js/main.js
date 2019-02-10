@@ -3,7 +3,7 @@ $(document).ready(function () {
     getCombos(getCurrentPageId());
 
 
-	$("li").on("click", function () {
+	$(document).on("click", "li, .nav", function () {
         var val = $(this).attr("value");
         getContent(val);
         getCombos(val);    
@@ -105,8 +105,7 @@ function getPlan(id) {
         success: function(response) {
             $("#content-data").html(response);
             setTimeout(function() {
-                window.location.hash = "#plan=1";
-                alert("План сформирован");
+                window.location.hash = "#plan=1";                
                 console.log("plan is OK");
             }, 100); 
         }

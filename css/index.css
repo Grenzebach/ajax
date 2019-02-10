@@ -225,6 +225,11 @@ tr:nth-child(2n) {
 	color: white;
 }
 
+.nav {
+	text-decoration: none;
+	color: black;
+}
+
 #add-link:hover {
 	background: #056292;
 	color: white;
