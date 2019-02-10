@@ -7,16 +7,24 @@
 		}
 		echo getContent($id); 
 	} else if (isset($_POST["type"]) && $_POST["type"] == "save") {
-		//print_r($_POST["ids"]);
 		applyChanges($_POST["ids"]);
-		echo getContent($_POST["page"]);		
-	} else if (isset($_POST["type"]) && $_POST["type"] == "add"){
+
+		if (isset($_POST["pageType"]) && $_POST["pageType"] == "plan") {
+			echo getPlan($_POST["page"]);
+		} else {
+			echo getContent($_POST["page"]);		
+		}
+	} else if (isset($_POST["type"]) && $_POST["type"] == "add") {
 		addRecord($_POST['sel'], $_POST['date_control'], $_POST['input_notes']);
-		echo getContent($_POST["page"]);
-		//echo json_encode(Array("error" => "", "data" => getContent($_POST["page"])));	
+		
+		if (isset($_POST["pageType"]) && $_POST["pageType"] == "plan") {
+			echo getPlan($_POST["page"]);
+		} else {
+			echo getContent($_POST["page"]);		
+		}
 	} else if (isset($_GET["type"]) && $_GET["type"] == "combos") {
-		echo getCombos($_GET["id"]);
+		echo getCombos($_GET["id"]);		
 	} else if (isset($_GET["type"]) && $_GET["type"] == "plan") {
-		echo getPlan($_GET["id"]);
+		echo getPlan($_GET["page"]);
 	}
 ?>

@@ -12,7 +12,6 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     border: 0;
     outline: 0;
     font-size: 100%;
-    vertical-align: baseline;
     background: transparent;
     font-weight: 400;
 }
@@ -295,4 +294,8 @@ tr:nth-child(2n) {
 p {
 	padding-top: 10px;
 	padding-bottom: 5px;
+}
+
+tr[checked] {
+	background-color: #fff8b0;
 }

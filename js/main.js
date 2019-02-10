@@ -1,6 +1,5 @@
 $(document).ready(function () {
-
-	getContent(getCurrentPageId());
+    routing();	
     getCombos(getCurrentPageId());
 
 
@@ -18,7 +17,7 @@ $(document).ready(function () {
         $.ajax({
             url: "php/server.php",
             method: "POST",
-            data: {"type": "save", "ids": getCheckedInputs(), "page": getCurrentPageId()},
+            data: {"type": "save", "ids": getCheckedInputs(), "page": getCurrentPageId(), "pageType": getCurrentPageType()},
             success: function(response) {
                 
                 $("#content-data").html(response);
@@ -27,46 +26,19 @@ $(document).ready(function () {
                 }, 100);
                 
             } 
-        });        
+        });         
     })
 
     $("#add-link").on("click", function() {
        
-        var sel = $("#id_select option:selected").val();
-        var date_control = $("#input_date_control_units").val();
-        var input_notes = $("#input_notes").val();
-
-        $.ajax({
-            url: "php/server.php",
-            method: "POST",
-            data: {"type": "add", "sel": sel, "date_control": date_control, "input_notes": input_notes, "page": getCurrentPageId() },
-            success: function(response) {
-                $("#content-data").html(response);
-                setTimeout(function() {
-                    alert("Проверка добавлена");
-                }, 100); 
-            }
-        });        
+        var unitId = $("#id_select option:selected").val();
+        var dateControl = $("#input_date_control_units").val();
+        var inputNotes = $("#input_notes").val();        
+        saveControl(unitId, dateControl, inputNotes)        
     });
 
-        $("#mkplan-link").on("click", function() {
-       
-        //var sel = $("#id_select option:selected").val();
-        //var date_control = $("#input_date_control_units").val();
-        //var input_notes = $("#input_notes").val();
-
-        $.ajax({
-            url: "php/server.php",
-            method: "POST",
-            data: {"type": "plan"},
-            success: function(response) {
-                $("#content-data").html(response);
-                setTimeout(function() {
-                    alert("План сформирован");
-                    console.log("plan is OK");
-                }, 100); 
-            }
-        });        
+    $("#mkplan-link").on("click", function() {
+        getPlan(getCurrentPageId());        
     });
     
 
@@ -82,7 +54,10 @@ $(document).ready(function () {
 
     $(document).on("keypress", ".col-notes-edit", function(event) {
         if(event.which == 13) {
-            $(this).parent().closest("td").html($(this).val()); 
+            var inputNotes = $(this).val();
+            var unitId = $(this).parent().closest("tr").attr("machine");
+            $(this).parent().closest("td").html(inputNotes); 
+            saveControl(unitId, new Date().toISOString(), inputNotes);
             //отправка запроса на изменение элемента.
         }             
     });
@@ -91,12 +66,24 @@ $(document).ready(function () {
         if ($(this).prop("checked")) {
             $(this).parent().closest("tr").attr("checked", "true");
             console.log("qwe");
+            //$("#row5").hide();
             
         } else {
             $(this).parent().closest("tr").removeAttr("checked");
         }
     });    
 });
+
+function routing() {
+    var type = getCurrentPageType();
+
+    if (type == "machine") {
+        getContent(getCurrentPageId());        
+    } else if (type == "plan") {
+        getPlan(getCurrentPageId())
+    }
+    console.log(type);
+}
 
 
 function getContent(id) {
@@ -108,6 +95,22 @@ function getContent(id) {
             $("#content-data").html(response)
         } 
     });
+}
+
+function getPlan(id) {
+    $.ajax({
+        url: "php/server.php",
+        method: "GET",
+        data: {"type": "plan", "page": id},
+        success: function(response) {
+            $("#content-data").html(response);
+            setTimeout(function() {
+                window.location.hash = "#plan=1";
+                alert("План сформирован");
+                console.log("plan is OK");
+            }, 100); 
+        }
+    });     
 }
 
 function getCombos(id) {
@@ -141,5 +144,28 @@ function getCurrentPageId() {
     return id;
 }
 
+function getCurrentPageType() {
+    var type = "machine";
+    if (window.location.hash != "") {
+        type = window.location.hash.split("=")[0];       
+        if (type == undefined) {
+            type = "machine";
+        }
+        type = type.replace("#", "");
+    }
+    return type;
+}
 
-
+function saveControl(unitId, dateControl, inputNotes) {
+    $.ajax({
+        url: "php/server.php",
+        method: "POST",
+        data: {"type": "add", "sel": unitId, "date_control": dateControl, "input_notes": inputNotes, "page": getCurrentPageId(), "pageType": getCurrentPageType() },
+        success: function(response) {
+            $("#content-data").html(response);
+            setTimeout(function() {
+                alert("Проверка добавлена");
+            }, 100); 
+        }
+    });     
+}
