@@ -19,12 +19,11 @@
     </div>
     <div id="navigation">
     	<ul class="nav-menu">
-    		<li class="nav-item"><a href="javascript: void(0);">ОБОРУДОВАНИЕ</a></li>
-    		<li class="nav-item"><a href="javascript: void(0);">ПРОБЛЕМЫ</a></li>
-    		<li class="nav-item"><a href="javascript: void(0);">ЗАПЧАСТИ</a></li>
+    		<li class="nav-item" id="machines"><a href="javascript: void(0);">ОБОРУДОВАНИЕ</a></li>
+    		<li class="nav-item" id="problems"><a href="javascript: void(0);">ПРОБЛЕМЫ</a></li>
+    		<li class="nav-item" id="parts"><a href="javascript: void(0);">ЗАПЧАСТИ</a></li>
     	</ul>
     	
-
 
     </div>
     <div id="sidebar">
