@@ -1,0 +1,31 @@
+@media print {
+    #sidebar, #combos, .links-container, 
+    .hide-col, .days-before,
+    .warning-icon, #footer{
+       display: none; 
+    }
+
+    .col-notes{
+        width: 100%;
+        font-size: 0;
+    }
+
+    #title{
+        color: black;
+    }
+    .logo{
+        width: 20%;
+    }
+
+    
+
+    body{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    @page {
+        margin: 2cm;
+    }
+}

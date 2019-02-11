@@ -12,10 +12,11 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     border: 0;
     outline: 0;
     font-size: 100%;
-    vertical-align: baseline;
     background: transparent;
-    font-weight: 100;
+    font-weight: 400;
 }
+
+
 .clear {
     clear: both;
 }
@@ -29,34 +30,37 @@ html, body {
     height: 100%;
 }
 
-.logo {
-	height: 50px;
-	padding-top: 20px;
-	padding-left: 20px; 
-	float: left;
-	
-	
-}
-img {
-		width: 50%;
+#header {
+	background: #056292;
+	height: 110px;
+	width: 100%;	
+	color: yellow;
+	white-space: nowrap;
 }
 
-#logo_title {
-	color: white;
-	font-size: 20px;
-	
-	padding-left: 50px;
+.logo {
+	height: 100px;
+	width: 300px;
+	padding-top: 10px;
+	padding-left: 10px; 
+	float: left;	
+}
+
+img {
+	width: 100%;
 }
 
 #title {
-	padding-top: 25px;
-	width: 100%;
-	color: yellow;
-	
+	width: 800px;
+	height: 100px;
+	padding-top: 35px;
+	display: inline-block;
+	color: white;
+	font-size: 20px;	
+	padding-left: 100px;	
 }
 
 body {
-	background: #f3f2f3;
 	color: #000000;
 	font-family: Verdana;
 	font-size: 12px;
@@ -64,32 +68,48 @@ body {
 
 #container {
 	background: #FFFFFF;
-	margin: 30px auto;
+	margin: 0 auto;
 	width: 100%;
-	height: 2000px;
 }
 
-#header {
-	background: #056292;
-	height: 100px;
-	width: 100%;
-	
-	color: yellow;
-}
-
-#navigation {
-	
+#navigation {	
 	background: #056292;
 	width: 100%;
-	height: 20px;
-	
+	height: 40px;
+	padding-left: 220px;
 }
 
-#sidebar {
-	
+.nav-item {
+	display: inline;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.nav-menu{
+	text-decoration: none;
+	list-style-type: none;	
+	background: #056292;
+	color: white;
+	height: 100%;	
+	padding-left: 20px;
+	padding-right: 20px; 
+	padding-top: 10px;
+}
+
+.nav-menu li a{	
+	text-decoration: none;
+	color: white;	
+	list-style-type: none;
+
+}
+.nav-menu :hover {
+	background: #507e96;
+}
+
+#sidebar {	
 	width: 220px;
-	height: 600px;
-
+	height: 100%;
+	float: left;
 }
 
 #head-menu {
@@ -112,10 +132,10 @@ body {
 }
 
 #menu a {
-
 	color: white;
 	text-decoration: none;
 }
+
 #menu li a {
 	display: block;
 	padding: 4px 15px;	
@@ -125,25 +145,28 @@ body {
 }
 
 #menu li a:hover {
-	background: #0089CF;
+	background: #507e96;
 	color: white;
 }
 
-#content {
-	background: #d2d0d2;	
-	width: 100%;
-	height: 100%;
-	margin-left: 215px;
+#content {	
+	background: #fff;		
 	padding-left: 10px;
 	padding-top: 10px;
+	white-space: nowrap;
+	overflow-x: auto;
 }
 #content-header {
 	text-align: left;
 	padding-left: 20px;
 	font-size: 12;
+	font-weight: bold;
 }
 #content-data{
 	margin-bottom: 20px;
+	display: block;
+  	overflow-x: auto;
+  	max-width: 100%;
 }
 
 #clear {
@@ -152,31 +175,29 @@ body {
 
 #footer {
 	background: #0089CF;
-	height: 180px;
-	width: 100%;
+	height: 80px;
+	width: 100%;   
+    top: 100%;    	
 }
 
 table {
-	border-collapse: collapse;
-	width: 	100%px;
+	border-collapse: collapse;	
 	border: 2px solid;
 	margin-top: 20px;
 	margin-left: 20px;
+	white-space: nowrap;	
 }
 
 th {
 	border: 1px solid;
-	text-align: center;
-	font-weight: normal;
+	text-align: center;	
  	color: black;
   	padding: 5px 8px;
   	font-weight: bold;
-
   	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); /* для webkit-браузеров */ 
   	background: -moz-linear-gradient(top right, #b8b9b1, #fff); /* для firefox 3.6+ */ 
   	background: -o-linear-gradient(top right, #b8b9b1, #fff); /* для Opera 11.10+ */ 
   	background: -ms-linear-gradient(top right, #b8b9b1, #fff); /* для IE10+ */
-
 }
 td {
 	font-size: 12;
@@ -186,19 +207,43 @@ td {
   	padding: 5px 8px;
 }
 tr:nth-child(2n) {
-	background: #bcbbbd;
+	background: #eaeaea;
 }
 
-#save-link {
+tr[checked] {
+	background-color: #fff8b0;
+}
+
+.add-record {
+	font-weight: bold;
+	padding-top: 10;
+	padding-bottom: 10;
+}
+
+.links-container {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.link {
 	background: #0089cf;
-	padding: 10px;
-	margin-top: 20px;
-	margin-left: 20px;
+	float: left;	
+	margin-right: 15px;
+}
+
+.link a {
 	text-decoration: none;
+	color: #fff;
+	padding: 10px;
+	display: block;
+}
+
+.link:hover {
+	background: #056292;
 	color: white;
 }
 
-#save-link:hover {
+#add-link:hover {
 	background: #056292;
 	color: white;
 }
@@ -207,17 +252,80 @@ tr:nth-child(2n) {
 	text-align: left;
 }
 
+#col_notes {
+	text-align: left;
+}
+
+.days {
+	padding: 5px,5px,5px,5px;
+}
+
 #td_green {
-	background: #7CFC00;
+	background-color: #7CFC00;
 	color: black;
 }
 #td_yellow {
-	background: yellow;
+	background-color: yellow;
 	color: blue;
 }
 
 #td_red {
-	background: red;
+	background-color: red;
 	color: white;
 	border-color: black;
+}
+
+.gif {
+	height: 35px;
+	width: 35px;
+	background: cyan;
+}
+
+.icon {
+	background-repeat: no-repeat;
+	background-position: center right;	
+}
+
+.ok-icon {	
+	background-image: url("../img/icon-ok.png");
+}
+
+.attention-icon {
+	background-image: url("../img/icon-attention.png");
+}
+
+.warning-icon {
+	background-image: url("../img/icon-warning.png");
+	background-color: #f3cfd1;
+}
+
+#combos {
+	padding: 20px;
+}
+#combos textarea {
+	padding-top: 40px;
+}
+#combos select {
+	margin-right: 20px;
+	height: 24px;
+}
+p {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+
+.problem{
+	width: 100%;
+}
+.problem td{
+	height: 30px;
+
+}
+.fst-col{
+	width: 30px;
+}	
+
+.col-notes-edit{
+	padding: 5px;
 }
