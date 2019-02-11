@@ -30,10 +30,18 @@ html, body {
     height: 100%;
 }
 
+#header {
+	background: #056292;
+	height: 110px;
+	width: 100%;	
+	color: yellow;
+	white-space: nowrap;
+}
 .logo {
 	height: 100px;
 	width: 300px;
-	padding: 10px; 
+	padding-top: 10px;
+	padding-left: 10px; 
 	float: left;	
 	
 }
@@ -44,13 +52,11 @@ img {
 #title {
 	width: 800px;
 	height: 100px;
-
 	padding-top: 35px;
 	display: inline-block;
 	color: white;
 	font-size: 20px;	
 	padding-left: 100px;
-	
 	
 }
 
@@ -66,28 +72,45 @@ body {
 	width: 100%;
 }
 
-#header {
-	background: #056292;
-	height: 100px;
-	width: 100%;	
-	color: yellow;
-	white-space: nowrap;
-}
-
-#navigation {
-	
+#navigation {	
 	background: #056292;
 	width: 100%;
-	height: 20px;
-	
+	height: 40px;
+	padding-left: 220px;
 }
 
-#sidebar {
+.nav-item {
+	display: inline;
+	padding-left: 30px;
+
+}
+.nav-menu{
+	text-decoration: none;
+	list-style-type: none;	
+	background: #056292;
+	color: white;
+	height: 100%;	
+	padding-left: 20px;
+	padding-right: 20px; 
+	padding-top: 10px;
+
+}
+
+.nav-menu li a{	
+	text-decoration: none;
+	color: white;
 	
+	list-style-type: none;
+
+}
+.nav-menu :hover {
+	background: #507e96;
+}
+
+#sidebar {	
 	width: 220px;
 	height: 100%;
 	float: left;
-
 }
 
 #head-menu {
@@ -110,10 +133,10 @@ body {
 }
 
 #menu a {
-
 	color: white;
 	text-decoration: none;
 }
+
 #menu li a {
 	display: block;
 	padding: 4px 15px;	
@@ -123,7 +146,7 @@ body {
 }
 
 #menu li a:hover {
-	background: #0089CF;
+	background: #507e96;
 	color: white;
 }
 
@@ -154,35 +177,28 @@ body {
 #footer {
 	background: #0089CF;
 	height: 80px;
-	width: 100%;
-   
-    top: 100%;
-    	
+	width: 100%;   
+    top: 100%;    	
 }
 
 table {
-	border-collapse: collapse;
-	
+	border-collapse: collapse;	
 	border: 2px solid;
 	margin-top: 20px;
 	margin-left: 20px;
-	white-space: nowrap;
-	
+	white-space: nowrap;	
 }
 
 th {
 	border: 1px solid;
-	text-align: center;
-	
+	text-align: center;	
  	color: black;
   	padding: 5px 8px;
   	font-weight: bold;
-
   	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); /* для webkit-браузеров */ 
   	background: -moz-linear-gradient(top right, #b8b9b1, #fff); /* для firefox 3.6+ */ 
   	background: -o-linear-gradient(top right, #b8b9b1, #fff); /* для Opera 11.10+ */ 
   	background: -ms-linear-gradient(top right, #b8b9b1, #fff); /* для IE10+ */
-
 }
 td {
 	font-size: 12;
@@ -193,6 +209,10 @@ td {
 }
 tr:nth-child(2n) {
 	background: #eaeaea;
+}
+
+tr[checked] {
+	background-color: #fff8b0;
 }
 
 .add-record {
@@ -225,10 +245,7 @@ tr:nth-child(2n) {
 	color: white;
 }
 
-.nav {
-	text-decoration: none;
-	color: black;
-}
+
 
 #add-link:hover {
 	background: #056292;
@@ -301,9 +318,17 @@ p {
 	padding-bottom: 5px;
 }
 
-tr[checked] {
-	background-color: #fff8b0;
+
+.problem{
+	width: 100%;
 }
+.problem td{
+	height: 30px;
+
+}
+.fst-col{
+	width: 30px;
+}	
 
 .col-notes-edit{
 	padding: 5px;

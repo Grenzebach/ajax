@@ -15,8 +15,18 @@
     	</div>
 		<div id='title'><p>Система ТОиР ЗАО "Муром"</p>
 		</div>
+		<div class="clear"></div>
     </div>
-    <div id="navigation"></div>
+    <div id="navigation">
+    	<ul class="nav-menu">
+    		<li class="nav-item"><a href="javascript: void(0);">ОБОРУДОВАНИЕ</a></li>
+    		<li class="nav-item"><a href="javascript: void(0);">ПРОБЛЕМЫ</a></li>
+    		<li class="nav-item"><a href="javascript: void(0);">ЗАПЧАСТИ</a></li>
+    	</ul>
+    	
+
+
+    </div>
     <div id="sidebar">
     	<p id=head-menu>Оборудование</p>
     <?php 
@@ -62,7 +72,14 @@
     		</div>	
 			<div class="clear"></div>
 		</div>
+		
+		<div class="maket">
+			<table class="problem">
+				<tr><td class="fst-col"><input type="checkbox"></td><td>Проблема</td><td>Устранение</td><td>Примечания</td></tr>
+				<td></td><td></td><td></td><td></td>
 
+			</table>
+		</div>
     	<div id="combos">
     	</div>    	
     	<div class="links-container">
