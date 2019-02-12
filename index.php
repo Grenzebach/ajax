@@ -6,6 +6,8 @@
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/print.css">
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/pager.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div id="container">
@@ -19,9 +21,9 @@
     </div>
     <div id="navigation">
     	<ul class="nav-menu">
-    		<li class="nav-item" id="machines"><a href="javascript: void(0);">ОБОРУДОВАНИЕ</a></li>
-    		<li class="nav-item" id="problems"><a href="javascript: void(0);">ПРОБЛЕМЫ</a></li>
-    		<li class="nav-item" id="parts"><a href="javascript: void(0);">ЗАПЧАСТИ</a></li>
+    		<li class="nav-item" id="machines"><a class="onepage-link" href="#machines=0">ОБОРУДОВАНИЕ</a></li>
+    		<li class="nav-item" id="problems"><a class="onepage-link" href="#problems=0">ПРОБЛЕМЫ</a></li>
+    		<li class="nav-item" id="parts"><a class="onepage-link" href="#parts=0">ЗАПЧАСТИ</a></li>
     	</ul>
     	
 
@@ -46,47 +48,14 @@
 		        //$i=0;
 		        while ($row = mysqli_fetch_array($result_menu)) {
 		            //$i++;
-		            echo '<li value='.$row["id_machines"].'><a href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
+		            echo '<li><a class="onepage-link" href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
 		        }
 		        echo "</ul>";
 		        mysqli_close($link);
     ?>
     
-    </div>
-    <script type="text/javascript" src="js/main.js"></script>
+    </div>    
     <div id="content">
-    	
-    	<div id="content-data">  
-    	</div>
-
-    	<div class="links-container">
-    		<div class="link">
-    			<a id="save-link" title="Применить изменения" href="javascript: void(0);">ПРИМЕНИТЬ</a>		
-    		</div>
-    		<div class="link">
-    			<a id="mkplan-link" title="Сформировать план на предстоящий четверг" href="javascript: void(0);">СФОРМИРОВАТЬ ПЛАН</a>		
-    		</div>
-    		<div class="link">
-    			<a id="print-link" title="Таблица на печать" href="javascript: void(0);">ПЕЧАТЬ</a>		
-    		</div>	
-			<div class="clear"></div>
-		</div>
-		
-		<div class="maket">
-			<table class="problem">
-				<tr><td class="fst-col"><input type="checkbox"></td><td>Проблема</td><td>Устранение</td><td>Примечания</td></tr>
-				<td></td><td></td><td></td><td></td>
-
-			</table>
-		</div>
-    	<div id="combos">
-    	</div>    	
-    	<div class="links-container">
-    		<div class="link">		
-				<a id="add-link" title="Добавить запись о проверке" href="javascript: void(0);">ДОБАВИТЬ ЗАПИСЬ</a>
-			</div>
-			<div class="clear"></div>
-		</div>
     </div>
     <div id="clear"></div>
     <div id="footer"><a href="http://localhost/phpmyadmin/">phpmyadmin</a>
