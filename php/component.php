@@ -230,13 +230,34 @@ function getActionsLinks($id) {
 }
 
 function getProblemsPanel($id) {
-    return
-        "<div class=\"maket\">
+    
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+    $query = "SELECT * FROM problems WHERE id_machine =".$id; //
+    
+    $result = mysqli_query($link, $query);
+    //logger($result);
+    $block = "<div class=\"maket\">
+        <p>Список текущих проблем:</p>
             <table class=\"problem\">
-                <tr><td class=\"fst-col\"><input type=\"checkbox\"></td><td>Проблема</td><td>Устранение</td><td>Примечания</td></tr>
-                <td></td><td></td><td></td><td></td>
-            </table>
-        </div>";    
+                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th><th>Проблема</th><th>Дата</th><th>Устранение</th><th>Примечания</th></tr>";
+
+    $i = 0;
+    while ($row = mysqli_fetch_array($result)) {
+        
+        $i++;
+        $block .= "<tr><td>$i</td><td>".$row['name_problems']."</td><td>".$row['date_problems']."</td><td>".$row['fix_problems']."</td><td>".$row['notes_problems']."</td></tr>"; 
+    }
+    mysqli_close($link);
+    $block .= "</table></div>"; 
+    return $block;
+        // "<div class=\"maket\">
+        // <p>Список текущих проблем:</p>
+        //     <table class=\"problem\">
+        //         <tr><td class=\"fst-col\"><input type=\"checkbox\"></td><td>Проблема</td><td>Устранение</td><td>Примечания</td></tr>
+        //         <td></td><td></td><td></td><td></td>
+        //     </table>
+        // </div>";    
 }
 
 function getControlsPanel($id) {
