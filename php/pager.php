@@ -17,7 +17,8 @@
 	function getMachine($id) {	    
 		logger("Получение списка узлов для $id");
 		$machineContent	= getMachineContent($id);
-		$machineHeader = $machineContent["header"]; 
+		$machineHeader = $machineContent["header"];
+		$machineList = getMachineList(); 
 	    $machineTable = $machineContent["content"];
 	    $actionsLinks = getActionsLinks($id);
 	    $problemsPanel = getProblemsPanel($id);
@@ -26,6 +27,7 @@
 	        
 	    return 
 	    	$machineHeader .
+	    	$machineList .
 	    	$machineTable . 
 	    	$actionsLinks . 
 	    	$problemsPanel . 
@@ -53,8 +55,8 @@
 	    	$controlsPanel;		
 	}
 
-	function getMachines() {		
-		return "Список всех агрегатов?";
+	function getMachines() {	
+		return getMachineList();			
 	}
 
 	function getProblems() {

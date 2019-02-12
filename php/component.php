@@ -79,6 +79,31 @@ function getMachineTable($id) {
     return $table;
 }
 
+//Построение списка агрегатов
+function getMachineList() {
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+
+    $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
+    $result_menu = mysqli_query($link, $query);
+    
+    //ОТРИСОВКА МЕНЮ
+        //ШАПКА
+        //echo "Оборудование";
+        
+        //ТЕЛО
+    $result = "<ul id='menu'>";
+            //$i=0;
+    while ($row = mysqli_fetch_array($result_menu)) {
+        //$i++;
+        $result .= '<li><a class="onepage-link" href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
+    }
+    $result .= "</ul>";
+    mysqli_close($link); 
+
+    return $result;   
+}
+
 function getPlanContent($id) {
     $table = getPlanTable($id);   
 

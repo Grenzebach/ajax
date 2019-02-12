@@ -28,7 +28,7 @@
     	
 
     </div>
-    <div id="sidebar">
+    <!--div id="sidebar">
     	<p id=head-menu>Оборудование</p>
     <?php 
 	    //БОКОВОЕ МЕНЮ
@@ -54,7 +54,7 @@
 		        mysqli_close($link);
     ?>
     
-    </div>    
+    </div-->    
     <div id="content">
     </div>
     <div id="clear"></div>

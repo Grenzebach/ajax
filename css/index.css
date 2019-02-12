@@ -80,12 +80,22 @@ body {
 }
 
 .nav-item {
-	display: inline;
-	padding-left: 15px;
-	padding-right: 15px;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
 }
 
-.nav-menu{
+.nav-item a {
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;	
+}
+
+.nav-item a.active {
+	background-color: #507e96;
+}
+
+.nav-menu {
 	text-decoration: none;
 	list-style-type: none;	
 	background: #056292;
@@ -96,7 +106,7 @@ body {
 	padding-top: 10px;
 }
 
-.nav-menu li a{	
+.nav-menu li a {	
 	text-decoration: none;
 	color: white;	
 	list-style-type: none;
@@ -145,8 +155,12 @@ body {
 }
 
 #menu li a:hover {
-	background: #507e96;
+	background-color: #507e96;
 	color: white;
+}
+
+#menu li a.active {
+	background-color: #507e96;
 }
 
 #content {	
