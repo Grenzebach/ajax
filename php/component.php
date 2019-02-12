@@ -14,7 +14,7 @@ function getMachineHeader($id) {
         $header = $row["name_machines"];
     } 
 
-    return "<p id='content-header'>$header</p>";
+    return "<div id='content-header'><h2>$header</h2></div>";
 }
 
 function getMachineTable($id) {
@@ -81,6 +81,9 @@ function getMachineTable($id) {
 
 //Построение списка агрегатов
 function getMachineList() {
+    
+    $result = "<div id=\"sidebar\">
+        <p id=head-menu>Оборудование</p>";
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
@@ -89,18 +92,18 @@ function getMachineList() {
     
     //ОТРИСОВКА МЕНЮ
         //ШАПКА
-        //echo "Оборудование";
-        
+        //echo "Оборудование";        
         //ТЕЛО
-    $result = "<ul id='menu'>";
+    $result .= "<ul id='menu'>";
             //$i=0;
     while ($row = mysqli_fetch_array($result_menu)) {
         //$i++;
         $result .= '<li><a class="onepage-link" href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
     }
     $result .= "</ul>";
-    mysqli_close($link); 
+    mysqli_close($link);
 
+    $result .= "</div>";
     return $result;   
 }
 
@@ -238,7 +241,7 @@ function getProblemsPanel($id) {
     $result = mysqli_query($link, $query);
     //logger($result);
     $block = "<div class=\"maket\">
-        <p>Список текущих проблем:</p>
+        <h2>Список текущих проблем:</h2>
             <table class=\"problem\">
                 <tr><th class=\"fst-col\"><input type=\"checkbox\"></th><th>Проблема</th><th>Дата</th><th>Устранение</th><th>Примечания</th></tr>";
 

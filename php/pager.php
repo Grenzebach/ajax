@@ -16,9 +16,10 @@
 
 	function getMachine($id) {	    
 		logger("Получение списка узлов для $id");
+		$machineList = getMachineList(); 		
 		$machineContent	= getMachineContent($id);
 		$machineHeader = $machineContent["header"];
-		$machineList = getMachineList(); 
+		
 	    $machineTable = $machineContent["content"];
 	    $actionsLinks = getActionsLinks($id);
 	    $problemsPanel = getProblemsPanel($id);
@@ -26,8 +27,8 @@
 		$controlsPanel = getControlsPanel($id);
 	        
 	    return 
-	    	$machineHeader .
 	    	$machineList .
+	    	$machineHeader .
 	    	$machineTable . 
 	    	$actionsLinks . 
 	    	$problemsPanel . 

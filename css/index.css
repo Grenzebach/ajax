@@ -13,7 +13,7 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     outline: 0;
     font-size: 100%;
     background: transparent;
-    font-weight: 400;
+    
 }
 
 
@@ -117,9 +117,11 @@ body {
 }
 
 #sidebar {	
-	width: 220px;
+	
 	height: 100%;
-	float: left;
+	
+	margin-top: -10px;
+	margin-left: -10px;
 }
 
 #head-menu {
@@ -138,7 +140,7 @@ body {
 	float: left;
 	padding-left: 0px;
 	color: white;
-	margin-top: 0px;
+	
 }
 
 #menu a {
@@ -171,10 +173,23 @@ body {
 	overflow-x: auto;
 }
 #content-header {
+	display: inline-block;
 	text-align: left;
 	padding-left: 20px;
 	font-size: 12;
-	font-weight: bold;
+	
+}
+
+h2{
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	font-weight: bold:  
+}
+
+p {
+	padding-top: 10px;
+	padding-bottom: 5px;
 }
 #content-data{
 	margin-bottom: 20px;
@@ -188,10 +203,16 @@ body {
 }
 
 #footer {
-	background: #0089CF;
-	height: 80px;
+	
+	background: #056292;
+	padding: 10px;
+
 	width: 100%;   
     top: 100%;    	
+}
+
+#footer a{
+	display: inline;
 }
 
 table {
@@ -237,6 +258,8 @@ tr[checked] {
 .links-container {
 	margin-top: 15px;
 	margin-bottom: 15px;
+	display: inline-block;
+	padding-left: 20px; 
 }
 
 .link {
@@ -249,6 +272,7 @@ tr[checked] {
 	text-decoration: none;
 	color: #fff;
 	padding: 10px;
+	
 	display: block;
 }
 
@@ -260,6 +284,10 @@ tr[checked] {
 #add-link:hover {
 	background: #056292;
 	color: white;
+}
+
+.maket{
+	display: block;
 }
 
 #col_1 {
@@ -315,6 +343,7 @@ tr[checked] {
 
 #combos {
 	padding: 20px;
+	display: inline-block;
 }
 #combos textarea {
 	padding-top: 40px;
@@ -323,10 +352,7 @@ tr[checked] {
 	margin-right: 20px;
 	height: 24px;
 }
-p {
-	padding-top: 10px;
-	padding-bottom: 5px;
-}
+
 
 .problem{
 	
