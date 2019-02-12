@@ -1,23 +1,18 @@
 $(document).ready(function () {
-    routing();	
-    getCombos(getCurrentPageId());
-
-
-	$(document).on("click", "li, .nav", function () {
-        var val = $(this).attr("value");
-        getContent(val);
-        getCombos(val);    
+	$(document).on("click", ".onepage-link", function () {
+        getPage(getCurrentPage($(this).attr("href")));  
     });
 
-    $("#save-link").on("click", function() {
+    $(document).on("click", "#save-link", function() {
         if (getCheckedInputs().length == 0) {
             alert("Нужно выбрать");
             return;
         }
+        var page = getCurrentPage(location.hash);
         $.ajax({
-            url: "php/server.php",
+            url: "php/controller.php",
             method: "POST",
-            data: {"type": "save", "ids": getCheckedInputs(), "page": getCurrentPageId(), "pageType": getCurrentPageType()},
+            data: {"action": "save", "items": getCheckedInputs(), "pageName": page["name"], "pageId": page["id"]},
             success: function(response) {
                 
                 $("#content-data").html(response);
@@ -29,23 +24,18 @@ $(document).ready(function () {
         });         
     })
 
-    $("#add-link").on("click", function() {
+    $(document).on("click", "#add-link", function() {
        
         var unitId = $("#id_select option:selected").val();
         var dateControl = $("#input_date_control_units").val();
         var inputNotes = $("#input_notes").val();        
         saveControl(unitId, dateControl, inputNotes)        
     });
-
-    $("#mkplan-link").on("click", function() {
-        getPlan(getCurrentPageId());        
-    });
     
-    $("#print-link").on("click", function() {
+    $(document).on("click", "#print-link", function() {
         window.print();                 //Печатать страницу
         console.log("print");        
     });
-
 
     $(document).on("dblclick", "tr[checked] .col-notes", function() {
         var element = $("td[oldValue]");
@@ -79,92 +69,38 @@ $(document).ready(function () {
     });    
 });
 
-function routing() {
-    var type = getCurrentPageType();
-
-    if (type == "machine") {
-        getContent(getCurrentPageId());        
-    } else if (type == "plan") {
-        getPlan(getCurrentPageId())
-    }
-    console.log(type);
-}
-
-
-function getContent(id) {
-    $.ajax({
-        url: "php/server.php?type=page&id=" + id,
-        method: "GET",
-        data: "",
-        success: function(response) {
-            $("#content-data").html(response)
-        } 
-    });
-}
-
-function getPlan(id) {
-    $.ajax({
-        url: "php/server.php",
-        method: "GET",
-        data: {"type": "plan", "page": id},
-        success: function(response) {
-            $("#content-data").html(response);
-            setTimeout(function() {
-                window.location.hash = "#plan="+ id;                
-                console.log("plan is OK");
-            }, 100); 
-        }
-    });     
-}
-
-function getCombos(id) {
-    $.ajax({
-        url: "php/server.php?type=combos&id=" + id,
-        method: "GET",
-        data: "",
-        success: function(response) {
-            $("#combos").html(response)
-        } 
-    });
-}
-
 function getCheckedInputs() {
     var ids = [];
     $("input:checked").each(function() {
-        ids.push($(this).parent().closest("tr").attr("id"));
+        ids.push($(this).parent().closest("tr").attr("machine"));
     });
     
     return ids;
 }
 
-function getCurrentPageId() {
-    var id = 1;
-    if (window.location.hash != "") {
-        id = window.location.hash.split("=")[1];       
-        if (id == undefined) {
-            id = 1;
-        }
-    }
-    return id;
-}
-
-function getCurrentPageType() {
-    var type = "machine";
-    if (window.location.hash != "") {
-        type = window.location.hash.split("=")[0];       
-        if (type == undefined) {
-            type = "machine";
-        }
+function getCurrentPage(href) {
+    var hrefElements = href.split("=");
+    var type = hrefElements[0];
+    var id = hrefElements[1];
+    if (type == undefined) {
+        type = "default";
+    } else {
         type = type.replace("#", "");
     }
-    return type;
+
+    if (id == undefined) {
+        id = "default";
+    }
+
+    return {"name": type, "id": id};
 }
 
 function saveControl(unitId, dateControl, inputNotes) {
+    var page = getCurrentPage(location.hash);
     $.ajax({
-        url: "php/server.php",
+        url: "php/controller.php",
         method: "POST",
-        data: {"type": "add", "sel": unitId, "date_control": dateControl, "input_notes": inputNotes, "page": getCurrentPageId(), "pageType": getCurrentPageType() },
+        data: {"action": "add", "sel": unitId, "date_control": dateControl, "input_notes": inputNotes, "pageName": page["name"], "pageId": page["id"] },
         success: function(response) {
             $("#content-data").html(response);
             setTimeout(function() {
