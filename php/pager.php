@@ -19,6 +19,7 @@
 		$machineList = getMachineList(); 		
 		$machineContent	= getMachineContent($id);
 		$machineHeader = $machineContent["header"];
+		//logger("$machineContent["header"]");
 		
 	    $machineTable = $machineContent["content"];
 	    $actionsLinks = getActionsLinks($id);
@@ -37,7 +38,7 @@
 	}	
 
 	function getPlan($id) {
-		logger("Получение плана для $id");
+		logger("Получение плана для id = $id");
 	    
 	    $planContent = getPlanContent($id);
 		$planHeader = $planContent["header"]; 
@@ -55,16 +56,25 @@
 	    	$combos . 
 	    	$controlsPanel;		
 	}
-
-	function getMachines() {	
-		return getMachineList();			
+	//Вывод по нвжатию в строке меню 
+	function getMachines() {		//Оборудование		
+		logger("Получение списка станков, id = 0");		
+		return getMachine(1);
+						
 	}
 
-	function getProblems() {
-		return "Список всех проблем?";
+	function getProblems() {		//Проблемы
+		logger("Получение списка проблем для оборудования");
+		$id = "0";
+		logger($id);
+		$table = getProblemsPanel(0);
+		$inputs = inputProblemsPanel();		
+		return 
+			$table .
+			$inputs;
 	}
 
-	function getParts() {
+	function getParts() {			//Запчасти
 		return "Список всех запчастей?";
 	}
 ?>

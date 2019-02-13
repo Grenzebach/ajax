@@ -19,8 +19,9 @@ function getMachineHeader($id) {
 
 function getMachineTable($id) {
     if ($id == "") {
-        return "<p>getContent = empty</p>";
-    }
+        $id = "1";
+    }elseif($id == "0")
+        $id = 1;
 
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -234,9 +235,17 @@ function getActionsLinks($id) {
 
 function getProblemsPanel($id) {
     
+    $sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
+    $appendTOsql = "WHERE id_machine =" . $id;
+
+
+    if ($id == "0"){
+        $appendTOsql = "";
+    } 
+    logger("В функции getProblemsPanel id = " . $id);
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-    $query = "SELECT * FROM problems WHERE id_machine =".$id; //
+    $query = "SELECT * FROM problems " . $appendTOsql; //WHERE id_machine =.$id; //
     
     $result = mysqli_query($link, $query);
     //logger($result);
@@ -253,14 +262,7 @@ function getProblemsPanel($id) {
     }
     mysqli_close($link);
     $block .= "</table></div>"; 
-    return $block;
-        // "<div class=\"maket\">
-        // <p>Список текущих проблем:</p>
-        //     <table class=\"problem\">
-        //         <tr><td class=\"fst-col\"><input type=\"checkbox\"></td><td>Проблема</td><td>Устранение</td><td>Примечания</td></tr>
-        //         <td></td><td></td><td></td><td></td>
-        //     </table>
-        // </div>";    
+    return $block;    
 }
 
 function getControlsPanel($id) {
@@ -271,5 +273,20 @@ function getControlsPanel($id) {
             </div>
             <div class=\"clear\"></div>
         </div>";
+}
+
+function inputProblemsPanel(){
+    return
+        "<div class = input-panel>
+            <h2>Создание новой записи:</h2>
+            <div id=\"inputs\"><p><input id=\"name-problems\"type=\"text\" placeholder=\"Наименование проблемы\" required><span class=\"validity\"></span></p>
+            <p><input id=\"date-problems\"type=\"date\" placeholder=\"Дата\" required><span class=\"validity\"></span></p>
+            <p><input id=\"fix-problems\"type=\"text\" placeholder=\"Устранение\" required><span class=\"validity\"></span></p>
+            <p><input id=\"notes-problems\"type=\"text\" placeholder=\"Примечания\" required><span class=\"validity\"></span></p></div>
+            <div class=\"link\"><a id=\"add-problem-link\" title=\"Добавить запись\" href=\"javascript: void(0);\">
+            ДОБАВИТЬ ЗАПИСЬ</a></div>
+
+        </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
+
 }
 ?>

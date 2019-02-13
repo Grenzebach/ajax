@@ -92,7 +92,8 @@ body {
 }
 
 .nav-item a.active {
-	background-color: #507e96;
+	background-color: white;
+	color: #056292;
 }
 
 .nav-menu {
@@ -136,7 +137,7 @@ body {
 #sidebar, #menu {
 	list-style: none;
 	width: 220px;
-	background: #004c73;
+	background: #224a5f;
 	float: left;
 	padding-left: 0px;
 	color: white;
@@ -266,13 +267,13 @@ tr[checked] {
 	background: #0089cf;
 	float: left;	
 	margin-right: 15px;
+
 }
 
 .link a {
 	text-decoration: none;
 	color: #fff;
-	padding: 10px;
-	
+	padding: 10px;	
 	display: block;
 }
 
@@ -353,10 +354,6 @@ tr[checked] {
 	height: 24px;
 }
 
-
-.problem{
-	
-}
 .problem td{
 	height: 30px;
 
@@ -368,3 +365,43 @@ tr[checked] {
 .col-notes-edit{
 	padding: 5px;
 }
+#date-problems{
+	height: 20px;
+}
+
+.input-panel{
+	width: 500px;
+	background: #eab7a3;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.input-panel input, #date-problems{
+	height: 26px;
+	width: 300px;
+}
+
+.input-panel p{
+	padding-left: 20px;
+}
+
+input + span {
+  padding-right: 30px;
+}
+
+input:invalid+span:after {
+  position: absolute; content: '✖';
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  position: absolute;
+  content: '✓';
+  padding-left: 5px;
+}
+
+#inputs{
+	display: block;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+}
+
