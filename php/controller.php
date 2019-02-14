@@ -10,6 +10,9 @@
 		addRecord($_POST['sel'], $_POST['date_control'], $_POST['input_notes']);
 		
 		echo getComponentByName($_POST["pageName"]);
+	} else if (isParamEquals($_POST, "action", "add-problem")) {
+		addProblem($_POST['selIdMachine'], $_POST['nameProblem'], $_POST['dateProblem'], $_POST['noteProblem']);
+		
 	}
 
 	function getComponentByName($name) {
@@ -40,7 +43,17 @@
 	        $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '$sel', '$dateControl', "."'4'".", '$inputNotes')";
 
 	        mysqli_query($link, $query);
-
 	        mysqli_close($link);
+	}
+
+	function addProblem($selIdMachine, $nameProblem, $dateProblem, $noteProblem){
+			$link = mysqli_connect("localhost", "root", "", "desk");
+	        mysqli_set_charset($link, "utf8"); 
+	        
+	        $query = "INSERT INTO `problems` (`id_problems`, `name_problems`, `date_problems`, `notes_problems`, `id_units_problems`, `status_problems`, `id_machine`) VALUES (NULL, '$nameProblem', '$dateProblem', '$noteProblem', NULL, '1', '$selIdMachine')";
+	        logger($query);
+	        mysqli_query($link, $query);
+	        mysqli_close($link);
+
 	}	
 ?>

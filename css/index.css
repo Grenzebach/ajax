@@ -12,8 +12,7 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     border: 0;
     outline: 0;
     font-size: 100%;
-    background: transparent;
-    
+    background: transparent;    
 }
 
 
@@ -371,9 +370,10 @@ tr[checked] {
 
 .input-panel{
 	width: 500px;
-	background: #eab7a3;
+	background: #f3dd9f;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	margin-left: 20px;
 }
 .input-panel input, #date-problems{
 	height: 26px;
@@ -381,9 +381,19 @@ tr[checked] {
 }
 
 .input-panel p{
+	padding-left: 20px;	
+}
+
+.select-list{
 	padding-left: 20px;
 }
 
+#machine-list-problems{
+	height: 26px;
+	width: 300px;
+}
+
+}
 input + span {
   padding-right: 30px;
 }
@@ -403,5 +413,9 @@ input:valid+span:after {
 	display: block;
 	padding-bottom: 15px;
 	margin-bottom: 10px;
+}
+#inputs textarea{
+	width: 446px;
+    height: 38px;
 }
 

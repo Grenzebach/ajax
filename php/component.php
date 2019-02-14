@@ -236,7 +236,7 @@ function getActionsLinks($id) {
 function getProblemsPanel($id) {
     
     $sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
-    $appendTOsql = "WHERE id_machine =" . $id;
+    $appendTOsql = "and machines.id_machines=" . $id;
 
 
     if ($id == "0"){
@@ -245,20 +245,20 @@ function getProblemsPanel($id) {
     logger("В функции getProblemsPanel id = " . $id);
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-    $query = "SELECT * FROM problems " . $appendTOsql; //WHERE id_machine =.$id; //
-    
+    $query = "SELECT * FROM problems, machines WHERE machines.id_machines=problems.id_machine " . $appendTOsql; //WHERE id_machine =.$id; //
+    logger("getProblemsPanel() ".$query);
     $result = mysqli_query($link, $query);
     //logger($result);
     $block = "<div class=\"maket\">
         <h2>Список текущих проблем:</h2>
             <table class=\"problem\">
-                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th><th>Проблема</th><th>Дата</th><th>Устранение</th><th>Примечания</th></tr>";
+                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th><th>Оборудование</th><th>Проблема</th><th>Дата</th><th>Примечания</th></tr>";
 
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
         
         $i++;
-        $block .= "<tr><td>$i</td><td>".$row['name_problems']."</td><td>".$row['date_problems']."</td><td>".$row['fix_problems']."</td><td>".$row['notes_problems']."</td></tr>"; 
+        $block .= "<tr><td>$i</td><td>".$row['name_machines']."</td><td>".$row['name_problems']."</td><td>".$row['date_problems']."</td><td>".$row['notes_problems']."</td></tr>"; 
     }
     mysqli_close($link);
     $block .= "</table></div>"; 
@@ -279,14 +279,46 @@ function inputProblemsPanel(){
     return
         "<div class = input-panel>
             <h2>Создание новой записи:</h2>
-            <div id=\"inputs\"><p><input id=\"name-problems\"type=\"text\" placeholder=\"Наименование проблемы\" required><span class=\"validity\"></span></p>
-            <p><input id=\"date-problems\"type=\"date\" placeholder=\"Дата\" required><span class=\"validity\"></span></p>
-            <p><input id=\"fix-problems\"type=\"text\" placeholder=\"Устранение\" required><span class=\"validity\"></span></p>
-            <p><input id=\"notes-problems\"type=\"text\" placeholder=\"Примечания\" required><span class=\"validity\"></span></p></div>
-            <div class=\"link\"><a id=\"add-problem-link\" title=\"Добавить запись\" href=\"javascript: void(0);\">
+            <p>*нажимайте TAB для переходе к следующему полю</p>
+            <p>Оборудование</p>
+            <div id=\"inputs\">"
+            . getSelectList("machine-list-problems") .
+            "<p>Проблема:</p>
+            <p><textarea id=\"name-problems\"type=\"text\" 
+                placeholder=\"Краткое описание проблемы. \nНаример: «Плохо срабатывает конечник»\" required></textarea><span class=\"validity\"></span></p>
+            <p>Дата:</p>
+            <p><input id=\"date-problems\"type=\"date\" 
+                placeholder=\"Дата\" required><span class=\"validity\"></span></p>
+            <p>Примечания:</p>
+            <p><textarea id=\"notes-problems\"type=\"text\" 
+                placeholder=\"Что необходимо сделать для устранения проблемы. \nНаример: «Проворачивает флажок, необходимо заменить»\" required></textarea><span class=\"validity\"></span></p></div>
+            <div class=\"link\"><a id=\"add-problem-link\" href=\"javascript: void(0);\">
             ДОБАВИТЬ ЗАПИСЬ</a></div>
 
         </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
 
 }
+function getSelectList($idSelect) {                             //Функция вывода списка оборудования в выпадающий список. 
+    $i = 0;
+    //logger($idSelect);
+    $resultOut = "";
+                                                                //Атрибут - идентификатор компонента        
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
+    $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
+    $result = mysqli_query($link, $query);    
+    
+    $resultOut .= "<div class=\"select-list\">
+                <select id=$idSelect>";
+    
+    while ($row = mysqli_fetch_array($result)) {
+        $i++;
+        $resultOut .= "<option value=" . $row['id_machines'] . ">" . $row['name_machines'] . "</option>";        
+    }
+
+    $resultOut .= "</select></div>";
+    mysqli_close($link);
+    return $resultOut;   
+}
+
 ?>

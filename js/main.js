@@ -37,6 +37,18 @@ $(document).ready(function () {
         console.log("print");        
     });
 
+    $(document).on("click", "#add-problem-link", function() {
+        console.log("add-problem-link pressed");
+        var selIdMachine = $("#machine-list-problems").val();
+        var nameProblem = $("#name-problems").val();
+        var dateProblem = $("#date-problems").val();
+        var noteProblem = $("#notes-problems").val();
+        addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
+        console.log(selIdMachine);
+
+
+    });
+
     $(document).on("dblclick", "tr[checked] .col-notes", function() {
         var element = $("td[oldValue]");
         element
@@ -108,4 +120,17 @@ function saveControl(unitId, dateControl, inputNotes) {
             }, 100); 
         }
     });     
+}
+
+function addProblem(selIdMachine, nameProblem, dateProblem, noteProblem){
+    
+    $.ajax({
+        url: "php/controller.php",
+        method: "POST",
+        data: {"action": "add-problem", "selIdMachine":selIdMachine, "nameProblem": nameProblem, "dateProblem": dateProblem, "noteProblem": noteProblem},
+        success: function(response) {
+            $("#content-data").html(response);
+            
+        }
+    });
 }
