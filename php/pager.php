@@ -2,18 +2,18 @@
 	include_once("utils.php");
 	include_once("component.php");
 
-	if (isParamEquals($_GET, "name", "machine")) {
-		echo getMachine($_GET["id"]);
+	if (isParamEquals($_GET, "name", "problems")) {
+		echo getProblems();
 	} else if (isParamEquals($_GET, "name", "plan")) {
 		echo getPlan($_GET["id"]);
 	} else if (isParamEquals($_GET, "name", "machines")) {
 		echo getMachines();
-	} else if (isParamEquals($_GET, "name", "problems")) {
-		echo getProblems();
+	} else if (isParamEquals($_GET, "name", "machine")) {
+		echo getMachine($_GET["id"]);
 	} else if (isParamEquals($_GET, "name", "parts")) {
 		echo getParts();
 	} else if (isParamEquals($_GET, "name", "default")) {		
-		echo getMachine(getDefaultMachineId());
+		echo getProblems(getDefaultMachineId());
 	} else {
 		echo "404 - страница не найдена";
 	}	

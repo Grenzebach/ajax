@@ -1,5 +1,6 @@
 <?php 
 function getDefaultMachineId() {
+    labelCode("component.php", "getDefaultMachineId");
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.id_machines FROM machines LIMIT 0, 1";
@@ -12,12 +13,14 @@ function getDefaultMachineId() {
     return 0;    
 }
 
-function getMachineContent($id) {  
+function getMachineContent($id) {
+    labelCode("component.php", "getMachineContent");  
     $table = getMachineTable($id);
     return Array("header" => getMachineHeader($id), "content" => "<div id=\"content-data\">$table</div>");
 }
 
 function getMachineHeader($id) {
+    labelCode("component.php", "getMachineHeader");
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.name_machines FROM machines WHERE machines.id_machines=$id";
@@ -96,6 +99,7 @@ function getMachineTable($id) {
 
 //Построение списка агрегатов в сайдбар
 function getMachineList() {
+    labelCode("component.php", "getMachineList");
     
     $result = "<div id=\"sidebar\">
         <p id=head-menu>Оборудование</p>
@@ -114,7 +118,7 @@ function getMachineList() {
             //$i=0;
     while ($row = mysqli_fetch_array($result_menu)) {
         //$i++;
-        $result .= '<li><a class="onepage-link" href="#machine=' . $row["id_machines"] . '">' . $row["name_machines"] . '</a></li>';
+        $result .= '<li><a class="onepage-link" href="#machine=' . $row["id_machines"] . '" title="'. $row["name_machines"] .'">' . $row["name_machines"] . '</a></li>';
     }
     $result .= "</ul>";
     mysqli_close($link);
@@ -124,12 +128,14 @@ function getMachineList() {
 }
 
 function getPlanContent($id) {
+    labelCode("component.php", "getPlanContent");
     $table = getPlanTable($id);   
 
     return Array("header" => getPlanHeader($id), "content" => "<div id=\"content-data\">$table</div>");
 }
 
 function getPlanHeader($id) {
+    labelCode("component.php", "getPlanHeader");
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.name_machines FROM machines WHERE machines.id_machines=$id";
@@ -146,6 +152,7 @@ function getPlanHeader($id) {
 }
 
 function getPlanTable($id) {
+    labelCode("component.php", "getPlanTable");
     $table = "<table><tr><th><img src='img/tick-button.png' alt='Отметка о выполнении'></th>
     <th>Узел</th>
     <th>Инфо</th>
@@ -213,6 +220,7 @@ function getPlanTable($id) {
 }
 
 function getCombos($id) {
+    labelCode("component.php", "getCombos");
     //Формирование в последней строчке выпадающего списка узлов
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -233,6 +241,7 @@ function getCombos($id) {
 }
 
 function getActionsLinks($id) {
+    labelCode("component.php", "getActionsLinks");
     return 
         "<div class=\"links-container\">
             <div class=\"link\">
@@ -249,6 +258,7 @@ function getActionsLinks($id) {
 }
 
 function getProblemsPanel($id) {
+    labelCode("component.php", "getProblemsPanel");
     
     $sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
     $appendTOsql = "and machines.id_machines=" . $id;
@@ -286,6 +296,7 @@ function getProblemsPanel($id) {
 }
 
 function getControlsPanel($id) {
+    labelCode("component.php", "getControlsPanel");
     return 
         "<div class=\"links-container\">
             <div class=\"link\">        
@@ -297,7 +308,7 @@ function getControlsPanel($id) {
 
 function inputProblemsPanel() {
     labelCode("component.php", "inputProblemsPanel");
-
+    
     $resultOut = 
         "<div class = input-panel>
             <h2>Создание новой записи:</h2>            
@@ -350,6 +361,7 @@ function inputProblemsPanel() {
 }
 
 function getSelectMachineList($userId = "") {                             //Функция вывода списка оборудования в выпадающий список. 
+    labelCode("component.php", "getSelectMachineList");
     $select =
         "<select id=\"machine-list-problems\">
             [#items#]
@@ -376,6 +388,7 @@ function getSelectMachineList($userId = "") {                             //Фу
 }
 
 function wrapElements($class, $targetContent){
+    labelCode("component.php", "wrapElements");
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
 ?>

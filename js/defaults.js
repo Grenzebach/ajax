@@ -1,1 +1,1 @@
-var startingPage = "machines";
+var startingPage = "problems";

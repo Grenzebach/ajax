@@ -134,6 +134,7 @@ body {
 
 #menu{
 	overflow-y: auto;
+	overflow-x: hidden;
 	height: 600px;
 }
 
@@ -450,4 +451,8 @@ input:valid+span:after {
     left: 50%;
     margin-top: -51px;
     margin-left: -499px;
-    }
+}
+#sidebar-search{
+	padding-left: 10px;
+	margin-left: 10px;
+}
