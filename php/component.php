@@ -1,4 +1,17 @@
 <?php 
+function getDefaultMachineId() {
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8  
+    $query = "SELECT machines.id_machines FROM machines LIMIT 0, 1";
+    $result = mysqli_query($link, $query);  
+    while ($row = mysqli_fetch_array($result)) {
+        return $row["id_machines"];
+    } 
+
+    logger("Не найдено ни одной машины");
+    return 0;    
+}
+
 function getMachineContent($id) {  
     $table = getMachineTable($id);
     return Array("header" => getMachineHeader($id), "content" => "<div id=\"content-data\">$table</div>");
@@ -18,10 +31,11 @@ function getMachineHeader($id) {
 }
 
 function getMachineTable($id) {
-    if ($id == "") {
-        $id = "1";
-    }elseif($id == "0")
-        $id = 1;
+    labelCode("component.php", "getMachineTable");
+
+    if ($id == "default") {
+        $id = getDefaultMachineId();
+    }
 
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -80,11 +94,12 @@ function getMachineTable($id) {
     return $table;
 }
 
-//Построение списка агрегатов
+//Построение списка агрегатов в сайдбар
 function getMachineList() {
     
     $result = "<div id=\"sidebar\">
-        <p id=head-menu>Оборудование</p>";
+        <p id=head-menu>Оборудование</p>
+        <input id=\"sidebar-search\" type =\"text\" placeholder=\"Поиск...\" />";
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
@@ -238,8 +253,8 @@ function getProblemsPanel($id) {
     $sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
     $appendTOsql = "and machines.id_machines=" . $id;
 
-
-    if ($id == "0"){
+    //SELECT * FROM problems, machines, users WHERE machines.id_machines=problems.id_machine and users.id_user=machines.respons_machines
+    if ($id == "default"){
         $appendTOsql = "";
     } 
     logger("В функции getProblemsPanel id = " . $id);
@@ -252,7 +267,12 @@ function getProblemsPanel($id) {
     $block = "<div class=\"maket\">
         <h2>Список текущих проблем:</h2>
             <table class=\"problem\">
-                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th><th>Оборудование</th><th>Проблема</th><th>Дата</th><th>Примечания</th></tr>";
+                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th>
+                <th>Оборудование</th>
+                <th>Проблема</th>
+                <th>Дата</th>
+                <th>Примечания</th>
+                <th>Ответственный</th></tr>";
 
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
@@ -275,50 +295,87 @@ function getControlsPanel($id) {
         </div>";
 }
 
-function inputProblemsPanel(){
-    return
+function inputProblemsPanel() {
+    labelCode("component.php", "inputProblemsPanel");
+
+    $resultOut = 
         "<div class = input-panel>
-            <h2>Создание новой записи:</h2>
-            <p>*нажимайте TAB для переходе к следующему полю</p>
-            <p>Оборудование</p>
-            <div id=\"inputs\">"
-            . getSelectList("machine-list-problems") .
-            "<p>Проблема:</p>
-            <p><textarea id=\"name-problems\"type=\"text\" 
-                placeholder=\"Краткое описание проблемы. \nНаример: «Плохо срабатывает конечник»\" required></textarea><span class=\"validity\"></span></p>
-            <p>Дата:</p>
-            <p><input id=\"date-problems\"type=\"date\" 
-                placeholder=\"Дата\" required><span class=\"validity\"></span></p>
-            <p>Примечания:</p>
-            <p><textarea id=\"notes-problems\"type=\"text\" 
-                placeholder=\"Что необходимо сделать для устранения проблемы. \nНаример: «Проворачивает флажок, необходимо заменить»\" required></textarea><span class=\"validity\"></span></p></div>
-            <div class=\"link\"><a id=\"add-problem-link\" href=\"javascript: void(0);\">
-            ДОБАВИТЬ ЗАПИСЬ</a></div>
+            <h2>Создание новой записи:</h2>            
+            <div id=\"inputs\">
+                <div class=\"select-list\">
+                    <p>Ответственный за оборудование:</p>
+                    <select id=\"respons\">
+                    <option></option>";       //Список ответственных за оборудование
 
-        </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
-
-}
-function getSelectList($idSelect) {                             //Функция вывода списка оборудования в выпадающий список. 
-    $i = 0;
-    //logger($idSelect);
-    $resultOut = "";
-                                                                //Атрибут - идентификатор компонента        
     $link = mysqli_connect("localhost", "root", "", "desk");
-    mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
-    $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
-    $result = mysqli_query($link, $query);    
-    
-    $resultOut .= "<div class=\"select-list\">
-                <select id=$idSelect>";
-    
-    while ($row = mysqli_fetch_array($result)) {
-        $i++;
-        $resultOut .= "<option value=" . $row['id_machines'] . ">" . $row['name_machines'] . "</option>";        
-    }
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+    $query = "SELECT id_user, name_user, priority_user FROM `users` WHERE priority_user=3 ORDER BY `users`.`name_user` ASC"; //    
+    $result = mysqli_query($link, $query);
 
-    $resultOut .= "</select></div>";
-    mysqli_close($link);
-    return $resultOut;   
+    while ($row = mysqli_fetch_array($result)) {
+        $resultOut .= "<option value=" . $row['id_user'] . ">" . $row['name_user'] . "</option>";
+    }
+    mysqli_close($link);        
+    
+    $resultOut .=
+                    "</select>
+                </div>
+                <p>Оборудование</p>
+                <div class=\"select-list\" id=\"select-machine-list\"> " .
+                    getSelectMachineList() .
+                "</div>
+                <p>Проблема:</p>
+                <p>
+                    <textarea id=\"name-problems\"type=\"text\" placeholder=\"Краткое описание проблемы. \nНаример: «Плохо срабатывает конечник»\" required></textarea>
+                    <span class=\"validity\"></span>
+                </p>
+                <p>Дата:</p>
+                <p>
+                    <input id=\"date-problems\"type=\"date\" placeholder=\"Дата\" required value=\"" . date('Y-m-d') . "\">
+                    <span class=\"validity\"></span> 
+                </p>
+                <p>Примечания:</p>
+                <p> 
+                    <textarea id=\"notes-problems\"type=\"text\" placeholder=\"Что необходимо сделать для устранения проблемы. \nНаример: «Проворачивает флажок, необходимо заменить»\" required></textarea> 
+                    <span class=\"validity\"></span> 
+                </p>
+                <div class=\"links-container\"> 
+                    <div class=\"link\">
+                        <a id=\"add-problem-link\" href=\"javascript: void(0);\">ДОБАВИТЬ ЗАПИСЬ</a>
+                    </div>                
+                </div>
+            </div>
+        </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
+    return $resultOut;
 }
 
+function getSelectMachineList($userId = "") {                             //Функция вывода списка оборудования в выпадающий список. 
+    $select =
+        "<select id=\"machine-list-problems\">
+            [#items#]
+        </select>";
+
+    $items = "<option></option>";     
+
+    if ($userId != "") {
+        $link = mysqli_connect("localhost", "root", "", "desk");
+        mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
+        $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId"; //ЗАПРОС
+        logger($query);
+
+        $result = mysqli_query($link, $query);    
+        
+        while ($row = mysqli_fetch_array($result)) {
+            $items .= "<option value=" . $row['id_machines'] . ">" . $row['name_machines'] . "</option>";        
+        }
+
+        mysqli_close($link);
+    }   
+
+    return str_replace("[#items#]", $items, $select); 
+}
+
+function wrapElements($class, $targetContent){
+    return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
+}
 ?>

@@ -67,8 +67,10 @@ body {
 
 #container {
 	background: #FFFFFF;
-	margin: 0 auto;
 	width: 100%;
+	min-height: 100%;
+    margin: 0 auto;
+    position: relative;	
 }
 
 #navigation {	
@@ -117,9 +119,6 @@ body {
 }
 
 #sidebar {	
-	
-	height: 100%;
-	
 	margin-top: -10px;
 	margin-left: -10px;
 }
@@ -133,14 +132,18 @@ body {
 	padding-bottom: 10px; 
 }
 
+#menu{
+	overflow-y: auto;
+	height: 600px;
+}
+
 #sidebar, #menu {
 	list-style: none;
 	width: 220px;
 	background: #224a5f;
 	float: left;
 	padding-left: 0px;
-	color: white;
-	
+	color: white;	
 }
 
 #menu a {
@@ -171,6 +174,7 @@ body {
 	padding-top: 10px;
 	white-space: nowrap;
 	overflow-x: auto;
+	padding-bottom: 110px;
 }
 #content-header {
 	display: inline-block;
@@ -209,6 +213,8 @@ p {
 
 	width: 100%;   
     top: 100%;    	
+    position: absolute;
+    margin-top: -110px;       
 }
 
 #footer a{
@@ -343,7 +349,6 @@ tr[checked] {
 
 #combos {
 	padding: 20px;
-	display: inline-block;
 }
 #combos textarea {
 	padding-top: 40px;
@@ -387,6 +392,13 @@ tr[checked] {
 .select-list{
 	padding-left: 20px;
 }
+.select-list p{
+	padding-left: 0; 
+}
+.select-list select{
+	height: 26px;
+	width: 300px; 
+}
 
 #machine-list-problems{
 	height: 26px;
@@ -419,3 +431,23 @@ input:valid+span:after {
     height: 38px;
 }
 
+.wrapper-content{
+	background: grey;
+	display: block;
+}
+
+.machine-content {
+	float: left;
+}
+
+.bottom {
+    width: 998px;
+    height: 51px;
+    background-color: #124217;
+    margin: 0 auto;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: -51px;
+    margin-left: -499px;
+    }

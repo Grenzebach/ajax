@@ -17,5 +17,11 @@ function getPage(page) {
 
 function setActiveLink(page) {
 	$(".onepage-link.active").removeClass("active");
-	$("a[href='#" + page["name"] + "=" + page["id"] + "']").addClass("active");	
+
+	var pageName = page["name"];
+	if (pageName == "default") {
+		pageName = startingPage;
+	}
+
+	$("a[href='#" + pageName + "=" + page["id"] + "']").addClass("active");	
 }

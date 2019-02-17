@@ -13,6 +13,10 @@
 	} else if (isParamEquals($_POST, "action", "add-problem")) {
 		addProblem($_POST['selIdMachine'], $_POST['nameProblem'], $_POST['dateProblem'], $_POST['noteProblem']);
 		
+		echo getProblemsPanel($_POST["pageId"]);
+	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {//Actions.php
+		echo getSelectMachineList($_POST["userId"]);		
+		
 	}
 
 	function getComponentByName($name) {
@@ -20,7 +24,11 @@
 		if (isParamEquals($_POST, "pageName", "plan")) {
 			$content = getPlanTable($_POST["pageId"]); 
 		} else {
-			$content = getMachineTable($_POST["pageId"]);
+			$pageId = $_POST["pageId"];
+			if ($pageId == "default") {
+				$pageId = getDefaultMachineId();
+			}
+			$content = getMachineTable($pageId);
 		}	
 
 		return $content;	

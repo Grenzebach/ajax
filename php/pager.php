@@ -12,6 +12,10 @@
 		echo getProblems();
 	} else if (isParamEquals($_GET, "name", "parts")) {
 		echo getParts();
+	} else if (isParamEquals($_GET, "name", "default")) {		
+		echo getMachine(getDefaultMachineId());
+	} else {
+		echo "404 - страница не найдена";
 	}	
 
 	function getMachine($id) {	    
@@ -28,13 +32,14 @@
 		$controlsPanel = getControlsPanel($id);
 	        
 	    return 
-	    	$machineList .
-	    	$machineHeader .
-	    	$machineTable . 
-	    	$actionsLinks . 
-	    	$problemsPanel . 
-	    	$combos . 
-	    	$controlsPanel;
+	    	$machineList .	    	
+	    	wrapElements("machine-content",
+	    		$machineHeader . 	    	
+	    		$machineTable . 
+		    	$actionsLinks . 
+		    	$problemsPanel . 
+		    	$combos . 
+		    	$controlsPanel);
 	}	
 
 	function getPlan($id) {
@@ -64,10 +69,8 @@
 	}
 
 	function getProblems() {		//Проблемы
-		logger("Получение списка проблем для оборудования");
-		$id = "0";
-		logger($id);
-		$table = getProblemsPanel(0);
+		logger("Получение списка проблем для оборудования");				
+		$table = getProblemsPanel("default");
 		$inputs = inputProblemsPanel();		
 		return 
 			$table .

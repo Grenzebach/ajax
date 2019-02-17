@@ -24,3 +24,14 @@ function addProblem(selIdMachine, nameProblem, dateProblem, noteProblem){
         }
     });
 }
+
+function getSelectMachineList(userId){
+    $.ajax({
+        url: "php/controller.php",
+        method: "POST",
+        data: {"action": "get-select-machine-list", "userId": userId},
+        success: function(response) {
+            $("#select-machine-list").html(response);        
+        }
+    });
+}

@@ -15,4 +15,8 @@
 	function isParamExists($method, $param) {
 		return isset($method[$param]) && $method[$param] != "";	
 	}
+
+	function labelCode($file, $method) {
+		echo "<!-- $file:$method -->";
+	}
 ?>
