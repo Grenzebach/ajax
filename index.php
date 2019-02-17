@@ -25,7 +25,7 @@
     <div id="navigation">
     	<ul class="nav-menu">
     		<li class="nav-item" id="problems"><a class="onepage-link" href="#problems=default">ЖУРНАЛ</a></li>
-    		<li class="nav-item" id="machines"><a class="onepage-link" href="#machines=default">ОБОРУДОВАНИЕ</a></li>    		
+    		<li class="nav-item" id="machines"><a class="onepage-link" href="#machines=default">ТО ОБОРУДОВАНИЯ</a></li>    		
     		<li class="nav-item" id="parts"><a class="onepage-link" href="#parts=default">нов.</a></li>
     	</ul>
     	

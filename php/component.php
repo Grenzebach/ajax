@@ -260,8 +260,8 @@ function getActionsLinks($id) {
 function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
     
-    $sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
-    $appendTOsql = "and machines.id_machines=" . $id;
+    //$sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
+    $appendTOsql = " and m.id_machines=" . $id;
 
     //SELECT * FROM problems, machines, users WHERE machines.id_machines=problems.id_machine and users.id_user=machines.respons_machines
     if ($id == "default"){
@@ -270,7 +270,13 @@ function getProblemsPanel($id) {
     logger("В функции getProblemsPanel id = " . $id);
     $link = mysqli_connect("localhost", "root", "", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-    $query = "SELECT * FROM problems, machines WHERE machines.id_machines=problems.id_machine " . $appendTOsql; //WHERE id_machine =.$id; //
+    $query = "  SELECT 
+                    p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
+                    m.id_machines, m.name_machines, m.respons_machines,
+                    u.id_user, u.name_user
+                FROM problems p, machines m, users u 
+                WHERE m.id_machines=p.id_machine 
+                AND m.respons_machines=u.id_user" . $appendTOsql;               //WHERE id_machine =.$id; 
     logger("getProblemsPanel() ".$query);
     $result = mysqli_query($link, $query);
     //logger($result);
@@ -282,13 +288,37 @@ function getProblemsPanel($id) {
                 <th>Проблема</th>
                 <th>Дата</th>
                 <th>Примечания</th>
-                <th>Ответственный</th></tr>";
+                <th>Состояние</th>
+                <th>Ответственный</th>
+                </tr>";
 
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
         
-        $i++;
-        $block .= "<tr><td>$i</td><td>".$row['name_machines']."</td><td>".$row['name_problems']."</td><td>".$row['date_problems']."</td><td>".$row['notes_problems']."</td></tr>"; 
+        $i++;               //Счетчик для нумерации строк в таблице
+        $statusProblems = $row['status_problems'];
+        if ($statusProblems == "1"){
+            $statusString = "Создана";
+            $statusClass = "status-problem-create";
+        } elseif ($statusProblems == "2"){
+            $statusString = "В работе";
+            $statusClass = "status-problem-doing";
+        } elseif ($statusProblems == "3") {
+            $statusString = "Выполнена";
+            $statusClass = "status-problem-done";
+        }
+
+        $status = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
+        $block .= 
+        "<tr>
+            <td>$i</td>
+            <td class = \"col-left-align\">" . $row['name_machines'] . "</td>
+            <td class = \"td-name-problems col-left-align tooltip\" data-description=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
+            <td class = \"td-notes-problems col-left-align tooltip\" data-description=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
+            <td class = \"status-problem\">" . $status . "</td>
+            <td class = \"col-left-align\">" . $row['name_user'] . "</td>
+        </tr>"; 
     }
     mysqli_close($link);
     $block .= "</table></div>"; 

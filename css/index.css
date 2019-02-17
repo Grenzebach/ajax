@@ -292,7 +292,43 @@ tr[checked] {
 	background: #056292;
 	color: white;
 }
+.btn-link a{
+	text-decoration: none;
+	color: white;
+}
 
+.status-problem-create{
+	background: #e65151;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.status-problem-create:hover {
+	background: #e67171;
+	color: white;
+}
+
+.status-problem-doing{
+	background: #69b175;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.status-problem-doing:hover {
+	background: #80d48e;
+	color: white;
+}
+.status-problem-done{
+	background: #7d7d7d;
+    padding: 2px;
+    border-radius: 5px;
+    
+}
+
+.status-problem-done:hover {
+	background: #e8e587;
+	
+}
 .maket{
 	display: block;
 }
@@ -301,7 +337,7 @@ tr[checked] {
 	text-align: left;
 }
 
-#col_notes {
+#col_notes, .col-left-align{
 	text-align: left;
 }
 
@@ -322,6 +358,12 @@ tr[checked] {
 	background-color: red;
 	color: white;
 	border-color: black;
+}
+
+.td-name-problems, .td-name-problems{
+	
+    max-width: 300px;
+    word-wrap: break-word;
 }
 
 .gif {
@@ -456,3 +498,4 @@ input:valid+span:after {
 	padding-left: 10px;
 	margin-left: 10px;
 }
+
