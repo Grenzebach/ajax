@@ -403,6 +403,7 @@ tr[checked] {
 
 .problem td{
 	height: 30px;
+	overflow: hidden;
 
 }
 .fst-col{

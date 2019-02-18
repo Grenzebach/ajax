@@ -281,15 +281,15 @@ function getProblemsPanel($id) {
     $result = mysqli_query($link, $query);
     //logger($result);
     $block = "<div class=\"maket\">
-        <h2>Список текущих проблем:</h2>
+        <h2>Журнал еженедельного осмотра оборудования:</h2>
             <table class=\"problem\">
                 <tr><th class=\"fst-col\"><input type=\"checkbox\"></th>
-                <th>Оборудование</th>
-                <th>Проблема</th>
-                <th>Дата</th>
-                <th>Примечания</th>
-                <th>Состояние</th>
-                <th>Ответственный</th>
+                    <th>Оборудование</th>
+                    <th>Проблема</th>
+                    <th>Дата</th>
+                    <th>Примечания</th>
+                    <th>Состояние</th>
+                    <th>Ответственный</th>
                 </tr>";
 
     $i = 0;
