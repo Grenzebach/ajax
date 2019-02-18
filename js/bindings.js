@@ -91,6 +91,35 @@ $(document).ready(function () {
             $(this).parent().closest("li").show();
         });
     });
+
+//  Нажатие на кнопку для изменения статуса проблемы. Кнопка преобразуется в селект
+    $(document).on("click", ".btn-link", function(){
+        $(this).closest("td").attr("sel", "true");  //Добавление атрибута нажатой кнопке
+        $.ajax({
+            url: "php/controller.php",
+            method: "POST",
+            data: {"action": "btn-to-select"},
+            success: function(response){
+                $("[sel='true']").html(response);
+            
+            }
+        });
+    });
+    $(document).on("selected", ".select-status-problem", function(){        
+        console.log("selected");
+        
+        $.ajax({
+            url: "php/controller.php",
+            method: "POST",
+            data: {"action": "btn-to-select"},
+            success: function(response){
+                
+                //$("[sel='true']").html(response);
+            
+            }
+        });
+    });
+
 });
 
 function getCheckedInputs() {

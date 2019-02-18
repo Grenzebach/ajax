@@ -313,9 +313,9 @@ function getProblemsPanel($id) {
         "<tr>
             <td>$i</td>
             <td class = \"col-left-align\">" . $row['name_machines'] . "</td>
-            <td class = \"td-name-problems col-left-align tooltip\" data-description=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
-            <td class = \"td-notes-problems col-left-align tooltip\" data-description=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
+            <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
             <td class = \"col-left-align\">" . $row['name_user'] . "</td>
         </tr>"; 
@@ -421,4 +421,22 @@ function wrapElements($class, $targetContent){
     labelCode("component.php", "wrapElements");
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
+
+function selectOfStatusProblem(){
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); 
+    $query = "SELECT * FROM `status` WHERE enable_status=true";
+    $result = mysqli_query($link, $query);
+    
+    $resultOut = "<select class=\"select-status-problem\">";
+    while ($row = mysqli_fetch_array($result)) {
+        $resultOut .= "<option value=" . $row['id_status'] . ">" . $row['name_status'] . "</option>";
+    }
+    mysqli_close($link);
+
+    $resultOut .= "</select>";
+
+    return $resultOut;
+}
+
 ?>

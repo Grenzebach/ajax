@@ -500,3 +500,6 @@ input:valid+span:after {
 	margin-left: 10px;
 }
 
+.select-status-problem{
+	width: 74px;
+}

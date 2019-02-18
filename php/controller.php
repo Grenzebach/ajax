@@ -17,6 +17,9 @@
 	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {//Actions.php
 		echo getSelectMachineList($_POST["userId"]);		
 		
+	}else if (isParamEquals($_POST, "action", "btn-to-select")){
+		echo selectOfStatusProblem();
+
 	}
 
 	function getComponentByName($name) {
@@ -63,5 +66,7 @@
 	        mysqli_query($link, $query);
 	        mysqli_close($link);
 
-	}	
+	}
+
+		
 ?>
