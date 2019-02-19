@@ -95,6 +95,7 @@ $(document).ready(function () {
 //  Нажатие на кнопку для изменения статуса проблемы. Кнопка преобразуется в селект
     $(document).on("click", ".btn-link", function(){
         $(this).closest("td").attr("sel", "true");  //Добавление атрибута нажатой кнопке
+        console.log("click");
         $.ajax({
             url: "php/controller.php",
             method: "POST",
@@ -105,16 +106,16 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on("selected", ".select-status-problem", function(){        
-        console.log("selected");
-        
+    $(document).on("change", ".select-status-problem", function(){
+        $(this).hide();
+        console.log("change");
+
         $.ajax({
             url: "php/controller.php",
             method: "POST",
-            data: {"action": "btn-to-select"},
+            data: {"action": "select-to-btn"},
             success: function(response){
-                
-                //$("[sel='true']").html(response);
+                $("[sel='true']").html(response);
             
             }
         });

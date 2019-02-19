@@ -20,7 +20,8 @@
 	}else if (isParamEquals($_POST, "action", "btn-to-select")){
 		echo selectOfStatusProblem();
 
-	}
+	}else if (isParamEquals($_POST, "action", "select-to-btn")){
+		echo selectOfStatusProblem();
 
 	function getComponentByName($name) {
 		$content = "Содержимое отсутствует";
