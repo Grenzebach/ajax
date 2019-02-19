@@ -94,28 +94,35 @@ $(document).ready(function () {
 
 //  Нажатие на кнопку для изменения статуса проблемы. Кнопка преобразуется в селект
     $(document).on("click", ".btn-link", function(){
-        $(this).closest("td").attr("sel", "true");  //Добавление атрибута нажатой кнопке
+        $(".status-problem").removeAttr("id","selected-btn");
+        $(this).closest("td").attr("id", "selected-btn");  //Добавление id div с нажатой кнопке
+        
         console.log("click");
         $.ajax({
             url: "php/controller.php",
             method: "POST",
             data: {"action": "btn-to-select"},
             success: function(response){
-                $("[sel='true']").html(response);
-            
+                $("#selected-btn").html(response);
+                //console.log($(this));
+                            
             }
         });
     });
     $(document).on("change", ".select-status-problem", function(){
-        $(this).hide();
-        console.log("change");
+        //$(this).hide();
+        console.log($(this).parent().closest("tr").attr("value"));
+        
+        var selValue = $(this).val();
+        var curRow = $(this).parent().closest("tr").attr("value");
 
         $.ajax({
             url: "php/controller.php",
             method: "POST",
-            data: {"action": "select-to-btn"},
+            data: {"action": "select-to-btn", "sel-value": selValue, "cur-row": curRow},
             success: function(response){
-                $("[sel='true']").html(response);
+                $("#selected-btn").html(response);
+
             
             }
         });

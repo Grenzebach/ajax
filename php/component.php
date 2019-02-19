@@ -303,14 +303,14 @@ function getProblemsPanel($id) {
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
             $statusClass = "status-problem-doing";
-        } elseif ($statusProblems == "3") {
+        } elseif ($statusProblems == "4") {
             $statusString = "Выполнена";
             $statusClass = "status-problem-done";
         }
 
         $status = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
         $block .= 
-        "<tr>
+        "<tr value=" . $row['id_problems'] . ">
             <td>$i</td>
             <td class = \"col-left-align\">" . $row['name_machines'] . "</td>
             <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
@@ -438,5 +438,31 @@ function selectOfStatusProblem(){
 
     return $resultOut;
 }
+
+function getBtnProblem($selValue, $curRow){
+    $statusProblems = $selValue;
+        if ($statusProblems == "1"){
+            $statusString = "Создана";
+            $statusClass = "status-problem-create";
+        } elseif ($statusProblems == "2"){
+            $statusString = "В работе";
+            $statusClass = "status-problem-doing";
+        } elseif ($statusProblems == "4") {
+            $statusString = "Выполнена";
+            $statusClass = "status-problem-done";
+        }
+        //"UPDATE `problems` SET `status_problems` = '1' WHERE `problems`.`id_problems` = 2;"
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); 
+    $query = "UPDATE `problems` SET `status_problems` = $statusProblems WHERE `problems`.`id_problems` = $curRow";
+    $result = mysqli_query($link, $query);    
+
+    $resultOut = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
+
+    return $resultOut;
+
+
+        
+    }
 
 ?>

@@ -502,3 +502,10 @@ input:valid+span:after {
 .select-status-problem{
 	width: 74px;
 }
+.status-problem select{
+	width: 74px;
+}
+
+.selected-btn select{
+	width: 74px;
+}

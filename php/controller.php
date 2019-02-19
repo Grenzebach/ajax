@@ -21,7 +21,9 @@
 		echo selectOfStatusProblem();
 
 	}else if (isParamEquals($_POST, "action", "select-to-btn")){
-		echo selectOfStatusProblem();
+		echo getBtnProblem($_POST["sel-value"], $_POST["cur-row"]);
+	}
+		
 
 	function getComponentByName($name) {
 		$content = "Содержимое отсутствует";
@@ -68,6 +70,8 @@
 	        mysqli_close($link);
 
 	}
+
+
 
 		
 ?>
