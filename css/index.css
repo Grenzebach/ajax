@@ -406,6 +406,9 @@ tr[checked] {
 	overflow: hidden;
 
 }
+.problem select{
+	width: 74px;
+}
 .fst-col{
 	width: 30px;
 }	
@@ -499,13 +502,6 @@ input:valid+span:after {
 	margin-left: 10px;
 }
 
-.select-status-problem{
-	width: 74px;
-}
-.status-problem select{
-	width: 74px;
-}
-
-.selected-btn select{
-	width: 74px;
+.problem-textarea{
+	width: 200px;
 }

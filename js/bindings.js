@@ -72,8 +72,7 @@ $(document).ready(function () {
     $(document).on("change", "input[type='checkbox']", function(event) {
         if ($(this).prop("checked")) {
             $(this).parent().closest("tr").attr("checked", "true");
-            console.log("кря!");
-            //$("#row5").hide();
+            
             
         } else {
             $(this).parent().closest("tr").removeAttr("checked");
@@ -109,7 +108,7 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on("change", ".select-status-problem", function(){
+    $(document).on("change mouseleave", ".select-status-problem", function(){
         //$(this).hide();
         console.log($(this).parent().closest("tr").attr("value"));
         
@@ -128,6 +127,16 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("dblclick", ".td-name-problems", function(){
+        console.log("click td");
+        $(this).closest("td").attr("value", "clicked");
+        var content = $(this).text();
+        console.log(content);
+        $(this).empty();
+        $(this).html("<textarea class='problem-textarea'>" + content + "</textarea>");
+
+    });
+
 });
 
 function getCheckedInputs() {
@@ -138,3 +147,4 @@ function getCheckedInputs() {
     
     return ids;
 }
+
