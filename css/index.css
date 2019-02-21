@@ -503,5 +503,6 @@ input:valid+span:after {
 }
 
 .problem-textarea{
-	width: 200px;
+	width: 263px;
+	height: 40px;
 }

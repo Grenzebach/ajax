@@ -71,8 +71,7 @@ $(document).ready(function () {
 
     $(document).on("change", "input[type='checkbox']", function(event) {
         if ($(this).prop("checked")) {
-            $(this).parent().closest("tr").attr("checked", "true");
-            
+            $(this).parent().closest("tr").attr("checked", "true");            
             
         } else {
             $(this).parent().closest("tr").removeAttr("checked");
@@ -93,17 +92,19 @@ $(document).ready(function () {
 
 //  Нажатие на кнопку для изменения статуса проблемы. Кнопка преобразуется в селект
     $(document).on("click", ".btn-link", function(){
-        $(".status-problem").removeAttr("id","selected-btn");
-        $(this).closest("td").attr("id", "selected-btn");  //Добавление id div с нажатой кнопке
-        
+        //$(".status-problem").removeAttr("id","selected-btn");
+        //$(".status-problem").removeAttr("value","selected");
+        //$(this).closest("td").attr("id", "selected-btn");  //Добавление id div с нажатой кнопке
+        $(this).closest("td").attr("value", "selected");
         console.log("click");
         $.ajax({
             url: "php/controller.php",
             method: "POST",
             data: {"action": "btn-to-select"},
             success: function(response){
-                $("#selected-btn").html(response);
-                //console.log($(this));
+                //$("#selected-btn").html(response);
+                $(".status-problem [value='selected']").html(response);
+                console.log($(".status-problem [value='selected']").hide());
                             
             }
         });
