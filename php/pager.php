@@ -70,9 +70,11 @@
 
 	function getProblems() {		//Проблемы
 		logger("Получение списка проблем для оборудования");				
+		//$tableJQ = jqGridTable();
 		$table = getProblemsPanel("default");
 		$inputs = inputProblemsPanel();		
 		return 
+			 
 			$table .
 			$inputs;
 	}

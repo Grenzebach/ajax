@@ -403,7 +403,7 @@ function getSelectMachineList($userId = "") {                             //Фу
         $link = mysqli_connect("localhost", "root", "", "desk");
         mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
         $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId"; //ЗАПРОС
-        logger($query);
+        
 
         $result = mysqli_query($link, $query);    
         
@@ -461,8 +461,38 @@ function getBtnProblem($selValue, $curRow){
 
     return $resultOut;
 
-
+    mysqli_close($link);
         
     }
+
+ function jqGridTable(){
+    $resultOut = "<table id=\"jqGrid\"><tr><td></td></tr></table>";
+    $resultOut .="<div id=\"pager\"></div>";
+
+    $link = mysqli_connect("localhost", "root", "", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8 
+    $query = "  SELECT 
+                    p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
+                    m.id_machines, m.name_machines, m.respons_machines,
+                    u.id_user, u.name_user
+                FROM problems p, machines m, users u 
+                WHERE m.id_machines=p.id_machine 
+                AND m.respons_machines=u.id_user";
+
+    $result = mysqli_query($link, $query);
+    $i = 0;
+
+    while ($row = mysqli_fetch_array($result)){
+        $i++;
+        $response->rows[$i]['num'] = $i;
+        $response->rows[$i]['cell'] = array($i, $row['name_machines'], $row['name_problems'], $row['date_problems'], $row['notes_problems'], $row['status_problems'], $row['name_user']);
+
+    }
+    echo json_encode($response);
+    logger(json_encode($response));
+    mysqli_close($link);
+
+ }
+    
 
 ?>

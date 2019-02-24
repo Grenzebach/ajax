@@ -5,12 +5,21 @@
 	<link rel="shortcut icon" href="img/icons8-maintenance-16.png" type="image/png">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/print.css">
+	<link rel="stylesheet" href="css/ui.jqgrid.css">
+
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/defaults.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/controller.js"></script>
 	<script type="text/javascript" src="js/bindings.js"></script>
-	<script type="text/javascript" src="js/pager.js"></script>	
+	<script type="text/javascript" src="js/pager.js"></script>
+
+	<script type="text/javascript" src="js/grid.locale-ru.js"></script>
+	<script type="text/javascript" src="js/jquery.jqGrid.min.js"></script>
+	<script type="text/javascript" src="js/grid.base.js"></script>
+	<script type="text/javascript" src="js/grid.jqueryui.js"></script>
+	
+
 </head>
 <body>
 <div id="container">
@@ -38,6 +47,7 @@
 		<p><a href="http://sublimetext.ru/documentation/hotkeys/windows">Горячие клавиши</a></p>
 		<p><a href="http://localhost/ajax/pages/plan.php/">План</a></p>
 		<a href="http://localhost:8080/phpmyadmin/">phpmyadmin HOME</a>
+		<a href="https://urvanov.ru/2015/07/20/моя-первая-таблица-в-jqgrid/">jqGrid</a>
     </div>
 </div>
 	
