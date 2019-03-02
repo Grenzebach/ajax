@@ -1,7 +1,7 @@
 <?php 
 function getDefaultMachineId() {
     labelCode("component.php", "getDefaultMachineId");
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.id_machines FROM machines LIMIT 0, 1";
     $result = mysqli_query($link, $query);  
@@ -21,7 +21,7 @@ function getMachineContent($id) {
 
 function getMachineHeader($id) {
     labelCode("component.php", "getMachineHeader");
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.name_machines FROM machines WHERE machines.id_machines=$id";
     $result = mysqli_query($link, $query);  
@@ -40,7 +40,7 @@ function getMachineTable($id) {
         $id = getDefaultMachineId();
     }
 
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
    
     $query_diff = "SELECT machines.id_machines, machines.name_machines, units.id_units, units.name_units, units.info_units, units.pozname_units, units.id_categories, c1.id_units, c1.date_control, c1.notes_control, categories.id_categories, categories.periodicy 
@@ -104,7 +104,7 @@ function getMachineList() {
     $result = "<div id=\"sidebar\">
         <p id=head-menu>Оборудование</p>
         <input id=\"sidebar-search\" type =\"text\" placeholder=\"Поиск...\" />";
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
     $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
@@ -136,7 +136,7 @@ function getPlanContent($id) {
 
 function getPlanHeader($id) {
     labelCode("component.php", "getPlanHeader");
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8  
     $query = "SELECT machines.name_machines FROM machines WHERE machines.id_machines=$id";
     $result = mysqli_query($link, $query);  
@@ -161,7 +161,7 @@ function getPlanTable($id) {
     <th class='hide-col'>Дней осталось</th>
     <th>Замечания</th></tr>";
     
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
             mysqli_set_charset($link, "utf8"); //кодировка в utf8 
 
     $query = "SELECT c1.date_control, 
@@ -222,7 +222,7 @@ function getPlanTable($id) {
 function getCombos($id) {
     labelCode("component.php", "getCombos");
     //Формирование в последней строчке выпадающего списка узлов
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "SELECT name_units,id_units,pozname_units FROM `units` WHERE id_machines =".$id; //Список узлов в селект
     $result = mysqli_query($link, $query);     
@@ -268,7 +268,7 @@ function getProblemsPanel($id) {
         $appendTOsql = "";
     } 
     logger("В функции getProblemsPanel id = " . $id);
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "  SELECT 
                     p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
@@ -348,7 +348,7 @@ function inputProblemsPanel() {
                     <select id=\"respons\">
                     <option></option>";       //Список ответственных за оборудование
 
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "SELECT id_user, name_user, priority_user FROM `users` WHERE priority_user=3 ORDER BY `users`.`name_user` ASC"; //    
     $result = mysqli_query($link, $query);
@@ -400,7 +400,7 @@ function getSelectMachineList($userId = "") {                             //Фу
     $items = "<option></option>";     
 
     if ($userId != "") {
-        $link = mysqli_connect("localhost", "root", "", "desk");
+        $link = mysqli_connect("localhost", "root", "mysql", "desk");
         mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
         $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId"; //ЗАПРОС
         
@@ -423,7 +423,7 @@ function wrapElements($class, $targetContent){
 }
 
 function selectOfStatusProblem(){
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
     $query = "SELECT * FROM `status` WHERE enable_status=true";
     $result = mysqli_query($link, $query);
@@ -452,7 +452,7 @@ function getBtnProblem($selValue, $curRow){
             $statusClass = "status-problem-done";
         }
         //"UPDATE `problems` SET `status_problems` = '1' WHERE `problems`.`id_problems` = 2;"
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
     $query = "UPDATE `problems` SET `status_problems` = $statusProblems WHERE `problems`.`id_problems` = $curRow";
     $result = mysqli_query($link, $query);    
@@ -469,7 +469,7 @@ function getBtnProblem($selValue, $curRow){
     $resultOut = "<table id=\"jqGrid\"><tr><td></td></tr></table>";
     $resultOut .="<div id=\"pager\"></div>";
 
-    $link = mysqli_connect("localhost", "root", "", "desk");
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = "  SELECT 
                     p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
