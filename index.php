@@ -11,6 +11,10 @@
 	<script type="text/javascript" src="js/controller.js"></script>
 	<script type="text/javascript" src="js/bindings.js"></script>
 	<script type="text/javascript" src="js/pager.js"></script>	
+
+	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+	<script type="text/javascript" src="js/datatables.min.js"></script>
+
 </head>
 <body>
 <div id="container">
@@ -33,6 +37,9 @@
     </div>   
     <div id="content">
     </div>
+
+
+
     <div id="clear"></div>
     <div id="footer"><a href="http://localhost/phpmyadmin/">phpmyadmin</a>
 		<p><a href="http://sublimetext.ru/documentation/hotkeys/windows">Горячие клавиши</a></p>

@@ -70,7 +70,8 @@
 
 	function getProblems() {		//Проблемы
 		logger("Получение списка проблем для оборудования");				
-		$table = getProblemsPanel("default");
+		$table =  getDataTable();
+		//getProblemsPanel("default");
 		$inputs = inputProblemsPanel();		
 		return 
 			$table .

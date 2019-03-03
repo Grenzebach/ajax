@@ -222,7 +222,7 @@ p {
 	display: inline;
 }
 
-table {
+/*table {
 	border-collapse: collapse;	
 	border: 2px solid;
 	margin-top: 20px;
@@ -236,10 +236,10 @@ th {
  	color: black;
   	padding: 5px 8px;
   	font-weight: bold;
-  	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); /* для webkit-браузеров */ 
-  	background: -moz-linear-gradient(top right, #b8b9b1, #fff); /* для firefox 3.6+ */ 
-  	background: -o-linear-gradient(top right, #b8b9b1, #fff); /* для Opera 11.10+ */ 
-  	background: -ms-linear-gradient(top right, #b8b9b1, #fff); /* для IE10+ */
+  	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); 
+  	background: -moz-linear-gradient(top right, #b8b9b1, #fff); 
+  	background: -o-linear-gradient(top right, #b8b9b1, #fff); 
+  	background: -ms-linear-gradient(top right, #b8b9b1, #fff); 
 }
 td {
 	font-size: 12;
@@ -254,7 +254,7 @@ tr:nth-child(2n) {
 
 tr[checked] {
 	background-color: #fff8b0;
-}
+}*/
 
 .add-record {
 	font-weight: bold;
@@ -484,7 +484,8 @@ input:valid+span:after {
 }
 
 .machine-content {
-	
+	float: left;
+}
 
 .bottom {
     width: 998px;
