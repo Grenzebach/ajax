@@ -507,3 +507,30 @@ input:valid+span:after {
 	width: 263px;
 	height: 40px;
 }
+
+#data-table{
+	border-collapse: collapse;	
+	border: 2px solid;
+	margin-top: 20px;
+	margin-left: 20px;
+	white-space: nowrap;
+}
+
+#data-table th {
+	border: 1px solid;
+	text-align: center;	
+ 	color: black;
+  	padding: 5px 8px;
+  	font-weight: bold;
+  	background: -webkit-linear-gradient(bottom, #939698, whitesmoke); 
+  	background: -moz-linear-gradient(top right, #b8b9b1, #fff); 
+  	background: -o-linear-gradient(top right, #b8b9b1, #fff); 
+  	background: -ms-linear-gradient(top right, #b8b9b1, #fff); 
+}
+#data-table td {
+	font-size: 12;
+	color: black;
+	text-align: center;
+  	border: 1px solid;
+  	padding: 5px 8px;
+}

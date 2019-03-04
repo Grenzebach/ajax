@@ -262,8 +262,7 @@ function getDataTable() {
         <table id=\"data-table\" class=\"display\" style=\"width:100%\">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Проблема</th>
+                <th>#</th>                
                 <th>Оборудование</th>
                 <th>Проблема</th>
                 <th>Дата</th>
@@ -272,19 +271,6 @@ function getDataTable() {
                 <th>Ответственный</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>#</th>
-                <th>Проблема</th>
-                <th>Оборудование</th>
-                <th>Проблема</th>
-                <th>Дата</th>
-                <th>Примечания</th>
-                <th>Состояние</th>
-                <th>Ответственный</th>
-
-            </tr>
-        </tfoot>
     </table>";
 }
 

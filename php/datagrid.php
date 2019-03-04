@@ -21,7 +21,7 @@
 // DB table to use https://datatables.net/examples/data_sources/server_side
 //https://editor.datatables.net/manual/php/conditions#Simple-OR-condition
 
-$table = 'problems';
+$table = 'viewProblems';
  
 // Table's primary key
 $primaryKey = 'id_problems';
@@ -32,13 +32,12 @@ $primaryKey = 'id_problems';
 // indexes
 $columns = array(
     array( 'db' => 'id_problems', 'dt' => 0),
-    array( 'db' => 'name_problems', 'dt' => 1),
+    array( 'db' => 'name_machines', 'dt' => 1),
     array( 'db' => 'name_problems', 'dt' => 2),
-    array( 'db' => 'name_problems', 'dt' => 3),
-    array( 'db' => 'name_problems', 'dt' => 4),
-    array( 'db' => 'name_problems', 'dt' => 5),
-    array( 'db' => 'name_problems', 'dt' => 6),
-    array( 'db' => 'name_problems', 'dt' => 7)
+    array( 'db' => 'date_problems', 'dt' => 3),
+    array( 'db' => 'notes_problems', 'dt' => 4),
+    array( 'db' => 'status_problems', 'dt' => 5),
+    array( 'db' => 'name_user', 'dt' => 6)    
 );
  
 // SQL server connection information

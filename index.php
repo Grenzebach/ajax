@@ -13,6 +13,8 @@
 	<script type="text/javascript" src="js/pager.js"></script>	
 
 	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/themes/base/jquery-ui.min.css"/>
+
 	<script type="text/javascript" src="js/datatables.min.js"></script>
 
 </head>
