@@ -259,19 +259,21 @@ function getActionsLinks($id) {
 
 function getDataTable() {
     return "
-        <table id=\"data-table\" class=\"display\" style=\"width:100%\">
-        <thead>
-            <tr>
-                <th>#</th>                
-                <th>Оборудование</th>
-                <th>Проблема</th>
-                <th>Дата</th>
-                <th>Примечания</th>
-                <th>Состояние</th>
-                <th>Ответственный</th>
-            </tr>
-        </thead>
-    </table>";
+        <div class= \"data-table-problems\">
+            <table id=\"data-table\" class=\"display\" style=\"width:100%\">
+            <thead>
+                <tr>
+                    <th>#</th>                
+                    <th>Оборудование</th>
+                    <th>Проблема</th>
+                    <th>Дата</th>
+                    <th>Примечания</th>
+                    <th>Состояние</th>
+                    <th>Ответственный</th>
+                </tr>
+            </thead>
+            </table>
+        </div>";
 }
 
 function getProblemsPanel($id) {

@@ -36,14 +36,12 @@ function getCallbacks() {
 	return {
 		"problems": function(page) {		
 	        $('#data-table').DataTable({
-	        	"jQueryUI" : true,
-		        language: {
-        			url: 'localisation/ru_RU.json'},
-		        "processing": true,
-		        "serverSide": true,
-		        "ajax": "php/datagrid.php",
-
-		        "bLengthChange": true
+	        	
+		        language: {url: 'localisation/ru_RU.json'},
+		        processing: true,
+		        serverSide: true,
+		        ajax: "php/datagrid.php",
+		        bLengthChange: true
 
 		    });		
 		},

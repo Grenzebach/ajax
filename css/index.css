@@ -534,3 +534,6 @@ input:valid+span:after {
   	border: 1px solid;
   	padding: 5px 8px;
 }
+.dataTables_filter{
+	padding-bottom: 10px;
+}

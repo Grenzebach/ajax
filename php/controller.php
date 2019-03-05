@@ -13,7 +13,8 @@
 	} else if (isParamEquals($_POST, "action", "add-problem")) {
 		addProblem($_POST['selIdMachine'], $_POST['nameProblem'], $_POST['dateProblem'], $_POST['noteProblem']);
 		
-		echo getProblemsPanel($_POST["pageId"]);
+		echo getDataTable();
+		//echo getProblemsPanel($_POST["pageId"]);
 	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {//Actions.php
 		echo getSelectMachineList($_POST["userId"]);		
 		
@@ -41,7 +42,7 @@
 	}
 
 	function applyChanges($items) {
-	    $link = mysqli_connect("localhost", "root", "", "desk");
+	    $link = mysqli_connect("localhost", "root", "mysql", "desk");
 	    mysqli_set_charset($link, "utf8");   
 	    foreach ($items as $value) {
 	         $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '".$value."', '".date('Y-m-d')."', '5', 'ok')";
@@ -51,7 +52,7 @@
 	}
 
 	function addRecord($sel, $dateControl, $inputNotes) {
-	        $link = mysqli_connect("localhost", "root", "", "desk");
+	        $link = mysqli_connect("localhost", "root", "mysql", "desk");
 	        mysqli_set_charset($link, "utf8"); 
 	        
 	        $query = "INSERT INTO `control` (`id_control`, `id_units`, `date_control`, `state_control`, `notes_control`) VALUES (NULL, '$sel', '$dateControl', "."'4'".", '$inputNotes')";
@@ -61,7 +62,7 @@
 	}
 
 	function addProblem($selIdMachine, $nameProblem, $dateProblem, $noteProblem){
-			$link = mysqli_connect("localhost", "root", "", "desk");
+			$link = mysqli_connect("localhost", "root", "mysql", "desk");
 	        mysqli_set_charset($link, "utf8"); 
 	        
 	        $query = "INSERT INTO `problems` (`id_problems`, `name_problems`, `date_problems`, `notes_problems`, `id_units_problems`, `status_problems`, `id_machine`) VALUES (NULL, '$nameProblem', '$dateProblem', '$noteProblem', NULL, '1', '$selIdMachine')";
