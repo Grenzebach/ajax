@@ -12,8 +12,7 @@ table, caption, tbody, tfoot, thead, tr, th, td, nobr {
     border: 0;
     outline: 0;
     font-size: 100%;
-    background: transparent;
-    font-weight: 400;
+    background: transparent;    
 }
 
 
@@ -68,8 +67,10 @@ body {
 
 #container {
 	background: #FFFFFF;
-	margin: 0 auto;
 	width: 100%;
+	min-height: 100%;
+    margin: 0 auto;
+    position: relative;	
 }
 
 #navigation {	
@@ -80,12 +81,23 @@ body {
 }
 
 .nav-item {
-	display: inline;
-	padding-left: 15px;
-	padding-right: 15px;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
 }
 
-.nav-menu{
+.nav-item a {
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;	
+}
+
+.nav-item a.active {
+	background-color: white;
+	color: #056292;
+}
+
+.nav-menu {
 	text-decoration: none;
 	list-style-type: none;	
 	background: #056292;
@@ -96,7 +108,7 @@ body {
 	padding-top: 10px;
 }
 
-.nav-menu li a{	
+.nav-menu li a {	
 	text-decoration: none;
 	color: white;	
 	list-style-type: none;
@@ -107,9 +119,8 @@ body {
 }
 
 #sidebar {	
-	width: 220px;
-	height: 100%;
-	float: left;
+	margin-top: -10px;
+	margin-left: -10px;
 }
 
 #head-menu {
@@ -121,14 +132,19 @@ body {
 	padding-bottom: 10px; 
 }
 
+#menu{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 600px;
+}
+
 #sidebar, #menu {
 	list-style: none;
 	width: 220px;
-	background: #004c73;
+	background: #30444e;
 	float: left;
 	padding-left: 0px;
-	color: white;
-	margin-top: 0px;
+	color: white;	
 }
 
 #menu a {
@@ -145,8 +161,12 @@ body {
 }
 
 #menu li a:hover {
-	background: #507e96;
+	background-color: #507e96;
 	color: white;
+}
+
+#menu li a.active {
+	background-color: #507e96;
 }
 
 #content {	
@@ -155,12 +175,26 @@ body {
 	padding-top: 10px;
 	white-space: nowrap;
 	overflow-x: auto;
+	padding-bottom: 110px;
 }
 #content-header {
+	display: inline-block;
 	text-align: left;
 	padding-left: 20px;
 	font-size: 12;
-	font-weight: bold;
+	
+}
+
+h2{
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	font-weight: bold:  
+}
+
+p {
+	padding-top: 10px;
+	padding-bottom: 5px;
 }
 #content-data{
 	margin-bottom: 20px;
@@ -174,10 +208,18 @@ body {
 }
 
 #footer {
-	background: #0089CF;
-	height: 80px;
+	
+	background: #056292;
+	padding: 10px;
+
 	width: 100%;   
     top: 100%;    	
+    position: absolute;
+    margin-top: -110px;       
+}
+
+#footer a{
+	display: inline;
 }
 
 table {
@@ -223,18 +265,21 @@ tr[checked] {
 .links-container {
 	margin-top: 15px;
 	margin-bottom: 15px;
+	display: inline-block;
+	padding-left: 20px; 
 }
 
 .link {
 	background: #0089cf;
 	float: left;	
 	margin-right: 15px;
+
 }
 
 .link a {
 	text-decoration: none;
 	color: #fff;
-	padding: 10px;
+	padding: 10px;	
 	display: block;
 }
 
@@ -247,12 +292,52 @@ tr[checked] {
 	background: #056292;
 	color: white;
 }
+.btn-link a{
+	text-decoration: none;
+	color: white;
+}
+
+.status-problem-create{
+	background: #e65151;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.status-problem-create:hover {
+	background: #e67171;
+	color: white;
+}
+
+.status-problem-doing{
+	background: #69b175;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.status-problem-doing:hover {
+	background: #80d48e;
+	color: white;
+}
+.status-problem-done{
+	background: #7d7d7d;
+    padding: 2px;
+    border-radius: 5px;
+    
+}
+
+.status-problem-done:hover {
+	background: #e8e587;
+	
+}
+.maket{
+	display: block;
+}
 
 #col_1 {
 	text-align: left;
 }
 
-#col_notes {
+#col_notes, .col-left-align{
 	text-align: left;
 }
 
@@ -273,6 +358,12 @@ tr[checked] {
 	background-color: red;
 	color: white;
 	border-color: black;
+}
+
+.td-name-problems, .td-name-problems{
+	
+    max-width: 300px;
+    word-wrap: break-word;
 }
 
 .gif {
@@ -309,18 +400,14 @@ tr[checked] {
 	margin-right: 20px;
 	height: 24px;
 }
-p {
-	padding-top: 10px;
-	padding-bottom: 5px;
-}
 
-
-.problem{
-	width: 100%;
-}
 .problem td{
 	height: 30px;
+	overflow: hidden;
 
+}
+.problem select{
+	width: 74px;
 }
 .fst-col{
 	width: 30px;
@@ -328,4 +415,112 @@ p {
 
 .col-notes-edit{
 	padding: 5px;
+}
+#date-problems{
+	height: 20px;
+}
+
+.input-panel{
+	width: 500px;
+	background: #f3dd9f;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+}
+.input-panel input, #date-problems{
+	height: 26px;
+	width: 300px;
+}
+
+.input-panel p{
+	padding-left: 20px;	
+}
+
+.select-list{
+	padding-left: 20px;
+}
+.select-list p{
+	padding-left: 0; 
+}
+.select-list select{
+	height: 26px;
+	width: 300px; 
+}
+
+#machine-list-problems{
+	height: 26px;
+	width: 300px;
+}
+
+}
+input + span {
+  padding-right: 30px;
+}
+
+input:invalid+span:after {
+  position: absolute; content: '✖';
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  position: absolute;
+  content: '✓';
+  padding-left: 5px;
+}
+
+#inputs{
+	display: block;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+}
+#inputs textarea{
+	width: 446px;
+    height: 38px;
+}
+
+.wrapper-content{
+	background: grey;
+	display: block;
+}
+
+.machine-content {
+	display: inline-block;
+}	
+
+#sidebar-search{
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+.problem-textarea{
+	width: 263px;
+	height: 40px;
+}
+
+.modal-background {
+	display: none;
+		background: black;
+		opacity: 0.4;
+		position: absolute;
+		width: 100%;
+		height: 100%;		
+		top: 0;
+		left: 0;		
+	}
+
+.modal-content {
+		width: 300px;
+		height: 300px;
+		color: black;
+		text-align: center;
+		line-height: 300px;
+		background: yellow;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -150px;
+		margin-left: -150px;
+	}
+.modal-head{
+	float: left;
 }

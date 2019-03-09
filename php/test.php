@@ -1,5 +1,6 @@
 <?php
-	include_once("getdata.php");
+	include_once("component.php");
+	include_once("utils.php");
 
-	echo json_encode(Array("error" => "", "data" =>utf8_encode(getContent(1))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);	
+	echo getSelectList(1);
 ?>
