@@ -257,7 +257,7 @@ tr[checked] {
 }
 
 .row-changed {
-	background-color: red !important; 
+	background-color: #e8e587 !important; 
 }
 
 .add-record {

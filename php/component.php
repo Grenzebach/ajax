@@ -432,7 +432,8 @@ function getStatusList(){
     $result = mysqli_query($link, $query);
     $resultOut = "";
     while ($row = mysqli_fetch_array($result)) {
-        $resultOut .= "<p><input type=\"radio\" name=\"status\" value=" . $row['id_status'] . ">" . $row['name_status'] . "</p>" ;
+        $resultOut .= "<p><input type=\"radio\" name=\"status\" id='radio" . $row['id_status'] . "' value=" . $row['id_status'] . ">
+        <label for='radio" . $row['id_status'] ."' >" . $row['name_status'] . "</label></p>" ;
     }
     mysqli_close($link);    
 
