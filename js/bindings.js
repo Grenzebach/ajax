@@ -92,19 +92,36 @@ $(document).ready(function () {
 
 //  Нажатие на кнопку для изменения статуса проблемы. Кнопка преобразуется в селект
     $(document).on("click", ".btn-link", function(){
-        //$(".status-problem").removeAttr("id","selected-btn");
-        //$(".status-problem").removeAttr("value","selected");
-        //$(this).closest("td").attr("id", "selected-btn");  //Добавление id div с нажатой кнопке
-        $(".status-problem[value='selected']").removeAttr("value");
-        $(this).closest("td").attr("value", "selected");
-        console.log("click");
+        var curRow = $(this).parent().closest("tr").attr("value");
+        // showModal("Тестовое окно", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", function() {            
+        //     closeModal(function() {
+        //         alert("Окно закрыто по ОК");
+        //     });
+        // })
+        
         $.ajax({
-            url: "php/controller.php",
-            method: "POST",
-            data: {"action": "btn-to-select"},
-            success: function(response){
-                //$("#selected-btn").html(response);
-                $(".status-problem[value='selected']").html(response);                            
+            url: "php/component-controller.php",
+            method: "GET",
+            data: {"name": "statusList"},
+            success: function(response) {
+                showModal("Изменение статуса", response, function(content) {
+                    var statusId = $("[name='status']:checked").val();
+                    $.ajax({
+                        url: "php/controller.php",
+                        method: "POST",
+                        data: {"action": "select-to-btn", "sel-value": statusId, "cur-row": curRow},
+                        success: function(response) {
+                            $("tr[value='" + curRow + "'] .status-problem").html(response);
+                            
+                            closeModal(function () {
+                                $("tr[value='" + curRow + "']").addClass("row-changed");
+                                setTimeout(function() {
+                                    $("tr[value='" + curRow + "']").removeClass("row-changed");
+                                }, 500);
+                            });                        
+                        }
+                    });
+                });
             }
         });
     });
@@ -149,4 +166,5 @@ function getCheckedInputs() {
     
     return ids;
 }
+
 

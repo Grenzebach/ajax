@@ -4,10 +4,15 @@
 	<title>Система ТОиР ЗАО "Муром"</title>
 	<link rel="shortcut icon" href="img/icons8-maintenance-16.png" type="image/png">
 	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/modal.css">
+	<link rel="stylesheet" href="css/table.css">	
 	<link rel="stylesheet" href="css/print.css">
+
+
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/defaults.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/modal.js"></script>
 	<script type="text/javascript" src="js/controller.js"></script>
 	<script type="text/javascript" src="js/bindings.js"></script>
 	<script type="text/javascript" src="js/pager.js"></script>	
@@ -42,26 +47,27 @@
 </div>
 
 
-<!--div class="modal-background">
+<div class="modal-background">
 </div>
 
 <div class="modal-content">
 	<div class="modal-head">
 		<div class="modal-title">Изменение статуса</div>
-		<div class="modal-close">Закрыть</div>
+		<div class="modal-close"></div>
 	</div>
 	<div class="modal-form">
-		<input type="radio" name="created">Создана <br>
-		<input type="radio" name="doing">В работе <br>
-		<input type="radio" name="done">Выполнена
 	</div>
 
-	<div class="modal-footer">
-		<div id="modal-ok" class="modal-button">ОК</div>
-		<div id="modal-cancel" class="modal-button">Отмена</div>
+	<div class="modal-footer links-container">
+		<div id="modal-ok" class="modal-button link modal-ok">
+			<a href="javascript: void(0);">ОК</a>
+		</div>
+		<div id="modal-cancel" class="modal-button link modal-cancel">
+			<a href="javascript: void(0);">ОТМЕНА</a>
+		</div>
 		
 	</div>
-</div-->
+</div>
 	
 	
 	
