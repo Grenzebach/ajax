@@ -1,4 +1,6 @@
 <?php 
+include_once("utils.php");
+
 function getDefaultMachineId() {
     labelCode("component.php", "getDefaultMachineId");
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
@@ -422,21 +424,20 @@ function wrapElements($class, $targetContent){
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
 
-function selectOfStatusProblem(){
+
+function getStatusList(){
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
     $query = "SELECT * FROM `status` WHERE enable_status=true";
     $result = mysqli_query($link, $query);
-    
-    $resultOut = "<select class=\"select-status-problem\">";
+    $resultOut = "";
     while ($row = mysqli_fetch_array($result)) {
-        $resultOut .= "<option value=" . $row['id_status'] . ">" . $row['name_status'] . "</option>";
+        $resultOut .= "<p><input type=\"radio\" name=\"status\" value=" . $row['id_status'] . ">" . $row['name_status'] . "</p>" ;
     }
-    mysqli_close($link);
-
-    $resultOut .= "</select>";
+    mysqli_close($link);    
 
     return $resultOut;
+
 }
 
 function getBtnProblem($selValue, $curRow){

@@ -56,13 +56,10 @@
 		<div class="modal-close"></div>
 	</div>
 	<div class="modal-form">
-		<input type="radio" name="status" value="created">Создана <br>
-		<input type="radio" name="status" value="doing">В работе <br>
-		<input type="radio" name="status" value="done">Выполнена
 	</div>
 
 	<div class="modal-footer links-container">
-		<div id="modal-ok" class="modal-button link">
+		<div id="modal-ok" class="modal-button link modal-ok">
 			<a href="javascript: void(0);">ОК</a>
 		</div>
 		<div id="modal-cancel" class="modal-button link modal-cancel">

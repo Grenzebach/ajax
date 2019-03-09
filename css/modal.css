@@ -19,7 +19,7 @@
 		top: 50%;
 		left: 50%;
 		margin-top: -150px;
-		margin-left: -150px;
+		margin-left: -300px;
 	}
 .modal-head{
 	height: 30px;
@@ -50,4 +50,5 @@
 .modal-form {
 	text-align: left;
 	line-height: 20px;
+	padding: 10px;
 }

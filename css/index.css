@@ -256,6 +256,10 @@ tr[checked] {
 	background-color: #fff8b0;
 }
 
+.row-changed {
+	background-color: red !important; 
+}
+
 .add-record {
 	font-weight: bold;
 	padding-top: 10;
@@ -364,7 +368,8 @@ tr[checked] {
 .td-name-problems, .td-name-problems{
 	
     max-width: 300px;
-    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
 }
 
 .gif {
