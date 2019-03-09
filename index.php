@@ -40,6 +40,28 @@
 		<a href="http://localhost:8080/phpmyadmin/">phpmyadmin HOME</a>
     </div>
 </div>
+
+
+<!--div class="modal-background">
+</div>
+
+<div class="modal-content">
+	<div class="modal-head">
+		<div class="modal-title">Изменение статуса</div>
+		<div class="modal-close">Закрыть</div>
+	</div>
+	<div class="modal-form">
+		<input type="radio" name="created">Создана <br>
+		<input type="radio" name="doing">В работе <br>
+		<input type="radio" name="done">Выполнена
+	</div>
+
+	<div class="modal-footer">
+		<div id="modal-ok" class="modal-button">ОК</div>
+		<div id="modal-cancel" class="modal-button">Отмена</div>
+		
+	</div>
+</div-->
 	
 	
 	

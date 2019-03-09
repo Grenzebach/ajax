@@ -11,6 +11,13 @@ function getPage(page) {
             $("#content").html(response);
 
             setActiveLink(page);
+
+            // var callback = getCallbacks()[page["name"]];
+            // if (callback == undefined) {
+            // 	getCallbacks()["default"].call(this, page);
+            // } else {
+            // 	callback.call(this, page);
+            // }              
         } 
     });    
 }
@@ -24,4 +31,15 @@ function setActiveLink(page) {
 	}
 
 	$("a[href='#" + pageName + "=" + page["id"] + "']").addClass("active");	
+}
+
+function getCallbacks() {
+	return {
+		"problems": function(page) {		
+	        	
+		},
+		"default" : function(page) {
+
+		}
+	}
 }

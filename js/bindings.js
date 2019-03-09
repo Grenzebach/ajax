@@ -95,6 +95,7 @@ $(document).ready(function () {
         //$(".status-problem").removeAttr("id","selected-btn");
         //$(".status-problem").removeAttr("value","selected");
         //$(this).closest("td").attr("id", "selected-btn");  //Добавление id div с нажатой кнопке
+        $(".status-problem[value='selected']").removeAttr("value");
         $(this).closest("td").attr("value", "selected");
         console.log("click");
         $.ajax({
@@ -103,9 +104,7 @@ $(document).ready(function () {
             data: {"action": "btn-to-select"},
             success: function(response){
                 //$("#selected-btn").html(response);
-                $(".status-problem [value='selected']").html(response);
-                console.log($(".status-problem [value='selected']").hide());
-                            
+                $(".status-problem[value='selected']").html(response);                            
             }
         });
     });
@@ -121,7 +120,9 @@ $(document).ready(function () {
             method: "POST",
             data: {"action": "select-to-btn", "sel-value": selValue, "cur-row": curRow},
             success: function(response){
-                $("#selected-btn").html(response);
+                //$("#selected-btn").html(response);
+                $(".status-problem[value='selected']").html(response)
+                .removeAttr("value"); 
 
             
             }

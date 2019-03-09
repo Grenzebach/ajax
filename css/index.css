@@ -484,19 +484,9 @@ input:valid+span:after {
 }
 
 .machine-content {
-	
+	display: inline-block;
+}	
 
-.bottom {
-    width: 998px;
-    height: 51px;
-    background-color: #124217;
-    margin: 0 auto;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: -51px;
-    margin-left: -499px;
-}
 #sidebar-search{
 	padding-left: 10px;
 	margin-left: 10px;
@@ -505,4 +495,32 @@ input:valid+span:after {
 .problem-textarea{
 	width: 263px;
 	height: 40px;
+}
+
+.modal-background {
+	display: none;
+		background: black;
+		opacity: 0.4;
+		position: absolute;
+		width: 100%;
+		height: 100%;		
+		top: 0;
+		left: 0;		
+	}
+
+.modal-content {
+		width: 300px;
+		height: 300px;
+		color: black;
+		text-align: center;
+		line-height: 300px;
+		background: yellow;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -150px;
+		margin-left: -150px;
+	}
+.modal-head{
+	float: left;
 }
