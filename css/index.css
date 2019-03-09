@@ -542,3 +542,7 @@ input:valid+span:after {
 td {
 	word-break: break-all;	
 }
+
+.dataTables_filter{
+	padding-bottom: 10px;
+}

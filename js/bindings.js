@@ -44,7 +44,7 @@ $(document).ready(function () {
         var dateProblem = $("#date-problems").val();
         var noteProblem = $("#notes-problems").val();
         addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
-        console.log(selIdMachine);
+        console.log("addProblem("+selIdMachine, nameProblem, dateProblem, noteProblem+")");
 
 
     });
@@ -110,7 +110,7 @@ $(document).ready(function () {
         });
     });
     $(document).on("change mouseleave", ".select-status-problem", function(){
-        //$(this).hide();
+        
         console.log($(this).parent().closest("tr").attr("value"));
         
         var selValue = $(this).val();

@@ -20,7 +20,7 @@ function addProblem(selIdMachine, nameProblem, dateProblem, noteProblem){
         method: "POST",
         data: {"action": "add-problem", "selIdMachine":selIdMachine, "nameProblem": nameProblem, "dateProblem": dateProblem, "noteProblem": noteProblem, "pageId": page["id"]},
         success: function(response) {
-            $(".maket").html(response);        
+            $(".data-table-problems").html(response);   //.maket     
         }
     });
 }
