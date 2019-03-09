@@ -35,9 +35,13 @@ function setActiveLink(page) {
 function getCallbacks() {
 	return {
 		"problems": function(page) {		
-	        $('#data-table').DataTable({
-	        	"jQueryUI" : true,
-		        language: {
+	        $('#data-table').DataTable({	        	
+	         	"columnDefs": [
+    		 		{ "width": "40%", "targets": 2},
+    		 		{ "width": "8%", "targets": 3 },    		 		
+    		 		{ "width": "30%", "targets": 4 }    		 		
+  				 ],				
+		        "language": {
         			url: 'localisation/ru_RU.json'},
 		        "processing": true,
 		        "serverSide": true,

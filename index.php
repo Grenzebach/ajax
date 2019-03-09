@@ -5,17 +5,25 @@
 	<link rel="shortcut icon" href="img/icons8-maintenance-16.png" type="image/png">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/print.css">
+
+	<link rel="stylesheet" type="text/css" href="css/themes/base/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="css/DataTables-1.10.18/css/dataTables.jqueryui.min.css"/>	
+
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<!--script type="text/javascript" src="js/jquery-ui.min.js"></script-->
+	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/dataTables.jqueryui.min.js"></script>
+
 	<script type="text/javascript" src="js/defaults.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/controller.js"></script>
 	<script type="text/javascript" src="js/bindings.js"></script>
 	<script type="text/javascript" src="js/pager.js"></script>	
 
-	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/themes/base/jquery-ui.min.css"/>
+	<!--link rel="stylesheet" type="text/css" href="css/datatables.min.css"/-->
 
-	<script type="text/javascript" src="js/datatables.min.js"></script>
+
+	<!--script type="text/javascript" src="js/datatables.min.js"></script-->
 
 </head>
 <body>
@@ -43,10 +51,13 @@
 
 
     <div id="clear"></div>
-    <div id="footer"><a href="http://localhost/phpmyadmin/">phpmyadmin</a>
-		<p><a href="http://sublimetext.ru/documentation/hotkeys/windows">Горячие клавиши</a></p>
-		<p><a href="http://localhost/ajax/pages/plan.php/">План</a></p>
-		<a href="http://localhost:8080/phpmyadmin/">phpmyadmin HOME</a>
+    <div id="footer">
+    	<div class="footer-container">
+	    	<a href="http://localhost/phpmyadmin/">phpmyadmin</a>
+			<p><a href="http://sublimetext.ru/documentation/hotkeys/windows">Горячие клавиши</a></p>
+			<p><a href="http://localhost/ajax/pages/plan.php/">План</a></p>
+			<a href="http://localhost:8080/phpmyadmin/">phpmyadmin HOME</a>
+		</div>
     </div>
 </div>
 	

@@ -76,8 +76,7 @@ body {
 #navigation {	
 	background: #056292;
 	width: 100%;
-	height: 40px;
-	padding-left: 220px;
+	height: 40px;	
 }
 
 .nav-item {
@@ -106,6 +105,7 @@ body {
 	padding-left: 20px;
 	padding-right: 20px; 
 	padding-top: 10px;
+	margin-left: 220px;
 }
 
 .nav-menu li a {	
@@ -208,9 +208,7 @@ p {
 }
 
 #footer {
-	
-	background: #056292;
-	padding: 10px;
+	background: #056292;	
 
 	width: 100%;   
     top: 100%;    	
@@ -220,6 +218,10 @@ p {
 
 #footer a{
 	display: inline;
+}
+
+.footer-container {
+	margin: 10px;
 }
 
 /*table {
@@ -508,6 +510,7 @@ input:valid+span:after {
 	height: 40px;
 }
 
+/*
 #data-table{
 	border-collapse: collapse;	
 	border: 2px solid;
@@ -533,4 +536,9 @@ input:valid+span:after {
 	text-align: center;
   	border: 1px solid;
   	padding: 5px 8px;
+}
+*/
+
+td {
+	word-break: break-all;	
 }

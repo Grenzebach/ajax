@@ -268,7 +268,7 @@ function getDataTable() {
                 <th>Дата</th>
                 <th>Примечания</th>
                 <th>Состояние</th>
-                <th>Ответственный</th>
+                <th>Ответственный</th>                
             </tr>
         </thead>
     </table>";
