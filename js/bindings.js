@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#save-link", function() {
         if (getCheckedInputs().length == 0) {
-            alert("Нужно выбрать");
+            alert("Нужно выбрать запись");
             return;
         }
         var page = getCurrentPage(location.hash);
@@ -45,7 +45,28 @@ $(document).ready(function () {
         var noteProblem = $("#notes-problems").val();
         addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
         console.log(selIdMachine);
+    });
 
+    $(document).on("click", "#delete-problem-link", function(){
+        console.log("delete-link pressed");
+        if (getCheckedInputs().length == 0) {
+            alert("Нужно выбрать запись");
+            return;
+        }
+        var page = getCurrentPage(location.hash);
+        $.ajax({
+            url: "php/controller.php",
+            method: "POST",
+            data: {"action": "delete", "items": getCheckedInputs(), "pageName": page["name"], "pageId": page["id"]},
+            success: function(response) {
+                
+                $(".maket").html(response);
+                setTimeout(function() {
+                    alert("Записи удалены");
+                }, 100);
+                
+            } 
+        });
 
     });
 

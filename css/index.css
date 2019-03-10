@@ -381,7 +381,7 @@ tr[checked] {
 	width: 300px;
 	max-width: 300px;
 	white-space: normal;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .gif {

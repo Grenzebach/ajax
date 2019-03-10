@@ -266,7 +266,7 @@ function getProblemsPanel($id) {
         <h2>Журнал еженедельного осмотра оборудования:</h2>
             <div class=\"table-component\">
                 <div class=\"buttons-container table-controls\">
-                    <div id=\"delete-problem\" class=\"delete-button link \">    
+                    <div id=\"delete-problem-link\" class=\"delete-button link \">    
                         <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
                     </div>
                 </div>";
