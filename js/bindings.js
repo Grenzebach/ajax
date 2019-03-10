@@ -117,7 +117,7 @@ $(document).ready(function () {
                                 $("tr[value='" + curRow + "']").addClass("row-changed");
                                 setTimeout(function() {
                                     $("tr[value='" + curRow + "']").removeClass("row-changed");
-                                }, 500);
+                                }, 1000);                                                        // Подсветка измененной строки
                             });                        
                         }
                     });
@@ -156,7 +156,53 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".table-component .pager-button a", function() {
+        var parent = $(this).parent().closest(".pager-button");
+        if (parent.hasClass("active")) {
+            return;
+        }
+        var nextPage = $(this).attr("value");
+        var currentPage = $(this).parent().closest(".table-component").find(".pager-button.active a").attr("value");
+        if (nextPage == "first" || nextPage == "prev") {
+            if (currentPage <= 1) {
+                return
+            }
+        }        
+        if (nextPage == "first") {
+            nextPage = 1;
+        } else if (nextPage == "prev") {
+            nextPage = currentPage - 1;            
+        }
+        var totalPages = $(this).parent().closest(".pagination").find(".pager-button").length - 4;
+        if (nextPage == "next" || nextPage == "last") {
+            if (currentPage >= totalPages) {
+                return;
+            }
+        }
+        if (nextPage == "next") {
+            nextPage = parseInt(currentPage) + 1;
+        } else if (nextPage == "last") {
+            nextPage = totalPages;
+        }
+        getProblemsTablePage(this, nextPage)
+    });
 });
+
+function getProblemsTablePage(_self, page, currentPage) {
+    var parentComponent = $(_self).parent().closest(".table-component");
+    var currentPage = parentComponent.find(".pager-button.active a").attr("value");
+    parentComponent.find(".pager-button.active").removeClass("active");
+    var sitePage = getCurrentPage(location.hash);                        
+    $.ajax({
+        url: "php/component-controller.php",
+        method: "GET",
+        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage},
+        success: function(response){
+            parentComponent.find(".table-content").html(response);
+            parentComponent.find(".pager-button a[value='" + page + "']").parent().closest(".pager-button").addClass("active");
+        }
+    });    
+}
 
 function getCheckedInputs() {
     var ids = [];

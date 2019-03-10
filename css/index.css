@@ -257,7 +257,7 @@ tr[checked] {
 }
 
 .row-changed {
-	background-color: #e8e587 !important; 
+	background-color: #fff8b0 !important; 
 }
 
 .add-record {
@@ -331,7 +331,7 @@ tr[checked] {
 }
 
 .status-problem-done:hover {
-	background: #e8e587;
+	background: #f9e9ab;
 	
 }
 .maket{
@@ -365,10 +365,22 @@ tr[checked] {
 	border-color: black;
 }
 
-.td-name-problems, .td-name-problems{
-	
+.td-name-problems{
+	width: 300px;
     max-width: 300px;
     white-space: normal;
+    word-break: break-all;
+}
+
+.td-name-machines{
+	width: 200px;
+	max-width: 200px;
+}
+
+.td-notes-problems{
+	width: 300px;
+	max-width: 300px;
+	white-space: normal;
     word-break: break-all;
 }
 
@@ -458,21 +470,7 @@ tr[checked] {
 	width: 300px;
 }
 
-}
-input + span {
-  padding-right: 30px;
-}
 
-input:invalid+span:after {
-  position: absolute; content: '✖';
-  padding-left: 5px;
-}
-
-input:valid+span:after {
-  position: absolute;
-  content: '✓';
-  padding-left: 5px;
-}
 
 #inputs{
 	display: block;
@@ -503,3 +501,8 @@ input:valid+span:after {
 	height: 40px;
 }
 
+.buttons-container{
+	padding: 10px 0px 0px 20px;
+	height: 30px;
+
+}
