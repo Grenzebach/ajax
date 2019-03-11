@@ -149,7 +149,7 @@ function getPlanHeader($id) {
     
     return 
         "<p id='content-header'>" .
-            "<a class ='nav onepage-link' href='#machine=$id'>$header</a> -> План на обслуживание" .
+            "<a class ='nav onepage-link' href='#machine=$id'>$header" . " / " . "</a><span class=\"plan-header\">План на обслуживание</span>" .
         "</p>";
 }
 
@@ -253,7 +253,7 @@ function getActionsLinks($id) {
                 <a id=\"mkplan-link\" class=\"onepage-link\" title=\"Сформировать план на предстоящий четверг\" href=\"#plan=$id\">СФОРМИРОВАТЬ ПЛАН</a>        
             </div>
             <div class=\"link\">
-                <a id=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
+                <a class=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
             </div>  
             <div class=\"clear\"></div>
         </div>";    
@@ -261,14 +261,12 @@ function getActionsLinks($id) {
 
 function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
-    $rowsPerPage = 5;
+    $rowsPerPage = 10;
     $block = "<div class=\"maket\">
-        <h2>Журнал еженедельного осмотра оборудования:</h2>
+        <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
             <div class=\"table-component\">
                 <div class=\"buttons-container table-controls\">
-                    <div id=\"delete-problem-link\" class=\"delete-button link \">    
-                        <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
-                    </div>
+                    
                 </div>";
 
     $block .= getPagination($rowsPerPage, getProblemsCount($id));
@@ -305,7 +303,7 @@ function getProblemsCount($id) {
 }
 
 function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 5;
+    $rowsPerPage = 10;
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -334,7 +332,6 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
                         <th>Состояние</th>
                         <th>Ответственный</th>
                     </tr>";
-
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
         
@@ -502,7 +499,6 @@ function wrapElements($class, $targetContent){
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
 
-
 function getStatusList(){
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
@@ -513,10 +509,8 @@ function getStatusList(){
         $resultOut .= "<p><input type=\"radio\" name=\"status\" id='radio" . $row['id_status'] . "' value=" . $row['id_status'] . ">
         <label for='radio" . $row['id_status'] ."' >" . $row['name_status'] . "</label></p>" ;
     }
-    mysqli_close($link);    
-
+    mysqli_close($link);  
     return $resultOut;
-
 }
 
 function getBtnProblem($selValue, $curRow){
@@ -539,10 +533,85 @@ function getBtnProblem($selValue, $curRow){
 
     $resultOut = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
 
-    return $resultOut;
-
-
-        
+    return $resultOut;        
     }
 
+    function downButtons(){
+        $block = 
+        "<div class=\"down-buttons-problems\">
+            <div id=\"delete-problem-link\" class=\"delete-button link \">    
+                        <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
+                    </div>
+            <div class=\"link\">
+                <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
+            </div>
+            <div class=\"link\" hidden=\"true\">
+                <a class=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
+            </div>
+        </div>";
+        //
+        return $block;
+    }
+
+//Список нерешенных проблем
+    function getProblemPlanTable(){     
+        $link = mysqli_connect("localhost", "root", "mysql", "desk");
+        mysqli_set_charset($link, "utf8"); 
+        $query = "SELECT 
+                    p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
+                    m.id_machines, m.name_machines, m.respons_machines,
+                    u.id_user, u.name_user
+                FROM problems p, machines m, users u 
+                WHERE m.id_machines=p.id_machine 
+                AND m.respons_machines=u.id_user
+                AND status_problems NOT LIKE 4";
+         
+        $result = mysqli_query($link, $query);
+
+    $block = "<p class=\"problems-plan-header\"><a class ='nav onepage-link' href='#problems=default'>ЖУРНАЛ / </a> 
+            <span class=\"plan-header\">СПИСОК АКТУАЛЬНЫХ ПРОБЛЕМ НА ОБОРУДОВАНИИ</span></p>
+                <table class=\"problem-plan\">
+                    <tr><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
+                        <th>№</th>
+                        <th>Оборудование</th>
+                        <th>Проблема</th>
+                        <th>Дата</th>
+                        <th>Примечания</th>
+                        <th>Состояние</th>
+                        <th>Ответственный</th>
+                    </tr>";
+    $i = 0;
+    while ($row = mysqli_fetch_array($result)) {
+        
+        $i++;               //Счетчик для нумерации строк в таблице
+        $statusProblems = $row['status_problems'];
+        if ($statusProblems == "1"){
+            $statusString = "Создана";
+            $statusClass = "status-problem-create";
+        } elseif ($statusProblems == "2"){
+            $statusString = "В работе";
+            $statusClass = "status-problem-doing";
+        } elseif ($statusProblems == "4") {
+            $statusString = "Выполнена";
+            $statusClass = "status-problem-done";
+        }
+
+        $status = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
+        $block .= 
+        "<tr value=" . $row['id_problems'] . ">
+            <td class=\"fst-col\"><input type=\"checkbox\" value=" . $row['id_problems'] . "></td>
+            <td class = \"num\">" . $i . "</td>
+            <td class = \"td-name-machines col-left-align\">" . $row['name_machines'] . "</td>
+            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
+            <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
+            <td class = \"status-problem\">" . $status . "</td>
+            <td class = \"td-name-user col-left-align\">" . $row['name_user'] . "</td>
+        </tr>"; 
+    }
+    mysqli_close($link);
+    $block .= "</table>";
+    return $block;
+
+    }
 ?>

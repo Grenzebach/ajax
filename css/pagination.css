@@ -10,8 +10,9 @@
 .pager-button a {
 	text-decoration: none;
 	color: #fff;
-	padding: 10px;	
+	padding: 8px;	
 	display: block;
+	text-align: center;
 }
 
 .pager-button:hover {
@@ -32,4 +33,7 @@
 .table-controls {
 	float: left;
 	padding-top: 0;
+}
+.table-component{
+	padding-top: 10px;
 }

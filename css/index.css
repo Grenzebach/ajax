@@ -29,6 +29,10 @@ html, body {
     height: 100%;
 }
 
+[hidden] { 
+	display: none; 
+}
+
 #header {
 	background: #056292;
 	height: 110px;
@@ -176,12 +180,30 @@ body {
 	overflow-x: auto;
 	padding-bottom: 110px;
 }
+.nav {
+	text-decoration: none;
+	color: black;
+}
+
+.nav:hover {
+	font-weight: bold;
+	
+}
+
+.plan-header {
+	font-weight: bold;
+}
+
 #content-header {
 	display: inline-block;
 	text-align: left;
 	padding-left: 20px;
 	font-size: 12;
-	
+}
+
+.problems-plan-header{
+	padding-left: 20px;
+	width: 100%;
 }
 
 h2{
@@ -283,13 +305,23 @@ tr[checked] {
 .link a {
 	text-decoration: none;
 	color: #fff;
-	padding: 10px;	
+	padding: 8px;	
 	display: block;
+	text-align: center;
 }
 
 .link:hover {
 	background: #056292;
 	color: white;
+}
+
+.page-link {
+	text-decoration: none;
+	color: black;
+}
+.page-link:hover {
+	color: #056292;
+	font-weight: bold;
 }
 
 #add-link:hover {
@@ -335,6 +367,13 @@ tr[checked] {
 }
 .maket{
 	display: block;
+}
+
+.down-buttons-problems{
+	padding: 10px;
+	padding-left: 20px;
+	
+	height: 30px;
 }
 
 #col_1 {
