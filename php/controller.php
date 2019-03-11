@@ -33,7 +33,7 @@
 		echo getBtnProblem($_POST["sel-value"], $_POST["cur-row"]);
 	}else if (isParamEquals($_POST, "action", "problems-plan")){		//Нерешенные проблемы
 			logger("problems-plan controller.php");
-			getProblemPlanTable();
+			echo getProblemPlanTable();
 	}		
 
 	function getComponentByName($name) {

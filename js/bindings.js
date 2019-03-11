@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 
 //Печатать страницу    
-    $(document).on("click", "#print-link", function() {             
+    $(document).on("click", ".print-link", function() {             
         window.print();                 
         console.log("print");        
     });
@@ -56,7 +56,7 @@ $(document).ready(function () {
             alert("Нужно выбрать запись");
             return;
         }
-        console.log(getCheckedInputsProblems);
+        
         var page = getCurrentPage(location.hash);
         $.ajax({
             url: "php/controller.php",
@@ -81,6 +81,10 @@ $(document).ready(function () {
             data: {"action": "problems-plan"},
             success: function(response) {                
                 $(".maket").html(response);
+                window.print();
+                $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
+
+                //$("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
                 console.log("problems plan");
             }
         });
