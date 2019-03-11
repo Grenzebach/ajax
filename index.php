@@ -5,6 +5,7 @@
 	<link rel="shortcut icon" href="img/icons8-maintenance-16.png" type="image/png">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/modal.css">
+	<link rel="stylesheet" href="css/pagination.css">
 	<link rel="stylesheet" href="css/table.css">	
 	<link rel="stylesheet" href="css/print.css">
 
@@ -34,7 +35,6 @@
     		<li class="nav-item" id="parts"><a class="onepage-link" href="#parts=default">нов.</a></li>
     	</ul>
     	
-
     </div>   
     <div id="content">
     </div>
@@ -52,7 +52,7 @@
 
 <div class="modal-content">
 	<div class="modal-head">
-		<div class="modal-title">Изменение статуса</div>
+		<div class="modal-title">Заголовок модального окна</div>
 		<div class="modal-close"></div>
 	</div>
 	<div class="modal-form">
