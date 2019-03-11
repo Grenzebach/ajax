@@ -58,7 +58,7 @@ $(document).ready(function () {
         $.ajax({
             url: "php/controller.php",
             method: "POST",
-            data: {"action": "delete", "items": getCheckedInputsProblems(), "pageName": page["name"], "pageId": page["id"]},
+            data: {"action": "delete", "items": getCheckedInputs(), "pageName": page["name"], "pageId": page["id"]},
             success: function(response) {
                 
                 $(".maket").html(response);

@@ -247,7 +247,7 @@ function getActionsLinks($id) {
     return 
         "<div class=\"links-container\">
             <div class=\"link\">
-                <a id=\"save-link\" title=\"Применить изменения\" href=\"javascript: void(0);\">ПРИМЕНИТЬ</a>       
+                <a id=\"save-link\" title=\"Обновить выделенные строки\" href=\"javascript: void(0);\">ОБНОВИТЬ</a>       
             </div>
             <div class=\"link\">
                 <a id=\"mkplan-link\" class=\"onepage-link\" title=\"Сформировать план на предстоящий четверг\" href=\"#plan=$id\">СФОРМИРОВАТЬ ПЛАН</a>        
