@@ -261,7 +261,7 @@ function getActionsLinks($id) {
 
 function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
-    $rowsPerPage = 5;
+    $rowsPerPage = 10;
     $block = "<div class=\"maket\">
         <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
             <div class=\"table-component\">
@@ -303,7 +303,7 @@ function getProblemsCount($id) {
 }
 
 function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 5;
+    $rowsPerPage = 10;
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -545,7 +545,7 @@ function getBtnProblem($selValue, $curRow){
             <div class=\"link\">
                 <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
             </div>
-            <div class=\"link\"  hidden=\"true\">
+            <div class=\"link\" hidden=\"true\">
                 <a class=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
             </div>
         </div>";
