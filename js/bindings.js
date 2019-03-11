@@ -229,7 +229,7 @@ function getProblemsTablePage(_self, page, currentPage) {
 function getCheckedInputs() {
     var ids = [];
     $("input:checked").each(function() {
-        ids.push($(this).parent().closest("tr").attr("machine"));
+        ids.push($(this).parent().closest("tr").attr("value"));
     });
     
     return ids;

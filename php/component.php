@@ -84,7 +84,7 @@ function getMachineTable($id) {
         }
 
         $date_control_rev = date("d-m-Y", strtotime($row['date_control']));
-        $table .=  "<tr id = row". $row['id_units'] . " machine='" . $row["id_units"] . "'>
+        $table .=  "<tr id = row". $row['id_units'] . " value='" . $row["id_units"] . "'>
         <td><input type='checkbox' name='a' value='10'></td>
         <td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td>
         <td>".$row['info_units']."</td>
