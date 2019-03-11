@@ -2,23 +2,28 @@
 	include_once("utils.php");
 	include_once("component.php");
 
-	if (isParamEquals($_POST, "action", "save")) {									//Обновление дат в таблице ТО по станкам
+//Обновление дат в таблице ТО по станкам
+	if (isParamEquals($_POST, "action", "save")) {									
 		applyChanges($_POST["items"]);
 
 		echo getComponentByName($_POST["pageName"]);	
-	} else if (isParamEquals($_POST, "action", "add")) {							//Добавление записи в таблицу ТО
+	} else if (isParamEquals($_POST, "action", "add")) {							
+//Добавление записи в таблицу ТО
 		addRecord($_POST['sel'], $_POST['date_control'], $_POST['input_notes']);
 		
 		echo getComponentByName($_POST["pageName"]);
-	} else if (isParamEquals($_POST, "action", "add-problem")) {					//Добавление записи в таблицу проблем
+	} else if (isParamEquals($_POST, "action", "add-problem")) {					
+//Добавление записи в таблицу проблем
 		addProblem($_POST['selIdMachine'], $_POST['nameProblem'], $_POST['dateProblem'], $_POST['noteProblem']);
 		
 		echo getProblemsPanel($_POST["pageId"]);
-	} else if (isParamEquals($_POST, "action", "delete")) { 						//Удаление записи в таблице проблем
+	} else if (isParamEquals($_POST, "action", "delete")) { 						
+//Удаление записи в таблице проблем
 		deleteProblem($_POST["items"]);
 
 		echo getProblemsPanel($_POST["pageId"]);
-	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {		//Вывод списка оборудования в выпадающий список на странице проблем
+	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {		
+//Вывод списка оборудования в выпадающий список на странице проблем
 		echo getSelectMachineList($_POST["userId"]);		
 		
 	}else if (isParamEquals($_POST, "action", "btn-to-select")){
@@ -26,8 +31,10 @@
 
 	}else if (isParamEquals($_POST, "action", "select-to-btn")){
 		echo getBtnProblem($_POST["sel-value"], $_POST["cur-row"]);
-	}
-		
+	}else if (isParamEquals($_POST, "action", "problems-plan")){		//Нерешенные проблемы
+			logger("problems-plan controller.php");
+			getProblemPlanTable();
+	}		
 
 	function getComponentByName($name) {
 		$content = "Содержимое отсутствует";

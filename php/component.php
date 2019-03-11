@@ -263,12 +263,10 @@ function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
     $rowsPerPage = 5;
     $block = "<div class=\"maket\">
-        <h2>Журнал еженедельного осмотра оборудования:</h2>
+        <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
             <div class=\"table-component\">
                 <div class=\"buttons-container table-controls\">
-                    <div id=\"delete-problem-link\" class=\"delete-button link \">    
-                        <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
-                    </div>
+                    
                 </div>";
 
     $block .= getPagination($rowsPerPage, getProblemsCount($id));
@@ -334,7 +332,6 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
                         <th>Состояние</th>
                         <th>Ответственный</th>
                     </tr>";
-
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
         
@@ -502,7 +499,6 @@ function wrapElements($class, $targetContent){
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
 
-
 function getStatusList(){
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
@@ -513,10 +509,8 @@ function getStatusList(){
         $resultOut .= "<p><input type=\"radio\" name=\"status\" id='radio" . $row['id_status'] . "' value=" . $row['id_status'] . ">
         <label for='radio" . $row['id_status'] ."' >" . $row['name_status'] . "</label></p>" ;
     }
-    mysqli_close($link);    
-
+    mysqli_close($link);  
     return $resultOut;
-
 }
 
 function getBtnProblem($selValue, $curRow){
@@ -539,10 +533,37 @@ function getBtnProblem($selValue, $curRow){
 
     $resultOut = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
 
-    return $resultOut;
-
-
-        
+    return $resultOut;        
     }
 
+    function downButtons(){
+        $block = 
+        "<div class=\"down-buttons-problems\">
+            <div id=\"delete-problem-link\" class=\"delete-button link \">    
+                        <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
+                    </div>
+            <div class=\"link\">
+                <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
+            </div>
+            <div class=\"link\">
+                <a id=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
+            </div>
+        </div>";
+        //
+        return $block;
+    }
+
+    function getProblemPlanTable(){
+        $link = mysqli_connect("localhost", "root", "mysql", "desk");
+        mysqli_set_charset($link, "utf8"); 
+        $query = "SELECT * FROM `problems` WHERE status_problems NOT LIKE 4";
+        $result = mysqli_query($link, $query);
+        $resultOut = "";
+        while ($row = mysqli_fetch_array($result)) {
+            $resultOut .= "" ;
+        }
+        mysqli_close($link);  
+        return $resultOut;
+
+    }
 ?>

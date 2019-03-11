@@ -283,8 +283,9 @@ tr[checked] {
 .link a {
 	text-decoration: none;
 	color: #fff;
-	padding: 10px;	
+	padding: 8px;	
 	display: block;
+	text-align: center;
 }
 
 .link:hover {
@@ -335,6 +336,13 @@ tr[checked] {
 }
 .maket{
 	display: block;
+}
+
+.down-buttons-problems{
+	padding: 10px;
+	padding-left: 20px;
+	
+	height: 30px;
 }
 
 #col_1 {
