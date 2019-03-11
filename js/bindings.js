@@ -53,11 +53,12 @@ $(document).ready(function () {
             alert("Нужно выбрать запись");
             return;
         }
+        console.log(getCheckedInputsProblems);
         var page = getCurrentPage(location.hash);
         $.ajax({
             url: "php/controller.php",
             method: "POST",
-            data: {"action": "delete", "items": getCheckedInputs(), "pageName": page["name"], "pageId": page["id"]},
+            data: {"action": "delete", "items": getCheckedInputsProblems(), "pageName": page["name"], "pageId": page["id"]},
             success: function(response) {
                 
                 $(".maket").html(response);
@@ -234,4 +235,12 @@ function getCheckedInputs() {
     return ids;
 }
 
+function getCheckedInputsProblems() {
+    var ids = [];
+    $("input:checked").each(function() {
+        ids.push($(this).parent().closest("tr").attr("value"));
+    });
+    
+    return ids;
+}
 

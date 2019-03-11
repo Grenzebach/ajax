@@ -15,13 +15,14 @@
 		
 		echo getProblemsPanel($_POST["pageId"]);
 	} else if (isParamEquals($_POST, "action", "delete")) { 						//Удаление записи в таблице проблем
-		
+		deleteProblem($_POST["items"]);
 
+		echo getProblemsPanel($_POST["pageId"]);
 	} else if (isParamEquals($_POST, "action", "get-select-machine-list")) {		//Вывод списка оборудования в выпадающий список на странице проблем
 		echo getSelectMachineList($_POST["userId"]);		
 		
 	}else if (isParamEquals($_POST, "action", "btn-to-select")){
-		echo selectOfStatusProblem();
+		//echo selectOfStatusProblem();
 
 	}else if (isParamEquals($_POST, "action", "select-to-btn")){
 		echo getBtnProblem($_POST["sel-value"], $_POST["cur-row"]);
@@ -73,9 +74,18 @@
 	        mysqli_close($link);
 
 	}
-	function deleteProblem(){
+	function deleteProblem($items){
 		logger("deleteProblem, controller.php");
-		
+
+		$link = mysqli_connect("localhost", "root", "mysql", "desk");
+	    mysqli_set_charset($link, "utf8");   
+	    foreach ($items as $value) {
+	         $query = "DELETE FROM `problems` WHERE `problems`.`id_problems` =" . $value;
+	         //logger("function delete_problem " . $query);
+	         	//DELETE FROM `problems` WHERE `problems`.`id_problems` = 7;
+				//DELETE FROM `problems` WHERE `problems`.`id_problems` = 8;
+	         mysqli_query($link, $query);
+	     }    
 	}
 
 
