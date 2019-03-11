@@ -1,4 +1,6 @@
 <?php 
+include_once("utils.php");
+
 function getDefaultMachineId() {
     labelCode("component.php", "getDefaultMachineId");
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
@@ -82,7 +84,7 @@ function getMachineTable($id) {
         }
 
         $date_control_rev = date("d-m-Y", strtotime($row['date_control']));
-        $table .=  "<tr id = row". $row['id_units'] . " machine='" . $row["id_units"] . "'>
+        $table .=  "<tr id = row". $row['id_units'] . " value='" . $row["id_units"] . "'>
         <td><input type='checkbox' name='a' value='10'></td>
         <td id = col_1>".$row['name_units']." ".$row['pozname_units']."</td>
         <td>".$row['info_units']."</td>
@@ -147,7 +149,7 @@ function getPlanHeader($id) {
     
     return 
         "<p id='content-header'>" .
-            "<a class ='nav onepage-link' href='#machine=$id'>$header</a> -> План на обслуживание" .
+            "<a class ='nav onepage-link' href='#machine=$id'>$header" . " / " . "</a><span class=\"plan-header\">План на обслуживание</span>" .
         "</p>";
 }
 
@@ -245,13 +247,13 @@ function getActionsLinks($id) {
     return 
         "<div class=\"links-container\">
             <div class=\"link\">
-                <a id=\"save-link\" title=\"Применить изменения\" href=\"javascript: void(0);\">ПРИМЕНИТЬ</a>       
+                <a id=\"save-link\" title=\"Обновить выделенные строки\" href=\"javascript: void(0);\">ОБНОВИТЬ</a>       
             </div>
             <div class=\"link\">
                 <a id=\"mkplan-link\" class=\"onepage-link\" title=\"Сформировать план на предстоящий четверг\" href=\"#plan=$id\">СФОРМИРОВАТЬ ПЛАН</a>        
             </div>
             <div class=\"link\">
-                <a id=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
+                <a class=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
             </div>  
             <div class=\"clear\"></div>
         </div>";    
@@ -259,39 +261,77 @@ function getActionsLinks($id) {
 
 function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
-    
-    //$sql = "SELECT * FROM problems";  //Формируем таблицу проблем: по единице оборудования или по всем станкам
-    $appendTOsql = " and m.id_machines=" . $id;
+    $rowsPerPage = 10;
+    $block = "<div class=\"maket\">
+        <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
+            <div class=\"table-component\">
+                <div class=\"buttons-container table-controls\">
+                    
+                </div>";
 
-    //SELECT * FROM problems, machines, users WHERE machines.id_machines=problems.id_machine and users.id_user=machines.respons_machines
-    if ($id == "default"){
+    $block .= getPagination($rowsPerPage, getProblemsCount($id));
+
+    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id) . "</div>";    
+    
+    $block .= 
+            "</div>
+        </div>"; 
+    return $block;    
+}
+
+function getProblemsCount($id) {
+    $appendTOsql = " and m.id_machines=" . $id;
+    if ($id == "default") {
         $appendTOsql = "";
     } 
+    $link = mysqli_connect("localhost", "root", "mysql", "desk");
+    mysqli_set_charset($link, "utf8"); //кодировка в utf8     
+    $queryForCount = "SELECT 
+                    count(*) as rows_count
+                FROM problems p, machines m, users u 
+                WHERE m.id_machines=p.id_machine 
+                AND m.respons_machines=u.id_user" . $appendTOsql;    
+
+    $countResult = mysqli_query($link, $queryForCount); 
+    $result = 0;
+    if ($rowsCount = mysqli_fetch_array($countResult)) {
+        $result = $rowsCount["rows_count"];
+    }
+
+    mysqli_close($link);               
+    return $result;    
+}
+
+function getProblemsTablePage($page, $id, $currentPage = 1) {
+    $rowsPerPage = 10;
+    $fromIndex = ($page - 1) * $rowsPerPage;
+    $appendTOsql = " and m.id_machines=" . $id;
+    if ($id == "default") {
+        $appendTOsql = "";
+    }
+
     logger("В функции getProblemsPanel id = " . $id);
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
-    $query = "  SELECT 
+    $query = " SELECT 
                     p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
                     m.id_machines, m.name_machines, m.respons_machines,
                     u.id_user, u.name_user
                 FROM problems p, machines m, users u 
                 WHERE m.id_machines=p.id_machine 
-                AND m.respons_machines=u.id_user" . $appendTOsql;               //WHERE id_machine =.$id; 
-    logger("getProblemsPanel() ".$query);
-    $result = mysqli_query($link, $query);
-    //logger($result);
-    $block = "<div class=\"maket\">
-        <h2>Журнал еженедельного осмотра оборудования:</h2>
-            <table class=\"problem\">
-                <tr><th class=\"fst-col\"><input type=\"checkbox\"></th>
-                    <th>Оборудование</th>
-                    <th>Проблема</th>
-                    <th>Дата</th>
-                    <th>Примечания</th>
-                    <th>Состояние</th>
-                    <th>Ответственный</th>
-                </tr>";
+                AND m.respons_machines=u.id_user" . $appendTOsql . " ORDER BY p.id_problems DESC LIMIT $fromIndex, $rowsPerPage";   
 
+    $result = mysqli_query($link, $query);
+
+    $block = "<table class=\"problem\">
+                    <tr><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
+                        <th>Оборудование</th>
+                        <th>Проблема</th>
+                        <th>Дата</th>
+                        <th>Примечания</th>
+                        <th>Состояние</th>
+                        <th>Ответственный</th>
+                    </tr>";
     $i = 0;
     while ($row = mysqli_fetch_array($result)) {
         
@@ -311,18 +351,55 @@ function getProblemsPanel($id) {
         $status = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
         $block .= 
         "<tr value=" . $row['id_problems'] . ">
-            <td>$i</td>
-            <td class = \"col-left-align\">" . $row['name_machines'] . "</td>
+            <td><input type=\"checkbox\" value=" . $row['id_problems'] . "></td>
+            <td class = \"td-name-machines col-left-align\">" . $row['name_machines'] . "</td>
             <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
             <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
-            <td class = \"col-left-align\">" . $row['name_user'] . "</td>
+            <td class = \"td-name-user col-left-align\">" . $row['name_user'] . "</td>
         </tr>"; 
     }
     mysqli_close($link);
-    $block .= "</table></div>"; 
-    return $block;    
+    $block .= "</table>";
+    return $block;
+}
+
+function getPagination($pageSize, $rowsCount){
+    
+    $resultOut = "  <div class=\"pagination\">
+                        <div class=\"pager-button\">    
+                            <a href=\"javascript: void(0);\" value=\"first\">
+                                <<
+                            </a>
+                        </div>    
+                        <div class=\"pager-button\">    
+                            <a href=\"javascript: void(0);\" value=\"prev\">
+                                <
+                            </a>
+                        </div>
+                    ";
+    $pageCount = ceil($rowsCount / $pageSize); 
+
+    for($i = 1; $i <= $pageCount; $i++) {
+        $resultOut .=
+        "<div id=\"page" . $i . "\" class=\"pager-button" . ($i == 1 ? " active" : "") . "\">    
+            <a href=\"javascript: void(0);\" value=\"" . $i . "\">" . $i . "</a>
+        </div>";
+    }
+    $resultOut .=
+                        "<div id=\"next\" class=\"pager-button\">    
+                            <a href=\"javascript: void(0);\" value=\"next\">
+                                >
+                            </a>
+                        </div>    
+                        <div id=\"last\" class=\"pager-button\">    
+                            <a href=\"javascript: void(0);\" value=\"last\">
+                                >>
+                            </a>
+                        </div>
+                    </div>";  
+    return $resultOut;
 }
 
 function getControlsPanel($id) {
@@ -422,20 +499,17 @@ function wrapElements($class, $targetContent){
     return "<div class = \"$class\">$targetContent</div>"; //Оборачивает содержимое в div
 }
 
-function selectOfStatusProblem(){
+function getStatusList(){
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); 
     $query = "SELECT * FROM `status` WHERE enable_status=true";
     $result = mysqli_query($link, $query);
-    
-    $resultOut = "<select class=\"select-status-problem\">";
+    $resultOut = "";
     while ($row = mysqli_fetch_array($result)) {
-        $resultOut .= "<option value=" . $row['id_status'] . ">" . $row['name_status'] . "</option>";
+        $resultOut .= "<p><input type=\"radio\" name=\"status\" id='radio" . $row['id_status'] . "' value=" . $row['id_status'] . ">
+        <label for='radio" . $row['id_status'] ."' >" . $row['name_status'] . "</label></p>" ;
     }
-    mysqli_close($link);
-
-    $resultOut .= "</select>";
-
+    mysqli_close($link);  
     return $resultOut;
 }
 
@@ -459,10 +533,85 @@ function getBtnProblem($selValue, $curRow){
 
     $resultOut = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
 
-    return $resultOut;
-
-
-        
+    return $resultOut;        
     }
 
+    function downButtons(){
+        $block = 
+        "<div class=\"down-buttons-problems\">
+            <div id=\"delete-problem-link\" class=\"delete-button link \">    
+                        <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
+                    </div>
+            <div class=\"link\">
+                <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
+            </div>
+            <div class=\"link\" hidden=\"true\">
+                <a class=\"print-link\" title=\"Таблица на печать\" href=\"javascript: void(0);\">ПЕЧАТЬ</a>       
+            </div>
+        </div>";
+        //
+        return $block;
+    }
+
+//Список нерешенных проблем
+    function getProblemPlanTable(){     
+        $link = mysqli_connect("localhost", "root", "mysql", "desk");
+        mysqli_set_charset($link, "utf8"); 
+        $query = "SELECT 
+                    p.id_problems, p.name_problems, p.date_problems, p.notes_problems, p.status_problems, p.id_machine, 
+                    m.id_machines, m.name_machines, m.respons_machines,
+                    u.id_user, u.name_user
+                FROM problems p, machines m, users u 
+                WHERE m.id_machines=p.id_machine 
+                AND m.respons_machines=u.id_user
+                AND status_problems NOT LIKE 4";
+         
+        $result = mysqli_query($link, $query);
+
+    $block = "<p class=\"problems-plan-header\"><a class ='nav onepage-link' href='#problems=default'>ЖУРНАЛ / </a> 
+            <span class=\"plan-header\">СПИСОК АКТУАЛЬНЫХ ПРОБЛЕМ НА ОБОРУДОВАНИИ</span></p>
+                <table class=\"problem-plan\">
+                    <tr><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
+                        <th>№</th>
+                        <th>Оборудование</th>
+                        <th>Проблема</th>
+                        <th>Дата</th>
+                        <th>Примечания</th>
+                        <th>Состояние</th>
+                        <th>Ответственный</th>
+                    </tr>";
+    $i = 0;
+    while ($row = mysqli_fetch_array($result)) {
+        
+        $i++;               //Счетчик для нумерации строк в таблице
+        $statusProblems = $row['status_problems'];
+        if ($statusProblems == "1"){
+            $statusString = "Создана";
+            $statusClass = "status-problem-create";
+        } elseif ($statusProblems == "2"){
+            $statusString = "В работе";
+            $statusClass = "status-problem-doing";
+        } elseif ($statusProblems == "4") {
+            $statusString = "Выполнена";
+            $statusClass = "status-problem-done";
+        }
+
+        $status = "<div class='btn-link " . $statusClass . "'><a title=\"Статус записи\" href=\"javascript: void(0);\">$statusString</a></div>";
+        $block .= 
+        "<tr value=" . $row['id_problems'] . ">
+            <td class=\"fst-col\"><input type=\"checkbox\" value=" . $row['id_problems'] . "></td>
+            <td class = \"num\">" . $i . "</td>
+            <td class = \"td-name-machines col-left-align\">" . $row['name_machines'] . "</td>
+            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
+            <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
+            <td class = \"status-problem\">" . $status . "</td>
+            <td class = \"td-name-user col-left-align\">" . $row['name_user'] . "</td>
+        </tr>"; 
+    }
+    mysqli_close($link);
+    $block .= "</table>";
+    return $block;
+
+    }
 ?>

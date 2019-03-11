@@ -1,8 +1,21 @@
 @media print {
     #sidebar, #combos, .links-container, 
     .hide-col, .days-before,
-    .warning-icon, #footer{
+    .warning-icon, #footer,
+    .nav-menu,
+    .nav,
+    .fst-col,
+    .down-buttons-problems,
+    .pagination,
+    .input-panel{
        display: none; 
+    }
+    .problems-plan-header{
+        width: 100%;
+    }
+    .plan-header{
+        text-align: center;
+        margin: 300px;
     }
 
     .col-notes{

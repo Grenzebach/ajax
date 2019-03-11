@@ -2,17 +2,19 @@
 	include_once("utils.php");
 	include_once("component.php");
 
-	if (isParamEquals($_GET, "name", "problems")) {
-		echo getProblems();
-	} else if (isParamEquals($_GET, "name", "plan")) {
+	if (isParamEquals($_GET, "name", "problems")) {					//Таблица проблем
+		echo getProblems();		
+	} else if (isParamEquals($_GET, "name", "plan")) {				//План на ТО
+		logger("plan pager.php");
 		echo getPlan($_GET["id"]);
 	} else if (isParamEquals($_GET, "name", "machines")) {
 		echo getMachines();
 	} else if (isParamEquals($_GET, "name", "machine")) {
 		echo getMachine($_GET["id"]);
 	} else if (isParamEquals($_GET, "name", "parts")) {
+		logger("parts pager.php");				//Запчасти
 		echo getParts();
-	} else if (isParamEquals($_GET, "name", "default")) {		
+	} else if (isParamEquals($_GET, "name", "default")) {			//По-умолчанию
 		echo getProblems(getDefaultMachineId());
 	} else {
 		echo "404 - страница не найдена";
@@ -23,7 +25,6 @@
 		$machineList = getMachineList(); 		
 		$machineContent	= getMachineContent($id);
 		$machineHeader = $machineContent["header"];
-		//logger("$machineContent["header"]");
 		
 	    $machineTable = $machineContent["content"];
 	    $actionsLinks = getActionsLinks($id);
@@ -71,10 +72,19 @@
 	function getProblems() {		//Проблемы
 		logger("Получение списка проблем для оборудования");				
 		$table = getProblemsPanel("default");
+		$buttons = downButtons();
 		$inputs = inputProblemsPanel();		
 		return 
 			$table .
+			$buttons .
 			$inputs;
+	}
+
+	function getProblemsPlan(){		//Получение списка проблем на ремонт
+		$table = getProblemsPanel("default");
+
+		return
+			$table;		
 	}
 
 	function getParts() {			//Запчасти

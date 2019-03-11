@@ -1,0 +1,39 @@
+.pager-button {
+	background: #0089cf;
+	float: left;	
+	border-left: 1px solid;
+	border-color: white;
+	min-width: 30px;
+
+}
+
+.pager-button a {
+	text-decoration: none;
+	color: #fff;
+	padding: 8px;	
+	display: block;
+	text-align: center;
+}
+
+.pager-button:hover {
+	background: #056292;
+	color: white;
+}
+.pager-button.active, .pager-button.active:hover {
+	background-color: #a2becc;
+}
+.pager-button.active a {
+	cursor: default;
+}
+
+.pagination { 
+	height: 30px;
+}
+
+.table-controls {
+	float: left;
+	padding-top: 0;
+}
+.table-component{
+	padding-top: 10px;
+}
