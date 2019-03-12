@@ -39,14 +39,13 @@ $(document).ready(function () {
     });
 
 //Добавить запись в таблицу проблем
-    $(document).on("click", "#add-problem-link", function() {       
-        console.log("add-problem-link pressed");
+    $(document).on("click", "#add-problem-link", function() {
         var selIdMachine = $("#machine-list-problems").val();
         var nameProblem = $("#name-problems").val();
         var dateProblem = $("#date-problems").val();
         var noteProblem = $("#notes-problems").val();
         addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
-        console.log(selIdMachine);
+        
     });
 
 //Удалить запись из таблицы проблем
@@ -84,7 +83,7 @@ $(document).ready(function () {
                 window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
-                //$("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
+                $("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
                 console.log("problems plan");
             }
         });

@@ -407,7 +407,7 @@ tr[checked] {
 	width: 300px;
     max-width: 300px;
     white-space: normal;
-    word-break: break-all;
+    
 }
 
 .td-name-machines{
@@ -419,7 +419,7 @@ tr[checked] {
 	width: 300px;
 	max-width: 300px;
 	white-space: normal;
-    word-break: break-word;
+   
 }
 
 .gif {
