@@ -423,7 +423,7 @@ function inputProblemsPanel() {
                 <div class=\"select-list\">
                     <p>Ответственный за оборудование:</p>
                     <select id=\"respons\">
-                    <option></option>";       //Список ответственных за оборудование
+                    <option value=\"\"  selected>Без выбора ответственного</option>";       //Список ответственных за оборудование
 
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -438,7 +438,7 @@ function inputProblemsPanel() {
     $resultOut .=
                     "</select>
                 </div>
-                <p>Оборудование</p>
+                <p>Оборудование:</p>
                 <div class=\"select-list\" id=\"select-machine-list\"> " .
                     getSelectMachineList() .
                 "</div>
@@ -470,16 +470,21 @@ function inputProblemsPanel() {
 function getSelectMachineList($userId = "") {                             //Функция вывода списка оборудования в выпадающий список. 
     labelCode("component.php", "getSelectMachineList");
     $select =
-        "<select id=\"machine-list-problems\">
+        "<select id=\"machine-list-problems\">            
             [#items#]
         </select>";
 
     $items = "<option></option>";     
 
     if ($userId != "") {
+        $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId";
+    }   else{
+        $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
+    }
+        
         $link = mysqli_connect("localhost", "root", "mysql", "desk");
         mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
-        $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId"; //ЗАПРОС
+        
         logger($query);
 
         $result = mysqli_query($link, $query);    
@@ -489,7 +494,7 @@ function getSelectMachineList($userId = "") {                             //Фу
         }
 
         mysqli_close($link);
-    }   
+       
 
     return str_replace("[#items#]", $items, $select); 
 }
