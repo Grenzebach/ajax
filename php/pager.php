@@ -71,11 +71,11 @@
 		logger("Получение списка проблем для оборудования");				
 		$table = getProblemsPanel("default");
 		$buttons = downButtons();
-		$inputs = inputProblemsPanel();		
+		//$inputs = inputProblemsPanel();		
 		return 
 			$table .
-			$buttons .
-			$inputs;
+			$buttons;
+			//$inputs;
 	}
 //Получение списка проблем на ремонт
 	function getProblemsPlan(){		

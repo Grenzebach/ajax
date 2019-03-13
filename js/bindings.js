@@ -45,6 +45,7 @@ $(document).ready(function () {
         var dateProblem = $("#date-problems").val();
         var noteProblem = $("#notes-problems").val();
         addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
+        console.log(selIdMachine, nameProblem, dateProblem, noteProblem);
         
     });
 
@@ -223,6 +224,31 @@ $(document).ready(function () {
     });
 });
 
+//Ввод данных в модальном окне
+$(document).on("click", ".get-problem-panel", function(){
+    $.ajax({
+        url: "php/component-controller.php",
+        method: "GET",
+        data: {"name": "get-problem-panel"},
+        success: function(response){
+            showModal("Добавление записи о проблеме", response, function(content){
+                
+                var selIdMachine = $("#machine-list-problems").val();
+                var nameProblem = $("#name-problems").val();
+                var dateProblem = $("#date-problems").val();
+                var noteProblem = $("#notes-problems").val();
+                addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
+                closeModal(function () {
+                                $(".problem-table-head + tr").addClass("row-changed");
+                                setTimeout(function() {
+                                    //$(".problem-table-head + tr").removeClass("row-changed");
+                                }, 1000);                                                        // Подсветка измененной строки
+                            });
+            });
+        }
+    });
+});
+
 //Формирование таблицы проблем в соответствии с пейджером
 function getProblemsTablePage(_self, page, currentPage) {
     var parentComponent = $(_self).parent().closest(".table-component");
@@ -239,6 +265,8 @@ function getProblemsTablePage(_self, page, currentPage) {
         }
     });    
 }
+
+
 
 //Получение массива выбранных строк таблицы
 function getCheckedInputs() {
