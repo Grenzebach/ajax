@@ -148,8 +148,10 @@ $(document).ready(function () {
             method: "GET",
             data: {"name": "statusList"},
             success: function(response) {
-                showModal("Изменение статуса", response, function(content) {
+                showModal("Изменение статуса проблемы", response, function(content) {
                     var statusId = $("[name='status']:checked").val();
+                    //Валидация
+                    console.log($("[name='status']:checked").val());
                     $.ajax({
                         url: "php/controller.php",
                         method: "POST",

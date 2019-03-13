@@ -547,6 +547,9 @@ function getBtnProblem($selValue, $curRow){
             <div id=\"delete-problem-link\" class=\"delete-button link \">    
                         <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
                     </div>
+            <div id=\"add-problem-link\" class=\"add-button link \">    
+                        <a href=\"javascript: void(0);\">ДОБАВИТЬ</a>
+                    </div>
             <div class=\"link\">
                 <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
             </div>
@@ -617,6 +620,11 @@ function getBtnProblem($selValue, $curRow){
     mysqli_close($link);
     $block .= "</table>";
     return $block;
+
+    }
+
+    //модальное окно - добавление записи в таблицу
+    function addProblemRecord(){
 
     }
 ?>
