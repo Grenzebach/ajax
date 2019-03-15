@@ -324,7 +324,7 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
     $result = mysqli_query($link, $query);
 
     $block = "<table class=\"problem\">
-                    <tr><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
+                    <tr class=\"problem-table-head\"><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
                         <th>Оборудование</th>
                         <th>Проблема</th>
                         <th>Дата</th>
@@ -338,7 +338,7 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
         $i++;               //Счетчик для нумерации строк в таблице
         $statusProblems = $row['status_problems'];
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
@@ -457,11 +457,7 @@ function inputProblemsPanel() {
                     <textarea id=\"notes-problems\"type=\"text\" placeholder=\"Что необходимо сделать для устранения проблемы. \nНаример: «Проворачивает флажок, необходимо заменить»\" required></textarea> 
                     <span class=\"validity\"></span> 
                 </p>
-                <div class=\"links-container\"> 
-                    <div class=\"link\">
-                        <a id=\"add-problem-link\" href=\"javascript: void(0);\">ДОБАВИТЬ ЗАПИСЬ</a>
-                    </div>                
-                </div>
+                
             </div>
         </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
     return $resultOut;
@@ -521,7 +517,7 @@ function getStatusList(){
 function getBtnProblem($selValue, $curRow){
     $statusProblems = $selValue;
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
@@ -547,7 +543,7 @@ function getBtnProblem($selValue, $curRow){
             <div id=\"delete-problem-link\" class=\"delete-button link \">    
                         <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
                     </div>
-            <div id=\"add-problem-link\" class=\"add-button link \">    
+            <div id=\"get-problem-link\" class=\"get-problem-panel add-button link \">    
                         <a href=\"javascript: void(0);\">ДОБАВИТЬ</a>
                     </div>
             <div class=\"link\">
@@ -594,7 +590,7 @@ function getBtnProblem($selValue, $curRow){
         $i++;               //Счетчик для нумерации строк в таблице
         $statusProblems = $row['status_problems'];
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
