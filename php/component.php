@@ -433,7 +433,7 @@ function inputProblemsPanel() {
     while ($row = mysqli_fetch_array($result)) {
         $resultOut .= "<option value=" . $row['id_user'] . ">" . $row['name_user'] . "</option>";
     }
-    mysqli_close($link);        
+    mysqli_close($link);       
     
     $resultOut .=
                     "</select>
@@ -620,7 +620,4 @@ function getBtnProblem($selValue, $curRow){
     }
 
     //модальное окно - добавление записи в таблицу
-    function addProblemRecord(){
-
-    }
 ?>
