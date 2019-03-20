@@ -259,11 +259,15 @@ function getActionsLinks($id) {
         </div>";    
 }
 
+function contentHeader($header){
+    return "<h2>" . $header . "</h2>";
+}
+
 function getProblemsPanel($id) {
     labelCode("component.php", "getProblemsPanel");
     $rowsPerPage = 10;
     $block = "<div class=\"maket\">
-        <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
+        
             <div class=\"table-component\">
                 <div class=\"buttons-container table-controls\">
                     
@@ -279,6 +283,7 @@ function getProblemsPanel($id) {
     return $block;    
 }
 
+//Общее количество записей в таблице проблем
 function getProblemsCount($id) {
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -303,14 +308,13 @@ function getProblemsCount($id) {
 }
 
 function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 10;
+    $rowsPerPage = 15;
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
         $appendTOsql = "";
     }
-
-    logger("В функции getProblemsPanel id = " . $id);
+    
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = " SELECT 
@@ -326,7 +330,7 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
     $block = "<table class=\"problem\">
                     <tr class=\"problem-table-head\"><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
                         <th>Оборудование</th>
-                        <th>Проблема</th>
+                        <th colspan=\"2\">Проблема</th>
                         <th>Дата</th>
                         <th>Примечания</th>
                         <th>Состояние</th>
@@ -353,7 +357,10 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
         "<tr value=" . $row['id_problems'] . ">
             <td><input type=\"checkbox\" value=" . $row['id_problems'] . "></td>
             <td class = \"td-name-machines col-left-align\">" . $row['name_machines'] . "</td>
-            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" 
+            . $row['name_problems'] . "</td>
+            <td class=\"td-icons\">
+                <a href=\"#\" class=\"icon-button\" value=\"1\"><img src=\"img/icon-photo.png\"></img></a></td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
             <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
@@ -417,8 +424,7 @@ function inputProblemsPanel() {
     labelCode("component.php", "inputProblemsPanel");
     
     $resultOut = 
-        "<div class = input-panel>
-            <h2>Создание новой записи:</h2>            
+        "<div class = input-panel>                       
             <div id=\"inputs\">
                 <div class=\"select-list\">
                     <p>Ответственный за оборудование:</p>
@@ -537,9 +543,9 @@ function getBtnProblem($selValue, $curRow){
     return $resultOut;        
     }
 
-    function downButtons(){
+    function controlButtons(){
         $block = 
-        "<div class=\"down-buttons-problems\">
+        "<div class=\"control-buttons-problems\">
             <div id=\"delete-problem-link\" class=\"delete-button link \">    
                         <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
                     </div>

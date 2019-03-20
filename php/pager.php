@@ -69,13 +69,17 @@
 //Проблемы
 	function getProblems() {		
 		logger("Получение списка проблем для оборудования");				
+		$contentHeader = contentHeader("ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ");
+		$topButtons = controlButtons();
 		$table = getProblemsPanel("default");
-		$buttons = downButtons();
-		//$inputs = inputProblemsPanel();		
+		$downButtons = controlButtons();
+				
 		return 
+			$contentHeader .
+			$topButtons .
 			$table .
-			$buttons;
-			//$inputs;
+			$downButtons;
+			
 	}
 //Получение списка проблем на ремонт
 	function getProblemsPlan(){		

@@ -33,6 +33,31 @@ html, body {
 	display: none; 
 }
 
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   position: fixed;
+   display: block;
+   opacity: 0.7;
+   background-color: #fff;
+   z-index: 99999;
+   text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 250px;  
+  z-index: 100;
+}
+
 #header {
 	background: #056292;
 	height: 110px;
@@ -368,7 +393,7 @@ tr[checked] {
 	display: block;
 }
 
-.down-buttons-problems{
+.control-buttons-problems{
 	padding: 10px;
 	padding-left: 20px;
 	
@@ -405,8 +430,7 @@ tr[checked] {
 .td-name-problems{
 	width: 300px;
     max-width: 300px;
-    white-space: normal;
-    
+    white-space: normal;    
 }
 
 .td-name-machines{
@@ -417,8 +441,16 @@ tr[checked] {
 .td-notes-problems{
 	width: 300px;
 	max-width: 300px;
-	white-space: normal;
-   
+	white-space: normal;   
+}
+
+.td-icons{
+	
+}
+
+.icon-button img{
+	width: 16px;
+	height: 16px;
 }
 
 .gif {
@@ -473,13 +505,12 @@ tr[checked] {
 }
 #date-problems{
 	height: 20px;
+	border-color: #056292;
 }
 
 .input-panel{
-	width: 500px;
-	background: #f3dd9f;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	width: 500px;	
+	margin-top: 0px;
 	margin-left: 20px;
 }
 .input-panel input, #date-problems{
@@ -493,29 +524,26 @@ tr[checked] {
 
 .select-list{
 	padding-left: 20px;
+	
+
 }
 .select-list p{
 	padding-left: 0; 
 }
 .select-list select{
-	height: 26px;
+	border-color: #056292;
+	height: 30px;
 	width: 300px; 
 }
 
-#machine-list-problems{
-	height: 26px;
-	width: 300px;
-}
-
-
-
 #inputs{
 	display: block;
-	padding-bottom: 15px;
-	margin-bottom: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 #inputs textarea{
-	width: 446px;
+	border-color: #056292;
+	width: 510px;
     height: 38px;
 }
 

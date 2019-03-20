@@ -1,5 +1,8 @@
+
+
 $(document).ready(function () {
 	getPage(getCurrentPage(location.hash));
+	$('#loading').hide();
 });
 
 function getPage(page) {

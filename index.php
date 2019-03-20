@@ -19,6 +19,9 @@
 	<script type="text/javascript" src="js/pager.js"></script>	
 </head>
 <body>
+	<div id="loading">
+		<img id="loading-image" src="img/loading.gif" alt="Loading..." />
+	</div>
 <div id="container">
     <div id="header">
     	<div class="logo"><a href="/"><img src="img/logo.jpg" alt=""></a>
@@ -70,6 +73,8 @@
 </div>
 	
 	
-	
+	<script language="javascript" type="text/javascript">
+	     
+	</script>	
 </body>
 </html>
