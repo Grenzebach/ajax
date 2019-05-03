@@ -226,6 +226,7 @@ $(document).ready(function () {
                 return;
             }
         }
+        var parentComponent = $(this).parent().closest(".table-component");
         if (nextPage == "next") {
             nextPage = currentPage + 1;
             if (totalPages > 5 && nextPage > 3 && nextPage < totalPages - 1) {
@@ -242,11 +243,11 @@ $(document).ready(function () {
         } else if (nextPage != "prev" && nextPage != "first") {
             nextPage = parseInt(nextPage);
             if (totalPages > 5 && nextPage > 1 && nextPage < totalPages) {
-                // var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
-                // $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
+                var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
+                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
             }            
         }
-        getProblemsTablePage(this, nextPage)
+        getProblemsTablePage(parentComponent, nextPage)
     });
 });
 
@@ -257,6 +258,7 @@ function buildByRange(from, to, active, totalPages) {
     }
     if (to > totalPages) {
         to = totalPages;
+        from--;
     }
     var pagination = "";    
     for(var i = from; i <= to; i++) {
@@ -294,13 +296,8 @@ $(document).on("click", ".get-problem-panel", function(){
 });
 
 //Формирование таблицы проблем в соответствии с пейджером
-function getProblemsTablePage(_self, page, currentPage) {
-    var parentComponent = $(_self).parent().closest(".table-component");
+function getProblemsTablePage(parentComponent, page, currentPage) {
     var currentPage = parentComponent.find(".pager-button.active a").attr("value");
-    if (currentPage == undefined) {
-        currentPage = page;
-    }
-    console.log([page, currentPage]);
     parentComponent.find(".pager-button.active").removeClass("active");
     var sitePage = getCurrentPage(location.hash);                        
     $.ajax({
