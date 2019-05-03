@@ -263,9 +263,8 @@ function contentHeader($header){
     return "<h2>" . $header . "</h2>";
 }
 
-function getProblemsPanel($id) {
+function getProblemsPanel($id, $rowsPerPage = 5) {
     labelCode("component.php", "getProblemsPanel");
-    $rowsPerPage = 3;
     $block = "<div class=\"maket\">
         
             <div class=\"table-component\">
@@ -275,7 +274,7 @@ function getProblemsPanel($id) {
 
     $block .= getPagination($rowsPerPage, getProblemsCount($id));
 
-    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id) . "</div>";    
+    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id, 1, $rowsPerPage) . "</div>";    
     
     $block .= 
             "</div>
@@ -307,8 +306,7 @@ function getProblemsCount($id) {
     return $result;    
 }
 
-function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 3;
+function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {    
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {

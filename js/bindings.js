@@ -205,17 +205,19 @@ $(document).ready(function () {
                 return
             }
         }        
+
+        var paginationRangeCount = 5;
         if (nextPage == "first") {
             nextPage = 1;
 
-            if (totalPages > 5) {
-                var newPagination = buildByRange(1, 5, 1, totalPages);
+            if (totalPages > paginationRangeCount) {
+                var newPagination = buildByRange(1, paginationRangeCount, 1, totalPages);
                 $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
             }            
         } else if (nextPage == "prev") {
             nextPage = currentPage - 1;
 
-            if (totalPages > 5 && nextPage > 2 && nextPage < totalPages - 2) {
+            if (totalPages > paginationRangeCount && nextPage > 2 && nextPage < totalPages - 2) {
                 var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
                 $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);
             }                        
@@ -229,20 +231,20 @@ $(document).ready(function () {
         var parentComponent = $(this).parent().closest(".table-component");
         if (nextPage == "next") {
             nextPage = currentPage + 1;
-            if (totalPages > 5 && nextPage > 3 && nextPage < totalPages - 1) {
+            if (totalPages > paginationRangeCount && nextPage > 3 && nextPage < totalPages - 1) {
                 var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
                 $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);
             }
         } else if (nextPage == "last") {
             nextPage = totalPages;
 
-            if (totalPages > 5) {
+            if (totalPages > paginationRangeCount) {
                 var newPagination = buildByRange(nextPage - 4, nextPage, nextPage, totalPages);
                 $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
             }
         } else if (nextPage != "prev" && nextPage != "first") {
             nextPage = parseInt(nextPage);
-            if (totalPages > 5 && nextPage > 1 && nextPage < totalPages) {
+            if (totalPages > paginationRangeCount && nextPage > 1 && nextPage < totalPages) {
                 var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
                 $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
             }            
@@ -250,25 +252,6 @@ $(document).ready(function () {
         getProblemsTablePage(parentComponent, nextPage)
     });
 });
-
-function buildByRange(from, to, active, totalPages) {
-    if (from < 1) {
-        from = 1;
-        to++;
-    }
-    if (to > totalPages) {
-        to = totalPages;
-        from--;
-    }
-    var pagination = "";    
-    for(var i = from; i <= to; i++) {
-        pagination += 
-        "<div id=\"page" + i + "\" class=\"pager-button" + (i == active ? " active" : "") + "\">" +    
-            "<a href=\"javascript: void(0);\" value=\"" + i + "\">" + i + "</a>" +
-        "</div>";            
-    }
-    return pagination;    
-}
 
 //Ввод данных в модальном окне
 $(document).on("click", ".get-problem-panel", function(){
@@ -295,6 +278,26 @@ $(document).on("click", ".get-problem-panel", function(){
     });
 });
 
+//Построение пагинации для текущей страницы и пары соседних
+function buildByRange(from, to, active, totalPages) {
+    if (from < 1) {
+        from = 1;
+        to++;
+    }
+    if (to > totalPages) {
+        to = totalPages;
+        from--;
+    }
+    var pagination = "";    
+    for(var i = from; i <= to; i++) {
+        pagination += 
+        "<div id=\"page" + i + "\" class=\"pager-button" + (i == active ? " active" : "") + "\">" +    
+            "<a href=\"javascript: void(0);\" value=\"" + i + "\">" + i + "</a>" +
+        "</div>";            
+    }
+    return pagination;    
+}
+
 //Формирование таблицы проблем в соответствии с пейджером
 function getProblemsTablePage(parentComponent, page, currentPage) {
     var currentPage = parentComponent.find(".pager-button.active a").attr("value");
@@ -303,7 +306,7 @@ function getProblemsTablePage(parentComponent, page, currentPage) {
     $.ajax({
         url: "php/component-controller.php",
         method: "GET",
-        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage},
+        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage, "rowsPerPage": 5},
         success: function(response){
             parentComponent.find(".table-content").html(response);
             parentComponent.find(".pager-button a[value='" + page + "']").parent().closest(".pager-button").addClass("active");
