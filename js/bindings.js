@@ -81,7 +81,7 @@ $(document).ready(function () {
             data: {"action": "problems-plan"},
             success: function(response) {                
                 $(".maket").html(response);
-                window.print();
+                //window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
                 $("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
