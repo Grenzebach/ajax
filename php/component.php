@@ -263,9 +263,8 @@ function contentHeader($header){
     return "<h2>" . $header . "</h2>";
 }
 
-function getProblemsPanel($id) {
+function getProblemsPanel($id, $rowsPerPage = 5) {
     labelCode("component.php", "getProblemsPanel");
-    $rowsPerPage = 10;
     $block = "<div class=\"maket\">
         
             <div class=\"table-component\">
@@ -275,7 +274,7 @@ function getProblemsPanel($id) {
 
     $block .= getPagination($rowsPerPage, getProblemsCount($id));
 
-    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id) . "</div>";    
+    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id, 1, $rowsPerPage) . "</div>";    
     
     $block .= 
             "</div>
@@ -307,8 +306,7 @@ function getProblemsCount($id) {
     return $result;    
 }
 
-function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 15;
+function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {    
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -373,8 +371,21 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
 }
 
 function getPagination($pageSize, $rowsCount){
-    
-    $resultOut = "  <div class=\"pagination\">
+    $pageCount = ceil($rowsCount / $pageSize); 
+
+    $paginationRange = "<div class=\"pagination-range\">";
+    $countToShow = 5;
+    for($i = 1; $i <= $pageCount; $i++) {
+        if ($i < 1 + $countToShow) {
+            $paginationRange .= 
+            "<div id=\"page" . $i . "\" class=\"pager-button" . ($i == 1 ? " active" : "") . "\">    
+                <a href=\"javascript: void(0);\" value=\"" . $i . "\">" . $i . "</a>
+            </div>";            
+        }        
+    }
+    $paginationRange .= "</div>";
+
+    $resultOut = "  <div class=\"pagination\" pageCount=\"$pageCount\">
                         <div class=\"pager-button\">    
                             <a href=\"javascript: void(0);\" value=\"first\">
                                 <<
@@ -385,15 +396,10 @@ function getPagination($pageSize, $rowsCount){
                                 <
                             </a>
                         </div>
-                    ";
-    $pageCount = ceil($rowsCount / $pageSize); 
+                    ";    
 
-    for($i = 1; $i <= $pageCount; $i++) {
-        $resultOut .=
-        "<div id=\"page" . $i . "\" class=\"pager-button" . ($i == 1 ? " active" : "") . "\">    
-            <a href=\"javascript: void(0);\" value=\"" . $i . "\">" . $i . "</a>
-        </div>";
-    }
+    $resultOut .= $paginationRange;
+
     $resultOut .=
                         "<div id=\"next\" class=\"pager-button\">    
                             <a href=\"javascript: void(0);\" value=\"next\">
