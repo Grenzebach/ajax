@@ -358,7 +358,7 @@ function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {
             <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" 
             . $row['name_problems'] . "</td>
             <td class=\"td-icons\">
-                <a href=\"#\" class=\"icon-button\" value=\"1\"><img src=\"img/icon-photo.png\"></img></a></td>
+                </td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
             <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
