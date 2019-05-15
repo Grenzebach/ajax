@@ -81,6 +81,7 @@ $(document).ready(function () {
             data: {"action": "problems-plan"},
             success: function(response) {                
                 $(".maket").html(response);
+                window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
                 $("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
@@ -192,64 +193,34 @@ $(document).ready(function () {
 
 //Управление кнопками пейджера
     $(document).on("click", ".table-component .pager-button a", function() {
-        var totalPages = parseInt($(this).parent().closest(".pagination").attr("pageCount"));
-
         var parent = $(this).parent().closest(".pager-button");
         if (parent.hasClass("active")) {
             return;
         }
         var nextPage = $(this).attr("value");
-        var currentPage = parseInt($(this).parent().closest(".table-component").find(".pager-button.active a").attr("value"));
+        var currentPage = $(this).parent().closest(".table-component").find(".pager-button.active a").attr("value");
         if (nextPage == "first" || nextPage == "prev") {
             if (currentPage <= 1) {
                 return
             }
         }        
-
-        var paginationRangeCount = 5;
         if (nextPage == "first") {
             nextPage = 1;
-
-            if (totalPages > paginationRangeCount) {
-                var newPagination = buildByRange(1, paginationRangeCount, 1, totalPages);
-                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
-            }            
         } else if (nextPage == "prev") {
-            nextPage = currentPage - 1;
-
-            if (totalPages > paginationRangeCount && nextPage > 2 && nextPage < totalPages - 2) {
-                var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
-                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);
-            }                        
+            nextPage = currentPage - 1;            
         }
-        
+        var totalPages = $(this).parent().closest(".pagination").find(".pager-button").length - 4;
         if (nextPage == "next" || nextPage == "last") {
             if (currentPage >= totalPages) {
                 return;
             }
         }
-        var parentComponent = $(this).parent().closest(".table-component");
         if (nextPage == "next") {
-            nextPage = currentPage + 1;
-            if (totalPages > paginationRangeCount && nextPage > 3 && nextPage < totalPages - 1) {
-                var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
-                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);
-            }
+            nextPage = parseInt(currentPage) + 1;
         } else if (nextPage == "last") {
             nextPage = totalPages;
-
-            if (totalPages > paginationRangeCount) {
-                var newPagination = buildByRange(nextPage - 4, nextPage, nextPage, totalPages);
-                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
-            }
-        } else if (nextPage != "prev" && nextPage != "first") {
-            nextPage = parseInt(nextPage);
-            if (totalPages > paginationRangeCount && nextPage > 1 && nextPage < totalPages) {
-                var newPagination = buildByRange(nextPage - 2, nextPage + 2, nextPage, totalPages);
-                $(this).parent().closest(".pagination").find(".pagination-range").html(newPagination);                
-            }            
         }
-        getProblemsTablePage(parentComponent, nextPage)
+        getProblemsTablePage(this, nextPage)
     });
 });
 
@@ -278,35 +249,16 @@ $(document).on("click", ".get-problem-panel", function(){
     });
 });
 
-//Построение пагинации для текущей страницы и пары соседних
-function buildByRange(from, to, active, totalPages) {
-    if (from < 1) {
-        from = 1;
-        to++;
-    }
-    if (to > totalPages) {
-        to = totalPages;
-        from--;
-    }
-    var pagination = "";    
-    for(var i = from; i <= to; i++) {
-        pagination += 
-        "<div id=\"page" + i + "\" class=\"pager-button" + (i == active ? " active" : "") + "\">" +    
-            "<a href=\"javascript: void(0);\" value=\"" + i + "\">" + i + "</a>" +
-        "</div>";            
-    }
-    return pagination;    
-}
-
 //Формирование таблицы проблем в соответствии с пейджером
-function getProblemsTablePage(parentComponent, page, currentPage) {
+function getProblemsTablePage(_self, page, currentPage) {
+    var parentComponent = $(_self).parent().closest(".table-component");
     var currentPage = parentComponent.find(".pager-button.active a").attr("value");
     parentComponent.find(".pager-button.active").removeClass("active");
     var sitePage = getCurrentPage(location.hash);                        
     $.ajax({
         url: "php/component-controller.php",
         method: "GET",
-        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage, "rowsPerPage": 5},
+        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage},
         success: function(response){
             parentComponent.find(".table-content").html(response);
             parentComponent.find(".pager-button a[value='" + page + "']").parent().closest(".pager-button").addClass("active");
