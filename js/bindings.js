@@ -39,14 +39,14 @@ $(document).ready(function () {
     });
 
 //Добавить запись в таблицу проблем
-    $(document).on("click", "#add-problem-link", function() {       
-        console.log("add-problem-link pressed");
+    $(document).on("click", "#add-problem-link", function() {
         var selIdMachine = $("#machine-list-problems").val();
         var nameProblem = $("#name-problems").val();
         var dateProblem = $("#date-problems").val();
         var noteProblem = $("#notes-problems").val();
         addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
-        console.log(selIdMachine);
+        console.log(selIdMachine, nameProblem, dateProblem, noteProblem);
+        
     });
 
 //Удалить запись из таблицы проблем
@@ -84,7 +84,7 @@ $(document).ready(function () {
                 window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
-                //$("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
+                $("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
                 console.log("problems plan");
             }
         });
@@ -149,8 +149,10 @@ $(document).ready(function () {
             method: "GET",
             data: {"name": "statusList"},
             success: function(response) {
-                showModal("Изменение статуса", response, function(content) {
+                showModal("Изменение статуса проблемы", response, function(content) {
                     var statusId = $("[name='status']:checked").val();
+                    //Валидация
+                    console.log($("[name='status']:checked").val());
                     $.ajax({
                         url: "php/controller.php",
                         method: "POST",
@@ -222,6 +224,31 @@ $(document).ready(function () {
     });
 });
 
+//Ввод данных в модальном окне
+$(document).on("click", ".get-problem-panel", function(){
+    $.ajax({
+        url: "php/component-controller.php",
+        method: "GET",
+        data: {"name": "get-problem-panel"},
+        success: function(response){
+            showModal("Добавление записи о проблеме", response, function(content){
+                
+                var selIdMachine = $("#machine-list-problems").val();
+                var nameProblem = $("#name-problems").val();
+                var dateProblem = $("#date-problems").val();
+                var noteProblem = $("#notes-problems").val();
+                addProblem(selIdMachine, nameProblem, dateProblem, noteProblem);
+                closeModal(function () {
+                                $(".problem-table-head + tr").addClass("row-changed");
+                                setTimeout(function() {
+                                    //$(".problem-table-head + tr").removeClass("row-changed");
+                                }, 1000);                                                        // Подсветка измененной строки
+                            });
+            });
+        }
+    });
+});
+
 //Формирование таблицы проблем в соответствии с пейджером
 function getProblemsTablePage(_self, page, currentPage) {
     var parentComponent = $(_self).parent().closest(".table-component");
@@ -238,6 +265,8 @@ function getProblemsTablePage(_self, page, currentPage) {
         }
     });    
 }
+
+
 
 //Получение массива выбранных строк таблицы
 function getCheckedInputs() {

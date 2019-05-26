@@ -10,6 +10,10 @@
     .input-panel{
        display: none; 
     }
+    body{
+        overflow: hidden;
+        width: 100%;
+    }
     .problems-plan-header{
         width: 100%;
     }

@@ -1,4 +1,4 @@
-.pager-button {
+.pager-button, .pager-button-inactive {
 	background: #0089cf;
 	float: left;	
 	border-left: 1px solid;
@@ -7,12 +7,16 @@
 
 }
 
-.pager-button a {
+.pager-button a, .pager-button-inactive span {
 	text-decoration: none;
 	color: #fff;
 	padding: 8px;	
 	display: block;
 	text-align: center;
+}
+
+.pager-button-inactive {
+	background-color: red;
 }
 
 .pager-button:hover {

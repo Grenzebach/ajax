@@ -20,12 +20,10 @@
 		echo "404 - страница не найдена";
 	}	
 
-	function getMachine($id) {	    
-		logger("Получение списка узлов для $id");
+	function getMachine($id) {
 		$machineList = getMachineList(); 		
 		$machineContent	= getMachineContent($id);
-		$machineHeader = $machineContent["header"];
-		
+		$machineHeader = $machineContent["header"];		
 	    $machineTable = $machineContent["content"];
 	    $actionsLinks = getActionsLinks($id);
 	    $problemsPanel = getProblemsPanel($id);
@@ -44,7 +42,6 @@
 	}	
 
 	function getPlan($id) {
-		logger("Получение плана для id = $id");
 	    
 	    $planContent = getPlanContent($id);
 		$planHeader = $planContent["header"]; 
@@ -62,32 +59,37 @@
 	    	$combos . 
 	    	$controlsPanel;		
 	}
-	//Вывод по нвжатию в строке меню 
-	function getMachines() {		//Оборудование		
+//Вывод по нвжатию в строке меню 
+//Оборудование	
+	function getMachines() {				
 		logger("Получение списка станков, id = 0");		
 		return getMachine(1);
 						
 	}
-
-	function getProblems() {		//Проблемы
+//Проблемы
+	function getProblems() {		
 		logger("Получение списка проблем для оборудования");				
+		$contentHeader = contentHeader("ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ");
+		$topButtons = controlButtons();
 		$table = getProblemsPanel("default");
-		$buttons = downButtons();
-		$inputs = inputProblemsPanel();		
+		$downButtons = controlButtons();
+				
 		return 
+			$contentHeader .
+			$topButtons .
 			$table .
-			$buttons .
-			$inputs;
+			$downButtons;
+			
 	}
-
-	function getProblemsPlan(){		//Получение списка проблем на ремонт
+//Получение списка проблем на ремонт
+	function getProblemsPlan(){		
 		$table = getProblemsPanel("default");
 
 		return
 			$table;		
 	}
-
-	function getParts() {			//Запчасти
+//Запчасти
+	function getParts() {			
 		return "Список всех запчастей?";
 	}
 ?>

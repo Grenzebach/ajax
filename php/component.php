@@ -259,11 +259,14 @@ function getActionsLinks($id) {
         </div>";    
 }
 
-function getProblemsPanel($id) {
+function contentHeader($header){
+    return "<h2>" . $header . "</h2>";
+}
+
+function getProblemsPanel($id, $rowsPerPage = 5) {
     labelCode("component.php", "getProblemsPanel");
-    $rowsPerPage = 10;
     $block = "<div class=\"maket\">
-        <h2>ЖУРНАЛ ЕЖЕНЕДЕЛЬНОГО ОСМОТРА ОБОРУДОВАНИЯ:</h2>
+        
             <div class=\"table-component\">
                 <div class=\"buttons-container table-controls\">
                     
@@ -271,7 +274,7 @@ function getProblemsPanel($id) {
 
     $block .= getPagination($rowsPerPage, getProblemsCount($id));
 
-    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id) . "</div>";    
+    $block .= "<div class=\"table-content\">" . getProblemsTablePage(1, $id, 1, $rowsPerPage) . "</div>";    
     
     $block .= 
             "</div>
@@ -279,6 +282,7 @@ function getProblemsPanel($id) {
     return $block;    
 }
 
+//Общее количество записей в таблице проблем
 function getProblemsCount($id) {
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -302,15 +306,13 @@ function getProblemsCount($id) {
     return $result;    
 }
 
-function getProblemsTablePage($page, $id, $currentPage = 1) {
-    $rowsPerPage = 10;
+function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {    
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
         $appendTOsql = "";
     }
-
-    logger("В функции getProblemsPanel id = " . $id);
+    
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
     $query = " SELECT 
@@ -324,9 +326,9 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
     $result = mysqli_query($link, $query);
 
     $block = "<table class=\"problem\">
-                    <tr><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
+                    <tr class=\"problem-table-head\"><th class=\"fst-col\" title=\"Выделить всё\"><input type=\"checkbox\" id=\"check-all\"></th>
                         <th>Оборудование</th>
-                        <th>Проблема</th>
+                        <th colspan=\"2\">Проблема</th>
                         <th>Дата</th>
                         <th>Примечания</th>
                         <th>Состояние</th>
@@ -338,7 +340,7 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
         $i++;               //Счетчик для нумерации строк в таблице
         $statusProblems = $row['status_problems'];
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
@@ -353,7 +355,10 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
         "<tr value=" . $row['id_problems'] . ">
             <td><input type=\"checkbox\" value=" . $row['id_problems'] . "></td>
             <td class = \"td-name-machines col-left-align\">" . $row['name_machines'] . "</td>
-            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" . $row['name_problems']."</td>
+            <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" 
+            . $row['name_problems'] . "</td>
+            <td class=\"td-icons\">
+                </td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
             <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
@@ -366,8 +371,21 @@ function getProblemsTablePage($page, $id, $currentPage = 1) {
 }
 
 function getPagination($pageSize, $rowsCount){
-    
-    $resultOut = "  <div class=\"pagination\">
+    $pageCount = ceil($rowsCount / $pageSize); 
+
+    $paginationRange = "<div class=\"pagination-range\">";
+    $countToShow = 5;
+    for($i = 1; $i <= $pageCount; $i++) {
+        if ($i < 1 + $countToShow) {
+            $paginationRange .= 
+            "<div id=\"page" . $i . "\" class=\"pager-button" . ($i == 1 ? " active" : "") . "\">    
+                <a href=\"javascript: void(0);\" value=\"" . $i . "\">" . $i . "</a>
+            </div>";            
+        }        
+    }
+    $paginationRange .= "</div>";
+
+    $resultOut = "  <div class=\"pagination\" pageCount=\"$pageCount\">
                         <div class=\"pager-button\">    
                             <a href=\"javascript: void(0);\" value=\"first\">
                                 <<
@@ -378,15 +396,10 @@ function getPagination($pageSize, $rowsCount){
                                 <
                             </a>
                         </div>
-                    ";
-    $pageCount = ceil($rowsCount / $pageSize); 
+                    ";    
 
-    for($i = 1; $i <= $pageCount; $i++) {
-        $resultOut .=
-        "<div id=\"page" . $i . "\" class=\"pager-button" . ($i == 1 ? " active" : "") . "\">    
-            <a href=\"javascript: void(0);\" value=\"" . $i . "\">" . $i . "</a>
-        </div>";
-    }
+    $resultOut .= $paginationRange;
+
     $resultOut .=
                         "<div id=\"next\" class=\"pager-button\">    
                             <a href=\"javascript: void(0);\" value=\"next\">
@@ -417,13 +430,12 @@ function inputProblemsPanel() {
     labelCode("component.php", "inputProblemsPanel");
     
     $resultOut = 
-        "<div class = input-panel>
-            <h2>Создание новой записи:</h2>            
+        "<div class = input-panel>                       
             <div id=\"inputs\">
                 <div class=\"select-list\">
                     <p>Ответственный за оборудование:</p>
                     <select id=\"respons\">
-                    <option></option>";       //Список ответственных за оборудование
+                    <option value=\"\"  selected>Без выбора ответственного</option>";       //Список ответственных за оборудование
 
     $link = mysqli_connect("localhost", "root", "mysql", "desk");
     mysqli_set_charset($link, "utf8"); //кодировка в utf8 
@@ -433,12 +445,12 @@ function inputProblemsPanel() {
     while ($row = mysqli_fetch_array($result)) {
         $resultOut .= "<option value=" . $row['id_user'] . ">" . $row['name_user'] . "</option>";
     }
-    mysqli_close($link);        
+    mysqli_close($link);       
     
     $resultOut .=
                     "</select>
                 </div>
-                <p>Оборудование</p>
+                <p>Оборудование:</p>
                 <div class=\"select-list\" id=\"select-machine-list\"> " .
                     getSelectMachineList() .
                 "</div>
@@ -457,11 +469,7 @@ function inputProblemsPanel() {
                     <textarea id=\"notes-problems\"type=\"text\" placeholder=\"Что необходимо сделать для устранения проблемы. \nНаример: «Проворачивает флажок, необходимо заменить»\" required></textarea> 
                     <span class=\"validity\"></span> 
                 </p>
-                <div class=\"links-container\"> 
-                    <div class=\"link\">
-                        <a id=\"add-problem-link\" href=\"javascript: void(0);\">ДОБАВИТЬ ЗАПИСЬ</a>
-                    </div>                
-                </div>
+                
             </div>
         </div>"; //источник: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
     return $resultOut;
@@ -470,16 +478,21 @@ function inputProblemsPanel() {
 function getSelectMachineList($userId = "") {                             //Функция вывода списка оборудования в выпадающий список. 
     labelCode("component.php", "getSelectMachineList");
     $select =
-        "<select id=\"machine-list-problems\">
+        "<select id=\"machine-list-problems\">            
             [#items#]
         </select>";
 
     $items = "<option></option>";     
 
     if ($userId != "") {
+        $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId";
+    }   else{
+        $query = "SELECT name_machines, id_machines FROM machines"; //ЗАПРОС
+    }
+        
         $link = mysqli_connect("localhost", "root", "mysql", "desk");
         mysqli_set_charset($link, "utf8");                          //кодировка в utf8 
-        $query = "SELECT name_machines, id_machines FROM machines WHERE respons_machines = $userId"; //ЗАПРОС
+        
         logger($query);
 
         $result = mysqli_query($link, $query);    
@@ -489,7 +502,7 @@ function getSelectMachineList($userId = "") {                             //Фу
         }
 
         mysqli_close($link);
-    }   
+       
 
     return str_replace("[#items#]", $items, $select); 
 }
@@ -516,7 +529,7 @@ function getStatusList(){
 function getBtnProblem($selValue, $curRow){
     $statusProblems = $selValue;
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
@@ -536,11 +549,14 @@ function getBtnProblem($selValue, $curRow){
     return $resultOut;        
     }
 
-    function downButtons(){
+    function controlButtons(){
         $block = 
-        "<div class=\"down-buttons-problems\">
+        "<div class=\"control-buttons-problems\">
             <div id=\"delete-problem-link\" class=\"delete-button link \">    
                         <a href=\"javascript: void(0);\">УДАЛИТЬ</a>
+                    </div>
+            <div id=\"get-problem-link\" class=\"get-problem-panel add-button link \">    
+                        <a href=\"javascript: void(0);\">ДОБАВИТЬ</a>
                     </div>
             <div class=\"link\">
                 <a id=\"problems-plan\" href=\"javascript: void(0);\">ПЛАН НА РЕМОНТ</a>
@@ -586,7 +602,7 @@ function getBtnProblem($selValue, $curRow){
         $i++;               //Счетчик для нумерации строк в таблице
         $statusProblems = $row['status_problems'];
         if ($statusProblems == "1"){
-            $statusString = "Создана";
+            $statusString = "Не решена";
             $statusClass = "status-problem-create";
         } elseif ($statusProblems == "2"){
             $statusString = "В работе";
@@ -614,4 +630,6 @@ function getBtnProblem($selValue, $curRow){
     return $block;
 
     }
+
+    //модальное окно - добавление записи в таблицу
 ?>

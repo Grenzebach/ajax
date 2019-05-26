@@ -50,7 +50,7 @@
 
 		return $content;	
 	}
-
+//Обновить дату проверки в таблице ТО - добавление записи с новой датой
 	function applyChanges($items) {
 	    $link = mysqli_connect("localhost", "root", "mysql", "desk");
 	    mysqli_set_charset($link, "utf8");   
@@ -60,7 +60,7 @@
 	         mysqli_query($link, $query);
 	     }    
 	}
-
+//Добавление записи в таблицу ТО оборудования
 	function addRecord($sel, $dateControl, $inputNotes) {
 	        $link = mysqli_connect("localhost", "root", "mysql", "desk");
 	        mysqli_set_charset($link, "utf8"); 
@@ -70,7 +70,7 @@
 	        mysqli_query($link, $query);
 	        mysqli_close($link);
 	}
-
+//Добавление записи в таблицу проблем на оборудовании
 	function addProblem($selIdMachine, $nameProblem, $dateProblem, $noteProblem){
 			$link = mysqli_connect("localhost", "root", "mysql", "desk");
 	        mysqli_set_charset($link, "utf8"); 
@@ -79,8 +79,8 @@
 	        
 	        mysqli_query($link, $query);
 	        mysqli_close($link);
-
 	}
+//Удаление записи в таблице проблем
 	function deleteProblem($items){
 		logger("deleteProblem, controller.php");
 
@@ -88,9 +88,6 @@
 	    mysqli_set_charset($link, "utf8");   
 	    foreach ($items as $value) {
 	         $query = "DELETE FROM `problems` WHERE `problems`.`id_problems` =" . $value;
-	         //logger("function delete_problem " . $query);
-	         	//DELETE FROM `problems` WHERE `problems`.`id_problems` = 7;
-				//DELETE FROM `problems` WHERE `problems`.`id_problems` = 8;
 	         mysqli_query($link, $query);
 	     }    
 	}
