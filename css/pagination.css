@@ -1,6 +1,6 @@
 .pager-button, .pager-button-inactive {
 	background: #0089cf;
-	float: left;	
+	float: left;
 	border-left: 1px solid;
 	border-color: white;
 	min-width: 30px;
@@ -10,7 +10,7 @@
 .pager-button a, .pager-button-inactive span {
 	text-decoration: none;
 	color: #fff;
-	padding: 8px;	
+	padding: 8px;
 	display: block;
 	text-align: center;
 }
@@ -30,7 +30,7 @@
 	cursor: default;
 }
 
-.pagination { 
+.pagination {
 	height: 30px;
 }
 
