@@ -81,7 +81,7 @@ $(document).ready(function () {
             data: {"action": "problems-plan"},
             success: function(response) {
                 $(".maket").html(response);
-                window.print();
+                //window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
                 $("#problems-plan").hide();  //Убрать кнопку сформировать план на странице с планом
@@ -307,7 +307,7 @@ function getProblemsTablePage(parentComponent, page, currentPage) {
     $.ajax({
         url: "php/component-controller.php",
         method: "GET",
-        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage, "rowsPerPage": 5},
+        data: {"name": "tablePage", "type": "problems", "page": page, "id": sitePage["id"], "currentPage": currentPage, "rowsPerPage": 10},
         success: function(response){
             parentComponent.find(".table-content").html(response);
             parentComponent.find(".pager-button a[value='" + page + "']").parent().closest(".pager-button").addClass("active");
