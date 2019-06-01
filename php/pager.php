@@ -1,6 +1,7 @@
 <?php
 	include_once("utils.php");
 	include_once("component.php");
+		sleep(2);
 
 	if (isParamEquals($_GET, "name", "problems")) {					//Таблица проблем
 		echo getProblems();		

@@ -74,13 +74,14 @@ $(document).ready(function () {
 
 //Получения списка нерешенных проблем
     $(document).on("click", "#problems-plan", function(){
-
+        //$('#loading').show();
         $.ajax({
             url: "php/controller.php",
             method: "POST",
             data: {"action": "problems-plan"},
             success: function(response) {
                 $(".maket").html(response);
+                //$('#loading').hide();
                 //window.print();
                 $(".link").show();      //Показать кнопку ПЕЧАТЬ при редактировании плана на ремонт
 
