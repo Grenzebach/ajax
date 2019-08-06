@@ -632,4 +632,9 @@ function getBtnProblem($selValue, $curRow){
     }
 
     //модальное окно - добавление записи в таблицу
+
+    //Формирование таблицы ППР
+    function getTablePpr(){
+        echo "121212";
+    }
 ?>

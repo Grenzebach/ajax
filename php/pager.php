@@ -11,6 +11,8 @@
 		echo getMachines();
 	} else if (isParamEquals($_GET, "name", "machine")) {
 		echo getMachine($_GET["id"]);
+	} else if (isParamEquals($_GET, "name", "ppr")) {
+		echo getPpr();	
 	} else if (isParamEquals($_GET, "name", "parts")) {
 		logger("parts pager.php");				//Запчасти
 		echo getParts();
@@ -87,6 +89,11 @@
 
 		return
 			$table;		
+	}
+//График ППР
+	function getPpr() {	
+		$tablePpr = getTablePpr("default");		
+		return $tablePpr;
 	}
 //Запчасти
 	function getParts() {			

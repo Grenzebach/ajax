@@ -27,7 +27,9 @@
     	<div class="logo"><a href="/"><img src="img/logo.jpg" alt=""></a>
 			
     	</div>
-		<div id='title'><p>Система ТОиР ЗАО "Муром"</p>
+		<div id='title'>
+			<div></div>	
+			<p>Система ТОиР ЗАО "Муром"</p>
 		</div>
 		<div class="clear"></div>
     </div>
@@ -35,7 +37,8 @@
     	<ul class="nav-menu">
     		<li class="nav-item" id="problems"><a class="onepage-link" href="#problems=default">ЖУРНАЛ</a></li>
     		<li class="nav-item" id="machines"><a class="onepage-link" href="#machines=default">ТО ОБОРУДОВАНИЯ</a></li>    		
-    		<li class="nav-item" id="parts"><a class="onepage-link" href="#parts=default">ППР</a></li>
+    		<li class="nav-item" id="ppr"><a class="onepage-link" href="#ppr=default">ППР</a></li>
+    		<li class="nav-item" id="parts"><a class="onepage-link" href="#parts=default">ЗАПЧАСТИ</a></li>
     	</ul>
     	
     </div>   

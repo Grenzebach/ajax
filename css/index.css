@@ -59,7 +59,7 @@ html, body {
 }
 
 #header {
-	background: #056292;
+	background: #004f81;
 	height: 110px;
 	width: 100%;	
 	color: yellow;
@@ -79,6 +79,7 @@ img {
 }
 
 #title {
+	background-image: url(../img/head-1.jpg);
 	width: 800px;
 	height: 100px;
 	padding-top: 35px;
@@ -103,7 +104,7 @@ body {
 }
 
 #navigation {	
-	background: #056292;	
+	background: #004f81;	
 	height: 40px;
 	padding-left: 220px;
 }
@@ -122,13 +123,13 @@ body {
 
 .nav-item a.active {
 	background-color: white;
-	color: #056292;
+	color: #004f81;
 }
 
 .nav-menu {
 	text-decoration: none;
 	list-style-type: none;	
-	background: #056292;
+	background: #004f81;
 	color: white;
 	height: 100%;	
 	padding-left: 20px;
