@@ -263,7 +263,7 @@ function contentHeader($header){
     return "<h2>" . $header . "</h2>";
 }
 
-function getProblemsPanel($id, $rowsPerPage = 5) {
+function getProblemsPanel($id, $rowsPerPage = 10) {
     labelCode("component.php", "getProblemsPanel");
     $block = "<div class=\"maket\">
         
@@ -306,7 +306,7 @@ function getProblemsCount($id) {
     return $result;    
 }
 
-function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {    
+function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 10) {    
     $fromIndex = ($page - 1) * $rowsPerPage;
     $appendTOsql = " and m.id_machines=" . $id;
     if ($id == "default") {
@@ -358,7 +358,7 @@ function getProblemsTablePage($page, $id, $currentPage, $rowsPerPage = 5) {
             <td class = \"td-name-problems col-left-align tooltip\" title=" . $row['name_problems'] . ">" 
             . $row['name_problems'] . "</td>
             <td class=\"td-icons\">
-                </td>
+                <a href=\"#\" class=\"icon-button\" value=\"1\"></a></td>
             <td>" . date("d-m-Y", strtotime($row['date_problems'])) . "</td>
             <td class = \"td-notes-problems col-left-align tooltip\" title=" . $row['notes_problems']. ">" . $row['notes_problems'] . "</td>
             <td class = \"status-problem\">" . $status . "</td>
@@ -374,7 +374,7 @@ function getPagination($pageSize, $rowsCount){
     $pageCount = ceil($rowsCount / $pageSize); 
 
     $paginationRange = "<div class=\"pagination-range\">";
-    $countToShow = 5;
+    $countToShow = 10;
     for($i = 1; $i <= $pageCount; $i++) {
         if ($i < 1 + $countToShow) {
             $paginationRange .= 

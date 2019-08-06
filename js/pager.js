@@ -2,10 +2,11 @@
 
 $(document).ready(function () {
 	getPage(getCurrentPage(location.hash));
-	$('#loading').hide();
+	
 });
 
 function getPage(page) {
+	$('#loading').show();
     $.ajax({
         url: "php/pager.php",
         method: "GET",
@@ -14,7 +15,7 @@ function getPage(page) {
             $("#content").html(response);
 
             setActiveLink(page);
-
+			$('#loading').hide();
             // var callback = getCallbacks()[page["name"]];
             // if (callback == undefined) {
             // 	getCallbacks()["default"].call(this, page);
